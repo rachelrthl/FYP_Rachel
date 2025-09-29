@@ -120,26 +120,106 @@ main {
     margin-bottom: 8px;
 }
 
-/* Benefits Grid */
-.benefits-grid {
+/* Pain Points Grid */
+.pain-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.pain-point {
+    background: #fff5f5;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #e53e3e;
+}
+
+.pain-point h4 {
+    color: #e53e3e;
+    margin-bottom: 10px;
+}
+
+/* Value Grid */
+.value-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
     margin: 30px 0;
 }
 
-.benefit {
-    background: #f8f9fa;
+.value-item {
+    background: #f0fff4;
     padding: 25px;
     border-radius: 8px;
     text-align: center;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #38a169;
 }
 
-.benefit h4 {
+.value-item h4 {
     font-size: 1.3rem;
     margin-bottom: 10px;
+    color: #38a169;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.metric {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.metric h4 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.metric p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Pipeline Diagram */
+.pipeline-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.pipeline-stage {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 250px;
+    margin: 10px;
+    border-top: 4px solid #667eea;
+}
+
+.pipeline-stage h4 {
     color: #667eea;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.pipeline-arrow {
+    font-size: 2rem;
+    color: #667eea;
+    font-weight: bold;
+    margin: 0 10px;
 }
 
 /* Components Grid */
@@ -167,6 +247,11 @@ main {
     padding-left: 20px;
 }
 
+.component p {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
 /* Achievements Grid */
 .achievements-grid {
     display: grid;
@@ -186,10 +271,15 @@ main {
 .achievement h4 {
     color: white;
     margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.achievement p {
+    margin: 5px 0;
 }
 
 /* Tables */
-.specs-table, .results-table {
+.specs-table, .results-table, .signal-table, .metrics-table {
     width: 100%;
     border-collapse: collapse;
     margin: 25px 0;
@@ -199,7 +289,7 @@ main {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.specs-table th, .results-table th {
+.specs-table th, .results-table th, .signal-table th, .metrics-table th {
     background: #667eea;
     color: white;
     padding: 15px;
@@ -207,22 +297,22 @@ main {
     font-weight: 600;
 }
 
-.specs-table td, .results-table td {
+.specs-table td, .results-table td, .signal-table td, .metrics-table td {
     padding: 12px 15px;
     border-bottom: 1px solid #eee;
 }
 
-.specs-table tr:hover, .results-table tr:hover {
+.specs-table tr:hover, .results-table tr:hover, .signal-table tr:hover, .metrics-table tr:hover {
     background: #f8f9fa;
 }
 
 /* Timeline */
-.timeline {
+.prototype-timeline {
     position: relative;
     margin: 30px 0;
 }
 
-.timeline::before {
+.prototype-timeline::before {
     content: '';
     position: absolute;
     left: 30px;
@@ -260,15 +350,33 @@ main {
     margin: 5px 0;
 }
 
-/* Architecture */
-.architecture {
-    text-align: center;
+/* Plan Phases */
+.plan-phase {
+    background: #f8f9fa;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.plan-phase h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+/* Validation Results */
+.validation-results {
     margin: 30px 0;
 }
 
-.architecture img {
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+.validation-results h4 {
+    color: #28a745;
+    margin: 25px 0 15px 0;
+    font-size: 1.2rem;
+}
+
+.validation-results ul {
+    margin-bottom: 20px;
 }
 
 /* Footer */
@@ -317,10 +425,21 @@ footer a:hover {
         margin-bottom: 25px;
     }
     
-    .benefits-grid,
+    .pain-points,
+    .value-grid,
+    .metrics-grid,
     .components-grid,
     .achievements-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .pipeline-diagram {
+        flex-direction: column;
+    }
+    
+    .pipeline-arrow {
+        transform: rotate(90deg);
+        margin: 10px 0;
     }
     
     .timeline-item {
@@ -328,9 +447,24 @@ footer a:hover {
     }
     
     .specs-table,
-    .results-table {
+    .results-table,
+    .signal-table,
+    .metrics-table {
         font-size: 0.9rem;
     }
+}
+
+/* Status Indicators */
+.status-complete::before {
+    content: "✅ ";
+}
+
+.status-progress::before {
+    content: "🔄 ";
+}
+
+.status-planned::before {
+    content: "📋 ";
 }
 
 /* Utility Classes */
@@ -352,25 +486,4 @@ footer a:hover {
 
 .bg-light {
     background-color: #f8f9fa;
-}
-
-.mt-4 {
-    margin-top: 2rem;
-}
-
-.mb-4 {
-    margin-bottom: 2rem;
-}
-
-/* Status Indicators */
-.status-complete::before {
-    content: "✅ ";
-}
-
-.status-progress::before {
-    content: "🔄 ";
-}
-
-.status-planned::before {
-    content: "📋 ";
 }
