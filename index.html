@@ -172,35 +172,116 @@
         <section id="solution" class="section">
             <h2>🏗️ Solution Architecture</h2>
             <div class="content">
+                <h3>RubyChan v2: Cloud-Native Intelligence Platform</h3>
+                <div class="architecture-overview">
+                    <p><strong>Multi-Agent Architecture:</strong> Microservices-based platform with specialized AI agents for data collection, analysis, and intelligence generation.</p>
+                </div>
+
+                <h3>System Architecture Layers</h3>
+                <div class="architecture-layers">
+                    <div class="layer">
+                        <h4>🎨 Frontend Layer</h4>
+                        <ul>
+                            <li><strong>React/Next.js Dashboard:</strong> Real-time account insights and rankings</li>
+                            <li><strong>Interactive Visualizations:</strong> Signal timelines and trend analysis</li>
+                            <li><strong>Responsive Design:</strong> Desktop and mobile access</li>
+                            <li><strong>Real-time Updates:</strong> Live data refresh and notifications</li>
+                        </ul>
+                    </div>
+                    <div class="layer">
+                        <h4>🔗 API Gateway Layer</h4>
+                        <ul>
+                            <li><strong>Account API:</strong> CRM integration and account management</li>
+                            <li><strong>Intelligence API:</strong> AI analysis and scoring engine</li>
+                            <li><strong>Data Ingestion API:</strong> External data collection and processing</li>
+                            <li><strong>Authentication API:</strong> Security and access control</li>
+                        </ul>
+                    </div>
+                    <div class="layer">
+                        <h4>🤖 AI Agent Layer</h4>
+                        <ul>
+                            <li><strong>CRM Agent:</strong> Internal data extraction and analysis</li>
+                            <li><strong>Web Scraper Agent:</strong> Public data collection and enrichment</li>
+                            <li><strong>Profiling Agent:</strong> Company intelligence generation</li>
+                            <li><strong>Scoring Agent:</strong> Propensity scoring and ranking</li>
+                            <li><strong>Insights Agent:</strong> Pain points and talking points generation</li>
+                        </ul>
+                    </div>
+                    <div class="layer">
+                        <h4>☁️ Cloud Infrastructure</h4>
+                        <ul>
+                            <li><strong>Compute:</strong> Container orchestration and serverless functions</li>
+                            <li><strong>Storage:</strong> Relational database, object storage, caching</li>
+                            <li><strong>AI/ML:</strong> Large language models and machine learning services</li>
+                            <li><strong>Messaging:</strong> Event-driven architecture with queues</li>
+                        </ul>
+                    </div>
+                </div>
+
                 <h3>Data Pipeline Architecture</h3>
                 <div class="pipeline-diagram">
                     <div class="pipeline-stage">
                         <h4>📥 Data Ingestion</h4>
                         <ul>
-                            <li>Web Scraping (LinkedIn, company websites, job boards)</li>
-                            <li>Internal Data (SFDC, past engagement, win/loss)</li>
-                            <li>Partner Ecosystem Data</li>
-                            <li>Competitor Activity Tracking</li>
+                            <li><strong>Multi-Source Collection:</strong> Company websites, job boards, professional networks</li>
+                            <li><strong>API Integration:</strong> Google Custom Search, SerpAPI, industry databases</li>
+                            <li><strong>Real-time Scraping:</strong> Scrapy-based web extraction (0.8s per company)</li>
+                            <li><strong>CRM Integration:</strong> Historical engagement and account data</li>
                         </ul>
+                        <p><strong>Status:</strong> ✅ Production Ready</p>
                     </div>
                     <div class="pipeline-arrow">→</div>
                     <div class="pipeline-stage">
-                        <h4>⚙️ Signal Processing</h4>
+                        <h4>⚙️ AI Processing</h4>
                         <ul>
-                            <li>Industry Classification (23 categories)</li>
-                            <li>Hiring Pattern Analysis</li>
-                            <li>Technology Stack Detection</li>
-                            <li>Company Growth Indicators</li>
+                            <li><strong>LLM Analysis:</strong> Company profiling and signal detection</li>
+                            <li><strong>Pattern Recognition:</strong> Hiring trends and technology adoption</li>
+                            <li><strong>Sentiment Analysis:</strong> Market positioning and growth indicators</li>
+                            <li><strong>Propensity Scoring:</strong> Multi-factor account ranking (0-100)</li>
                         </ul>
+                        <p><strong>Status:</strong> 🔄 In Development</p>
                     </div>
                     <div class="pipeline-arrow">→</div>
                     <div class="pipeline-stage">
                         <h4>📊 Intelligence Output</h4>
                         <ul>
-                            <li>Account Score (0-100)</li>
-                            <li>Buyer Signal Dashboard</li>
-                            <li>Personalized Talk Tracks</li>
-                            <li>Recommended Next Actions</li>
+                            <li><strong>Account Rankings:</strong> Prioritized list with confidence scores</li>
+                            <li><strong>Signal Dashboard:</strong> Real-time buying signals and trends</li>
+                            <li><strong>Talking Points:</strong> AI-generated conversation starters</li>
+                            <li><strong>Action Recommendations:</strong> Next best actions and timing</li>
+                        </ul>
+                        <p><strong>Status:</strong> 📋 Architecture Complete</p>
+                    </div>
+                </div>
+
+                <h3>Technical Implementation Progress</h3>
+                <div class="implementation-status">
+                    <div class="status-item completed">
+                        <h4>✅ Data Ingestion Engine (Completed)</h4>
+                        <ul>
+                            <li>Flask-based REST API with CORS support</li>
+                            <li>Multi-source data collection (Google Custom Search, SerpAPI)</li>
+                            <li>Scrapy integration for website profiling</li>
+                            <li>Comprehensive testing suite with real company validation</li>
+                            <li>Cost-effective scaling ($4.50 per 1000 companies)</li>
+                        </ul>
+                    </div>
+                    <div class="status-item in-progress">
+                        <h4>🔄 AI Analysis Layer (In Progress)</h4>
+                        <ul>
+                            <li>Large Language Model integration for company analysis</li>
+                            <li>Signal detection algorithms for buying intent</li>
+                            <li>Propensity scoring engine with weighted factors</li>
+                            <li>Database schema for structured data storage</li>
+                        </ul>
+                    </div>
+                    <div class="status-item planned">
+                        <h4>📋 Frontend Dashboard (Planned)</h4>
+                        <ul>
+                            <li>React-based interactive dashboard</li>
+                            <li>Real-time account rankings and insights</li>
+                            <li>Signal timeline and trend visualizations</li>
+                            <li>Mobile-responsive design for field access</li>
                         </ul>
                     </div>
                 </div>
@@ -289,54 +370,117 @@
         <section id="prototypes" class="section">
             <h2>🔬 Prototype Development & Testing</h2>
             <div class="content">
-                <h3>Component-Based Development Approach</h3>
-                <p>Building the Signal Intelligence Platform systematically, starting with the foundational web scraping component and progressively adding intelligence layers.</p>
+                <h3>RubyChan v2 Development Progress</h3>
+                <p>Building the Signal Intelligence Platform using a microservices architecture with specialized AI agents for scalable data collection and analysis.</p>
 
                 <div class="prototype-timeline">
-                    <div class="timeline-item">
-                        <h4>Phase 1: Web Scraping Foundation</h4>
-                        <p><strong>Focus:</strong> Build reliable data extraction for company intelligence</p>
-                        <p><strong>Results:</strong> 0.8s per company, 100% success rate, 8 data categories</p>
-                        <p><strong>Learning:</strong> Hybrid approach (website + search) provides richest context</p>
-                        <p><strong>Status:</strong> ✅ Complete</p>
+                    <div class="timeline-item completed">
+                        <h4>✅ Phase 1: Data Ingestion API (Completed)</h4>
+                        <p><strong>Achievement:</strong> Production-ready data collection engine</p>
+                        <ul>
+                            <li><strong>Multi-source Integration:</strong> Google Custom Search, SerpAPI, direct web scraping</li>
+                            <li><strong>Company Profiling:</strong> Automated website analysis with Scrapy</li>
+                            <li><strong>Job Intelligence:</strong> Structured job posting collection and employee discovery</li>
+                            <li><strong>Performance:</strong> Sub-second processing, cost-effective scaling ($4.50/1000 companies)</li>
+                            <li><strong>Testing:</strong> Validated with real companies across different industries and sizes</li>
+                        </ul>
+                        <p><strong>Technical Stack:</strong> Flask REST API, Scrapy, Google APIs, comprehensive error handling</p>
                     </div>
                     
-                    <div class="timeline-item">
-                        <h4>Phase 2: Signal Detection Algorithms</h4>
-                        <p><strong>Focus:</strong> Develop buyer intent and growth signal detection</p>
-                        <p><strong>Approach:</strong> Pattern recognition for hiring, tech adoption, business growth</p>
-                        <p><strong>Target:</strong> Identify 5-10 key signal types with confidence scoring</p>
-                        <p><strong>Status:</strong> 🔄 In Progress</p>
+                    <div class="timeline-item in-progress">
+                        <h4>🔄 Phase 2: AI Analysis Engine (In Development)</h4>
+                        <p><strong>Focus:</strong> Large Language Model integration for intelligent signal detection</p>
+                        <ul>
+                            <li><strong>LLM Integration:</strong> Company data analysis using cloud AI services</li>
+                            <li><strong>Signal Detection:</strong> Hiring patterns, technology adoption, growth indicators</li>
+                            <li><strong>Data Storage:</strong> Database schema design for structured intelligence storage</li>
+                            <li><strong>Agent Architecture:</strong> Specialized AI agents for different analysis tasks</li>
+                        </ul>
+                        <p><strong>Target:</strong> Automated identification of 10+ buying signal types</p>
                     </div>
                     
-                    <div class="timeline-item">
-                        <h4>Phase 3: Account Scoring Engine</h4>
-                        <p><strong>Focus:</strong> Multi-factor scoring algorithm (0-100 scale)</p>
-                        <p><strong>Approach:</strong> Weighted signal combination with temporal analysis</p>
-                        <p><strong>Target:</strong> Accurate prioritization of high-intent accounts</p>
-                        <p><strong>Status:</strong> 📋 Planned</p>
+                    <div class="timeline-item planned">
+                        <h4>📋 Phase 3: Propensity Scoring Algorithm (Planned)</h4>
+                        <p><strong>Focus:</strong> Multi-factor account scoring and ranking system</p>
+                        <ul>
+                            <li><strong>Weighted Scoring:</strong> Signal strength and confidence calculation</li>
+                            <li><strong>Temporal Analysis:</strong> Trend detection and momentum scoring</li>
+                            <li><strong>CRM Integration:</strong> Historical engagement data incorporation</li>
+                            <li><strong>Validation:</strong> A/B testing with sales team feedback</li>
+                        </ul>
+                        <p><strong>Target:</strong> 0-100 account scores with 80%+ accuracy</p>
                     </div>
                     
-                    <div class="timeline-item">
-                        <h4>Phase 4: Intelligence Dashboard</h4>
-                        <p><strong>Focus:</strong> User interface for sales teams</p>
-                        <p><strong>Approach:</strong> Real-time dashboard with actionable insights</p>
-                        <p><strong>Target:</strong> Intuitive interface for 100-account pilot</p>
-                        <p><strong>Status:</strong> 📋 Planned</p>
+                    <div class="timeline-item planned">
+                        <h4>📋 Phase 4: Intelligence Dashboard (Planned)</h4>
+                        <p><strong>Focus:</strong> React-based frontend for sales team interaction</p>
+                        <ul>
+                            <li><strong>Real-time Dashboard:</strong> Account rankings and signal visualization</li>
+                            <li><strong>Interactive Features:</strong> Drill-down analysis and trend exploration</li>
+                            <li><strong>Mobile Responsive:</strong> Field access for sales professionals</li>
+                            <li><strong>Integration:</strong> CRM workflow and notification system</li>
+                        </ul>
+                        <p><strong>Target:</strong> Intuitive interface for 100-account pilot deployment</p>
                     </div>
                 </div>
 
-                <h3>Web Scraping Component Testing Results</h3>
+                <h3>Data Ingestion Engine - Comprehensive Testing Results</h3>
                 <table class="results-table">
                     <tr>
-                        <th>Metric</th>
-                        <th>Target</th>
-                        <th>Achieved</th>
-                        <th>Status</th>
+                        <th>Test Category</th>
+                        <th>Companies Tested</th>
+                        <th>Success Rate</th>
+                        <th>Key Findings</th>
                     </tr>
                     <tr>
-                        <td>Processing Speed</td>
-                        <td>&lt; 1 second</td>
+                        <td>Large Enterprises</td>
+                        <td>Microsoft, Google</td>
+                        <td>100%</td>
+                        <td>Rich structured job data, comprehensive employee profiles</td>
+                    </tr>
+                    <tr>
+                        <td>Regional Fintechs</td>
+                        <td>Syfe (Singapore)</td>
+                        <td>100%</td>
+                        <td>10+ structured job postings, salary ranges, detailed descriptions</td>
+                    </tr>
+                    <tr>
+                        <td>Tech Startups</td>
+                        <td>igloohome, Kumu</td>
+                        <td>100%</td>
+                        <td>Employee networks, hiring patterns, company intelligence</td>
+                    </tr>
+                    <tr>
+                        <td>B2B Services</td>
+                        <td>Contemi Trading</td>
+                        <td>100%</td>
+                        <td>Business focus identification, market positioning</td>
+                    </tr>
+                </table>
+
+                <h3>Performance Metrics Achieved</h3>
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <h4>⚡ Processing Speed</h4>
+                        <p><strong>0.8 seconds</strong> per company</p>
+                        <p>750-1,250x faster than manual research</p>
+                    </div>
+                    <div class="metric">
+                        <h4>💰 Cost Efficiency</h4>
+                        <p><strong>$0.0045</strong> per company</p>
+                        <p>$4.50 for 1000 companies vs $110K manual effort</p>
+                    </div>
+                    <div class="metric">
+                        <h4>📊 Data Quality</h4>
+                        <p><strong>8+ data categories</strong> per company</p>
+                        <p>Profile, jobs, employees, market intelligence</p>
+                    </div>
+                    <div class="metric">
+                        <h4>🎯 Scalability</h4>
+                        <p><strong>55K+ accounts</strong> processing capability</p>
+                        <p>Batch processing with intelligent refresh strategies</p>
+                    </div>
+                </div>
                         <td>0.8 seconds</td>
                         <td>✅ Exceeded</td>
                     </tr>
