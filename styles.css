@@ -1,4 +1,396 @@
-/* Reset and Base Styles */
+/* Challenge and Problem Definition Styles */
+.challenge-box {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.challenge-box p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.process-breakdown {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid #007bff;
+}
+
+.process-breakdown h4 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.process-breakdown ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.process-breakdown li {
+    padding: 8px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.process-breakdown li:last-child {
+    border-bottom: none;
+}
+
+.mathematical-problem {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.mathematical-problem h4 {
+    color: #856404;
+    margin-bottom: 15px;
+}
+
+.consequence {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.missed-signals {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.missed-signals h4 {
+    color: #0c5460;
+    margin-bottom: 15px;
+}
+
+.revenue-impact {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.revenue-impact h4 {
+    color: #155724;
+    margin-bottom: 15px;
+}
+
+.impact-summary {
+    background: #28a745;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.impact-summary p {
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+.footnote {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.industry-validation {
+    margin: 30px 0;
+}
+
+.industry-validation blockquote {
+    background: #f8f9fa;
+    border-left: 4px solid #6c757d;
+    padding: 20px;
+    margin: 15px 0;
+    font-style: italic;
+}
+
+.industry-validation cite {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.solution-gaps {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.solution-gaps h4 {
+    color: #856404;
+    margin-bottom: 15px;
+}
+
+.core-gap {
+    background: #dc3545;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.ideal-dashboard {
+    background: #e7f3ff;
+    border: 2px solid #007bff;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.dashboard-preview {
+    background: #1a1a1a;
+    color: #00ff00;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    margin: 15px 0;
+}
+
+.priority-section h4 {
+    color: #ff6b6b;
+    margin-bottom: 15px;
+}
+
+.account-card {
+    background: #2a2a2a;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+.account-card p {
+    margin: 8px 0;
+}
+
+.account-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 10px 0;
+}
+
+.account-card li {
+    color: #00ff00;
+    font-family: monospace;
+}
+
+.talk-track {
+    color: #ffd700 !important;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.system-delivers {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.system-delivers ol {
+    padding-left: 20px;
+}
+
+.system-delivers li {
+    margin: 8px 0;
+}
+
+.target-outcomes {
+    margin: 30px 0;
+}
+
+.outcomes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.outcomes-table th {
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.outcomes-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.outcomes-table tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.sources {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border-left: 4px solid #28a745;
+}
+
+.sources ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.validation-methods, .design-requirements {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.validation-methods h4, .design-requirements h4 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.validation-methods ul, .design-requirements ul {
+    padding-left: 20px;
+}
+
+.validation-methods li, .design-requirements li {
+    margin: 8px 0;
+}
+
+/* Market Context Styles */
+.industry-pattern {
+    background: #e7f3ff;
+    border-left: 4px solid #007bff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.enablement-factors {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.factor {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid #28a745;
+}
+
+.factor h4 {
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.market-gap {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.market-opportunity {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.market-opportunity p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #155724;
+}
+
+.validation-evidence {
+    margin: 30px 0;
+}
+
+.case-study {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.case-study h4 {
+    color: #0c5460;
+    margin-bottom: 15px;
+}
+
+.benchmarks {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.benchmarks h4 {
+    color: #155724;
+    margin-bottom: 15px;
+}
+
+.benchmarks ul {
+    padding-left: 20px;
+}
+
+.benchmarks li {
+    margin: 8px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .enablement-factors {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-preview {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+    
+    .outcomes-table {
+        font-size: 0.9rem;
+    }
+    
+    .outcomes-table th,
+    .outcomes-table td {
+        padding: 8px 10px;
+    }
+}
 * {
     margin: 0;
     padding: 0;
