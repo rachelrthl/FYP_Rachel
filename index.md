@@ -96,6 +96,20 @@ This project bridges time inefficiency and signal blindness through scalable, AS
 
 This project introduces a GenAI-powered Signal Intelligence Dashboard designed to improve both the coverage and accuracy of account research. It addresses the six identified barriers through a three-layer architecture comprising automated data ingestion, AI-driven signal analysis, and an explainable user interface.
 
+![Dashboard Interface](images/Dashboard-v1.png)
+*Figure 1: Signal Intelligence Dashboard Interface*
+
+<details>
+<summary>Click to view additional dashboard screenshots</summary>
+
+![Company Overview](images/company%20overview.png)
+*Company Profile Overview*
+
+![Talking Points](images/talking%20points.png)
+*AI-Generated Talking Points*
+
+</details>
+
 **1. Data Ingestion Layer**
 Automates the collection of external data across 1,000+ accounts daily using APIs such as Perplexity and Tavily. It is optimized for ASEAN-specific and multilingual sources, overcoming the cognitive and infrastructural limits of manual research. This layer expands portfolio visibility from 7% to near-complete monitoring without additional headcount.
 
@@ -333,6 +347,9 @@ Next semester focus: Complete scale testing → pilot with reps → iterate base
 ## A9. PROJECT PLAN
 
 Now that the system works, the next goal is to scale it from prototype to production deployment through pilot testing, iteration, and integration into AWS workflows.
+
+![Project Timeline](images/Gannt%20Chart.png)
+*Figure 2: Project Execution Timeline*
 
 ### 9.2 Execution Plan
 
