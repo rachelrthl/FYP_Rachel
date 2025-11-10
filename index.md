@@ -102,10 +102,10 @@ This project introduces a GenAI-powered Signal Intelligence Dashboard designed t
 <details>
 <summary>Click to view additional dashboard screenshots</summary>
 
-![Company Overview](images/company%20overview.png)
+![Company Overview](images/company-overview.png)
 *Company Profile Overview*
 
-![Talking Points](images/talking%20points.png)
+![Talking Points](images/talking-points.png)
 *AI-Generated Talking Points*
 
 </details>
@@ -348,7 +348,7 @@ Next semester focus: Complete scale testing → pilot with reps → iterate base
 
 Now that the system works, the next goal is to scale it from prototype to production deployment through pilot testing, iteration, and integration into AWS workflows.
 
-![Project Timeline](images/Gannt%20Chart.png)
+![Project Timeline](images/gantt-chart.png)
 *Figure 2: Project Execution Timeline*
 
 ### 9.2 Execution Plan
