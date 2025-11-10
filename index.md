@@ -96,16 +96,19 @@ This project bridges time inefficiency and signal blindness through scalable, AS
 
 This project introduces a GenAI-powered Signal Intelligence Dashboard designed to improve both the coverage and accuracy of account research. It addresses the six identified barriers through a three-layer architecture comprising automated data ingestion, AI-driven signal analysis, and an explainable user interface.
 
-![Dashboard Interface](https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/Dashboard-v1.png)
+<img src="https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/Dashboard-v1.png" alt="Dashboard Interface" width="800">
+
 *Figure 1: Signal Intelligence Dashboard Interface*
 
 <details>
 <summary>Click to view additional dashboard screenshots</summary>
 
-![Company Overview](https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/company-overview.png)
+<img src="https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/company-overview.png" alt="Company Overview" width="600">
+
 *Company Profile Overview*
 
-![Talking Points](https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/talking-points.png)
+<img src="https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/talking-points.png" alt="Talking Points" width="600">
+
 *AI-Generated Talking Points*
 
 </details>
@@ -348,7 +351,7 @@ Next semester focus: Complete scale testing → pilot with reps → iterate base
 
 Now that the system works, the next goal is to scale it from prototype to production deployment through pilot testing, iteration, and integration into AWS workflows.
 
-![Project Timeline](https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/gantt-chart.png)
+<img src="https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/gantt-chart.png" alt="Project Timeline" width="800">
 *Figure 2: Project Execution Timeline*
 
 ### 9.2 Execution Plan
