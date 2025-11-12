@@ -1,2 +1,16 @@
-theme: minima
+title: "Signal Intelligence Dashboard - FYP Report"
 description: "GenAI-powered account research automation for sales representatives"
+author: "Rachel"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-feed
+
+# Custom settings
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"

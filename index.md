@@ -4,13 +4,13 @@
 
 ### 1.1 The Problem & Persona
 
-**Persona: Sarah Tan – Demand Generation Representative, AWS (Singapore)**
+**Persona: Sarah Tan – <span class="tooltip">Demand Generation Representative<span class="tooltiptext">Front-line outbound sales role responsible for identifying potential customers and booking qualified meetings for Account Executives</span></span>, AWS (Singapore)**
 
-Sarah is a Demand Generation Representative (DGR) — a front-line outbound sales role responsible for identifying potential customers and booking qualified meetings for Account Executives (AEs). Her performance is measured by the number of "sales-qualified meetings" (SQMs) she creates each week, which directly feeds AWS's new business pipeline.
+Sarah is a <span class="tooltip">DGR<span class="tooltiptext">Demand Generation Representative - outbound sales role focused on creating new pipeline</span></span> — a front-line outbound sales role responsible for identifying potential customers and booking qualified meetings for <span class="tooltip">Account Executives<span class="tooltiptext">Senior sales professionals who close deals and manage customer relationships</span></span> (AEs). Her performance is measured by the number of <span class="tooltip">sales-qualified meetings<span class="tooltiptext">Meetings that meet criteria for passing to Account Executives, involving qualified decision-makers with confirmed budget/timeline</span></span> (<span class="tooltip">SQMs<span class="tooltiptext">Sales-Qualified Meetings - meetings that meet specific criteria for passing to Account Executives</span></span>) she creates each week, which directly feeds AWS's new business pipeline.
 
-Sarah manages a portfolio of 1,200 Small and Medium Business (SMB) accounts, each representing potential cloud deals between US$10K–100K annually. Her target is to book 10 qualified meetings per week, converting research and outreach into tangible sales opportunities.
+Sarah manages a portfolio of 1,200 <span class="tooltip">Small and Medium Business<span class="tooltiptext">Companies typically with <500 employees and <$50M revenue, representing potential cloud deals between $10K-$100K annually</span></span> (<span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business - typically <500 employees, <$50M revenue</span></span>) accounts, each representing potential cloud deals between US$10K–100K annually. Her target is to book 10 qualified meetings per week, converting research and outreach into tangible sales opportunities.
 
-Within AWS's structure, DGRs operate under tight time constraints. Interviews with eight AWS sales representatives show that only 12 out of 40 weekly working hours are typically allocated to prospecting. The remaining time is consumed by internal meetings, pipeline reviews, CRM updates, reporting, and follow-ups — leaving limited bandwidth for deep account research.
+Within AWS's structure, <span class="tooltip">DGRs<span class="tooltiptext">Demand Generation Representatives - front-line outbound sales roles</span></span> operate under tight time constraints. Interviews with eight AWS sales representatives show that only 12 out of 40 weekly working hours are typically allocated to prospecting. The remaining time is consumed by internal meetings, pipeline reviews, <span class="tooltip">CRM<span class="tooltiptext">Customer Relationship Management system (e.g., Salesforce)</span></span> updates, reporting, and follow-ups — leaving limited bandwidth for deep account research.
 
 **Psychographic Profile:**
 Sarah is ambitious, data-driven, and goal-oriented. She enjoys helping companies scale through cloud adoption but is often frustrated by the inefficiency of manual prospecting. Every hour spent researching low-potential accounts feels like a lost opportunity, especially when performance metrics depend on how efficiently she identifies the right leads.
@@ -19,9 +19,9 @@ Sarah is ambitious, data-driven, and goal-oriented. She enjoys helping companies
 
 1. **Time inefficiency**: Manual research across multiple systems takes roughly 10 minutes per account, limiting her to about 72 accounts per week—only 6–7% of her portfolio.
 
-2. **Signal blindness**: Within that 7%, her prioritization is based largely on static internal metrics (e.g., account revenue, cloud spend, AWS event attendance) rather than dynamic external buying signals (e.g., job postings, funding rounds, or leadership changes).
+2. **Signal blindness**: Within that 7%, her prioritization is based largely on static internal metrics (e.g., account revenue, cloud spend, AWS event attendance) rather than dynamic external <span class="tooltip">buying signals<span class="tooltiptext">Observable indicators that a company may be ready to purchase a product/service (e.g., hiring, funding, leadership changes)</span></span> (e.g., job postings, funding rounds, or leadership changes).
 
-This means that each week, roughly 45 high-intent accounts go undetected. Assuming an average AWS SMB deal size of US$37,000, these missed opportunities represent an estimated US$1.66M in unrealized annual pipeline per rep.
+This means that each week, roughly 45 high-intent accounts go undetected. Assuming an average AWS <span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business - typically <500 employees, <$50M revenue</span></span> deal size of US$37,000<span class="footnote" data-note="Based on AWS internal data for Scale segment average deal size in ASEAN region, 2024">1</span>, these missed opportunities represent an estimated US$1.66M in unrealized annual pipeline per rep.
 
 Sarah's problem is not one of motivation or skill — it is structural. Her tools and processes do not allow her to see which companies are actively evaluating cloud solutions in real time.
 
@@ -36,7 +36,7 @@ Sarah's current prospecting process depends on four disconnected systems, each i
 | Google News (≈3 min/account) | Search for funding, expansion, or new partnerships. | Requires manual reading and synthesis; many relevant triggers are missed. |
 | Internal Propensity Scores (≈2 min/account) | Identify "ready-to-buy" accounts using AWS's internal AI models. | 40–50% false positives lead to distrust; six of eight interviewed reps revalidate scores manually. |
 
-**Note:** Propensity scores are AI-generated likelihood rankings that predict which accounts are most likely to buy based on past engagement or usage data. However, their lack of explainability — sometimes referred to as a "black-box" problem — makes them difficult for sales reps to trust or act upon confidently.
+**Note:** <span class="tooltip">Propensity scores<span class="tooltiptext">AI-generated likelihood rankings that predict which accounts are most likely to buy based on past engagement or usage data</span></span> are AI-generated likelihood rankings that predict which accounts are most likely to buy based on past engagement or usage data. However, their lack of explainability — sometimes referred to as a <span class="tooltip">"black-box" problem<span class="tooltiptext">AI system that produces outputs without explaining how it reached its decision</span></span> — makes them difficult for sales reps to trust or act upon confidently.
 
 **Total research time:** ~10 minutes per account  
 **Portfolio coverage:** ~7.2% of accounts analyzed weekly
@@ -94,20 +94,20 @@ This project bridges time inefficiency and signal blindness through scalable, AS
 
 ### 1.6 Solution Overview
 
-This project introduces a GenAI-powered Signal Intelligence Dashboard designed to improve both the coverage and accuracy of account research. It addresses the six identified barriers through a three-layer architecture comprising automated data ingestion, AI-driven signal analysis, and an explainable user interface.
+This project introduces a <span class="tooltip">GenAI<span class="tooltiptext">Generative Artificial Intelligence - AI that creates new content (text, code, images)</span></span>-powered Signal Intelligence Dashboard designed to improve both the coverage and accuracy of account research. It addresses the six identified barriers through a three-layer architecture comprising automated data ingestion, AI-driven signal analysis, and an explainable user interface.
 
-<img src="https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/Dashboard-v1.png" alt="Dashboard Interface" width="800">
+![Dashboard Interface](https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/Dashboard-v1.png){: .zoomable}
 
-*Figure 1: Signal Intelligence Dashboard Interface*
+*Figure 1: Signal Intelligence Dashboard Interface - Click to zoom*
 
 <details>
 <summary>Click to view additional dashboard screenshots</summary>
 
-<img src="https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/company-overview.png" alt="Company Overview" width="600">
+![Company Overview](https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/company-overview.png){: .zoomable}
 
 *Company Profile Overview*
 
-<img src="https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/talking-points.png" alt="Talking Points" width="600">
+![Talking Points](https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/talking-points.png){: .zoomable}
 
 *AI-Generated Talking Points*
 
@@ -351,8 +351,8 @@ Next semester focus: Complete scale testing → pilot with reps → iterate base
 
 Now that the system works, the next goal is to scale it from prototype to production deployment through pilot testing, iteration, and integration into AWS workflows.
 
-<img src="https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/gantt-chart.png" alt="Project Timeline" width="800">
-*Figure 2: Project Execution Timeline*
+![Project Timeline](https://raw.githubusercontent.com/rachelrthl/FYP_Rachel/main/images/gantt-chart.png){: .zoomable}
+*Figure 2: Project Execution Timeline - Click to zoom*
 
 ### 9.2 Execution Plan
 
@@ -364,3 +364,79 @@ Now that the system works, the next goal is to scale it from prototype to produc
 | Integration | 13-16 | Week 14: Salesforce sync<br>Week 16: 10-rep rollout | Production system |
 
 **Expected Outcome (Week 16):** Fully operational system embedded in AWS sales workflow, validated through real rep usage, with recommendation for regional expansion.
+
+---
+
+## APPENDICES
+
+<details>
+<summary>Appendix A: Semi-Structured Interview Findings</summary>
+
+**Purpose**
+To understand how <span class="tooltip">Demand Generation Representatives<span class="tooltiptext">Front-line outbound sales roles responsible for identifying potential customers and booking qualified meetings</span></span> (<span class="tooltip">DGRs<span class="tooltiptext">Demand Generation Representatives - outbound sales role focused on creating new pipeline</span></span>) and Customer Sales Representatives (<span class="tooltip">CSRs<span class="tooltiptext">Sales representatives who manage customer relationships and handle inbound leads</span></span>) currently prioritise accounts, identify buying signals, and the challenges they face with manual prospecting.
+
+**Methodology**
+- Sample: 8 AWS sales representatives (3 Scale, 3 Enterprise, 2 Nurture segments)
+- Format: Semi-structured interviews (45-60 minutes each)  
+- Period: July-August 2024
+
+### Key Findings Summary
+- **7% portfolio coverage** due to 10-minute research time per account
+- **6 out of 8 reps** manually revalidate AI scores due to 40-50% false positives
+- **Desire for explainable reasoning** with citations and transparent logic
+- **Time inefficiency** as the primary barrier to scale
+
+*[Full interview findings available in Report-Content.txt]*
+
+</details>
+
+<details>
+<summary>Appendix B: Technical Architecture</summary>
+
+**System Architecture Overview**
+
+The system uses a three-layer architecture:
+1. **Data Ingestion**: Perplexity + Tavily + NewsAPI
+2. **AI Analysis**: Claude 3.5 Sonnet via AWS Bedrock  
+3. **Storage & UI**: PostgreSQL + DynamoDB + Web Dashboard
+
+**Cost Breakdown (per 1,000 accounts/month)**
+- Perplexity API: $15.00
+- Tavily API: $12.00  
+- AWS Bedrock: $5.00
+- Infrastructure: $15.00
+- **Total: $0.047 per account**
+
+*[Full technical specifications available in Report-Content.txt]*
+
+</details>
+
+<details>
+<summary>Appendix C: Prototype Evolution Details</summary>
+
+**P1 → P2 → P3 Evolution:**
+
+| Prototype | Success Rate | Key Learning |
+|-----------|--------------|--------------|
+| P1 (Scraping) | 32-68% | Bot detection is architectural barrier |
+| P2 (Search API) | 73% | Reliable but lacks structure |  
+| P3 (Specialized APIs) | 96% | Production-grade performance achieved |
+
+*[Complete prototype details available in Report-Content.txt]*
+
+</details>
+
+<details>
+<summary>Appendix D: Glossary of Terms</summary>
+
+| Term | Definition |
+|------|------------|
+| **<span class="tooltip">DGR<span class="tooltiptext">Demand Generation Representative - outbound sales role focused on creating new pipeline</span></span>** | Demand Generation Representative - outbound sales role focused on creating new pipeline |
+| **<span class="tooltip">SQM<span class="tooltiptext">Sales-Qualified Meeting - meeting that meets criteria for passing to Account Executive</span></span>** | Sales-Qualified Meeting - meeting that meets criteria for passing to Account Executive |
+| **<span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business - typically <500 employees, <$50M revenue</span></span>** | Small and Medium Business - typically <500 employees, <$50M revenue |
+| **<span class="tooltip">GenAI<span class="tooltiptext">Generative Artificial Intelligence - AI that creates new content</span></span>** | Generative Artificial Intelligence - AI that creates new content (text, code, images) |
+| **<span class="tooltip">API<span class="tooltiptext">Application Programming Interface - allows different software systems to communicate</span></span>** | Application Programming Interface - allows different software systems to communicate |
+
+*[Complete glossary available in Report-Content.txt]*
+
+</details>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Intelligence Dashboard - FYP Report</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        
+        h1, h2, h3 { 
+            color: #2c3e50;
+            margin-top: 2em;
+        }
+        
+        img { 
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+        
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        .section {
+            margin-bottom: 3em;
+        }
+    </style>
+</head>
+<body>
+    <div id="toc"></div>
+    
+    <main>
+        <h1>Signal Intelligence Dashboard for AWS Sales</h1>
+
+        <div class="section">
+            <h2>A1. PROBLEM DEFINITION & VALUE PROPOSITION</h2>
+
+            <h3>1.1 The Problem & Persona</h3>
+
+            <p><strong>Persona: Sarah Tan – <span class="tooltip">Demand Generation Representative<span class="tooltiptext">Front-line outbound sales role responsible for identifying potential customers and booking qualified meetings for Account Executives</span></span>, AWS (Singapore)</strong></p>
+
+            <p>Sarah is a <span class="tooltip">DGR<span class="tooltiptext">Demand Generation Representative - outbound sales role focused on creating new pipeline</span></span> — a front-line outbound sales role responsible for identifying potential customers and booking qualified meetings for <span class="tooltip">Account Executives<span class="tooltiptext">Senior sales professionals who close deals and manage customer relationships</span></span> (AEs). Her performance is measured by the number of <span class="tooltip">sales-qualified meetings<span class="tooltiptext">Meetings that meet criteria for passing to Account Executives, involving qualified decision-makers with confirmed budget/timeline</span></span> (<span class="tooltip">SQMs<span class="tooltiptext">Sales-Qualified Meetings - meetings that meet specific criteria for passing to Account Executives</span></span>) she creates each week, which directly feeds AWS's new business pipeline.</p>
+
+            <p>Sarah manages a portfolio of 1,200 <span class="tooltip">Small and Medium Business<span class="tooltiptext">Companies typically with <500 employees and <$50M revenue, representing potential cloud deals between $10K-$100K annually</span></span> (<span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business - typically <500 employees, <$50M revenue</span></span>) accounts, each representing potential cloud deals between US$10K–100K annually. Her target is to book 10 qualified meetings per week, converting research and outreach into tangible sales opportunities.</p>
+
+            <p><strong>The Core Problem:</strong> Sarah's challenge is twofold:</p>
+
+            <ol>
+                <li><strong>Time inefficiency</strong>: Manual research across multiple systems takes roughly 10 minutes per account, limiting her to about 72 accounts per week—only 6–7% of her portfolio.</li>
+                <li><strong>Signal blindness</strong>: Within that 7%, her prioritization is based largely on static internal metrics rather than dynamic external <span class="tooltip">buying signals<span class="tooltiptext">Observable indicators that a company may be ready to purchase a product/service (e.g., hiring, funding, leadership changes)</span></span>.</li>
+            </ol>
+
+            <p>This means that each week, roughly 45 high-intent accounts go undetected. Assuming an average AWS <span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business - typically <500 employees, <$50M revenue</span></span> deal size of US$37,000<span class="footnote" data-note="Based on AWS internal data for Scale segment average deal size in ASEAN region, 2024">1</span>, these missed opportunities represent an estimated US$1.66M in unrealized annual pipeline per rep.</p>
+        </div>
+
+        <div class="section">
+            <h3>1.2 Current State – The Productivity & Prioritization Problem</h3>
+
+            <p>Sarah's current prospecting process depends on four disconnected systems:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Purpose</th>
+                        <th>Limitation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Salesforce (≈2 min/account)</td>
+                        <td>Review account history, revenue tier, and past spending trends</td>
+                        <td>Data often outdated; reflects past usage, not current purchase intent</td>
+                    </tr>
+                    <tr>
+                        <td>LinkedIn (≈3 min/account)</td>
+                        <td>Check leadership changes, hiring activity, and technology discussions</td>
+                        <td>Unscalable across 1,200 accounts; signals are typically 5–7 days old when seen</td>
+                    </tr>
+                    <tr>
+                        <td>Google News (≈3 min/account)</td>
+                        <td>Search for funding, expansion, or new partnerships</td>
+                        <td>Requires manual reading and synthesis; many relevant triggers are missed</td>
+                    </tr>
+                    <tr>
+                        <td>Internal <span class="tooltip">Propensity Scores<span class="tooltiptext">AI-generated likelihood rankings that predict which accounts are most likely to buy based on past engagement or usage data</span></span> (≈2 min/account)</td>
+                        <td>Identify "ready-to-buy" accounts using AWS's internal AI models</td>
+                        <td>40–50% false positives lead to distrust; six of eight interviewed reps revalidate scores manually</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Total research time:</strong> ~10 minutes per account<br>
+            <strong>Portfolio coverage:</strong> ~7.2% of accounts analyzed weekly</p>
+        </div>
+
+        <div class="section">
+            <h3>1.6 Solution Overview</h3>
+
+            <p>This project introduces a <span class="tooltip">GenAI<span class="tooltiptext">Generative Artificial Intelligence - AI that creates new content (text, code, images)</span></span>-powered Signal Intelligence Dashboard designed to improve both the coverage and accuracy of account research.</p>
+
+            <img src="images/Dashboard-v1.png" alt="Dashboard Interface" class="zoomable">
+            <p><em>Figure 1: Signal Intelligence Dashboard Interface - Click to zoom</em></p>
+
+            <details>
+                <summary>Click to view additional dashboard screenshots</summary>
+                <img src="images/company-overview.png" alt="Company Overview" class="zoomable">
+                <p><em>Company Profile Overview</em></p>
+                <img src="images/talking-points.png" alt="Talking Points" class="zoomable">
+                <p><em>AI-Generated Talking Points</em></p>
+            </details>
+
+            <p><strong>1. Data Ingestion Layer</strong><br>
+            Automates the collection of external data across 1,000+ accounts daily using APIs such as Perplexity and Tavily.</p>
+
+            <p><strong>2. Signal Analysis Layer</strong><br>
+            Powered by <span class="tooltip">Claude 3.5 Sonnet<span class="tooltiptext">Large language model by Anthropic, used for natural-language reasoning and synthesis</span></span>, this layer extracts structured insights and produces transparent natural-language reasoning with cited evidence.</p>
+
+            <p><strong>3. Dashboard Interface</strong><br>
+            Displays ranked accounts (0–100) with signal breakdowns, citations, and AI-generated talking points.</p>
+        </div>
+
+        <div class="section">
+            <h2>A4. FABRICATION OF SPECIMENS/PROTOTYPES</h2>
+
+            <h3>4.1 Prototype Evolution Overview</h3>
+
+            <p>From July to October 2024, three prototypes validated the <span class="tooltip">API-First<span class="tooltiptext">System design that prioritizes Application Programming Interface access over web scraping for data retrieval</span></span> + <span class="tooltip">GenAI<span class="tooltiptext">Generative Artificial Intelligence</span></span> architecture:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prototype</th>
+                        <th>Technology Stack</th>
+                        <th>Success Rate</th>
+                        <th>Critical Learning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P1</td>
+                        <td>Selenium + ScrapingBee</td>
+                        <td>32-68%</td>
+                        <td>Official sites accurate but scraping architecturally unsound (36% bot blocks)</td>
+                    </tr>
+                    <tr>
+                        <td>P2</td>
+                        <td>DuckDuckGo API + Claude 3.5</td>
+                        <td>73%</td>
+                        <td>Search APIs reliable but lack structure; missing hiring signals</td>
+                    </tr>
+                    <tr>
+                        <td>P3</td>
+                        <td>Perplexity + Tavily + Claude 3.5</td>
+                        <td>96%</td>
+                        <td>Specialized APIs + <span class="tooltip">LLM<span class="tooltiptext">Large Language Model - AI trained on vast text data to understand and generate human language</span></span> synthesis achieves production-grade performance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>A9. PROJECT PLAN</h2>
+
+            <p>Now that the system works, the next goal is to scale it from prototype to production deployment through pilot testing, iteration, and integration into AWS workflows.</p>
+
+            <img src="images/gantt-chart.png" alt="Project Timeline" class="zoomable">
+            <p><em>Figure 2: Project Execution Timeline - Click to zoom</em></p>
+
+            <h3>9.2 Execution Plan</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Weeks</th>
+                        <th>Key Milestones</th>
+                        <th>Deliverable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pilot Testing</td>
+                        <td>1-8</td>
+                        <td>Week 3: 1,000-account load test<br>Week 6: Deploy to 3 reps<br>Week 8: Usage data collected</td>
+                        <td>Real-world validation</td>
+                    </tr>
+                    <tr>
+                        <td>Iteration</td>
+                        <td>9-12</td>
+                        <td>Week 10: Signal quality improved<br>Week 12: UI refined</td>
+                        <td>False positives &lt;20%</td>
+                    </tr>
+                    <tr>
+                        <td>Evaluation</td>
+                        <td>11-13</td>
+                        <td>Week 13: A/B test results</td>
+                        <td>Productivity comparison</td>
+                    </tr>
+                    <tr>
+                        <td>Integration</td>
+                        <td>13-16</td>
+                        <td>Week 14: Salesforce sync<br>Week 16: 10-rep rollout</td>
+                        <td>Production system</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Expected Outcome (Week 16):</strong> Fully operational system embedded in AWS sales workflow, validated through real rep usage, with recommendation for regional expansion.</p>
+        </div>
+
+        <hr>
+
+        <div class="section">
+            <h2>APPENDICES</h2>
+
+            <details>
+                <summary>Appendix A: Semi-Structured Interview Findings</summary>
+                <h3>Purpose</h3>
+                <p>To understand how <span class="tooltip">Demand Generation Representatives<span class="tooltiptext">Front-line outbound sales roles responsible for identifying potential customers and booking qualified meetings</span></span> (<span class="tooltip">DGRs<span class="tooltiptext">Demand Generation Representatives - outbound sales role focused on creating new pipeline</span></span>) and Customer Sales Representatives (<span class="tooltip">CSRs<span class="tooltiptext">Sales representatives who manage customer relationships and handle inbound leads</span></span>) currently prioritise accounts, identify buying signals, and the challenges they face with manual prospecting.</p>
+
+                <h3>Methodology</h3>
+                <ul>
+                    <li>Sample: 8 AWS sales representatives (3 Scale, 3 Enterprise, 2 Nurture segments)</li>
+                    <li>Format: Semi-structured interviews (45-60 minutes each)</li>
+                    <li>Period: July-August 2024</li>
+                </ul>
+
+                <h3>Key Findings Summary</h3>
+                <ul>
+                    <li><strong>7% portfolio coverage</strong> due to 10-minute research time per account</li>
+                    <li><strong>6 out of 8 reps</strong> manually revalidate AI scores due to 40-50% false positives</li>
+                    <li><strong>Desire for explainable reasoning</strong> with citations and transparent logic</li>
+                    <li><strong>Time inefficiency</strong> as the primary barrier to scale</li>
+                </ul>
+
+                <p><em>[Full interview findings available in Report-Content.txt]</em></p>
+            </details>
+
+            <details>
+                <summary>Appendix B: Technical Architecture</summary>
+                <h3>System Architecture Overview</h3>
+                <p>The system uses a three-layer architecture:</p>
+                <ol>
+                    <li><strong>Data Ingestion</strong>: Perplexity + Tavily + NewsAPI</li>
+                    <li><strong>AI Analysis</strong>: Claude 3.5 Sonnet via <span class="tooltip">AWS Bedrock<span class="tooltiptext">Amazon Web Services' managed service for running large language models</span></span></li>
+                    <li><strong>Storage & UI</strong>: PostgreSQL + DynamoDB + Web Dashboard</li>
+                </ol>
+
+                <h3>Cost Breakdown (per 1,000 accounts/month)</h3>
+                <ul>
+                    <li>Perplexity API: $15.00</li>
+                    <li>Tavily API: $12.00</li>
+                    <li>AWS Bedrock: $5.00</li>
+                    <li>Infrastructure: $15.00</li>
+                    <li><strong>Total: $0.047 per account</strong></li>
+                </ul>
+
+                <p><em>[Full technical specifications available in Report-Content.txt]</em></p>
+            </details>
+
+            <details>
+                <summary>Appendix C: Prototype Evolution Details</summary>
+                <h3>P1 → P2 → P3 Evolution:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Prototype</th>
+                            <th>Success Rate</th>
+                            <th>Key Learning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>P1 (Scraping)</td>
+                            <td>32-68%</td>
+                            <td>Bot detection is architectural barrier</td>
+                        </tr>
+                        <tr>
+                            <td>P2 (Search API)</td>
+                            <td>73%</td>
+                            <td>Reliable but lacks structure</td>
+                        </tr>
+                        <tr>
+                            <td>P3 (Specialized APIs)</td>
+                            <td>96%</td>
+                            <td>Production-grade performance achieved</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><em>[Complete prototype details available in Report-Content.txt]</em></p>
+            </details>
+
+            <details>
+                <summary>Appendix D: Glossary of Terms</summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Term</th>
+                            <th>Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong><span class="tooltip">DGR<span class="tooltiptext">Demand Generation Representative - outbound sales role focused on creating new pipeline</span></span></strong></td>
+                            <td>Demand Generation Representative - outbound sales role focused on creating new pipeline</td>
+                        </tr>
+                        <tr>
+                            <td><strong><span class="tooltip">SQM<span class="tooltiptext">Sales-Qualified Meeting - meeting that meets criteria for passing to Account Executive</span></span></strong></td>
+                            <td>Sales-Qualified Meeting - meeting that meets criteria for passing to Account Executive</td>
+                        </tr>
+                        <tr>
+                            <td><strong><span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business - typically <500 employees, <$50M revenue</span></span></strong></td>
+                            <td>Small and Medium Business - typically &lt;500 employees, &lt;$50M revenue</td>
+                        </tr>
+                        <tr>
+                            <td><strong><span class="tooltip">GenAI<span class="tooltiptext">Generative Artificial Intelligence - AI that creates new content</span></span></strong></td>
+                            <td>Generative Artificial Intelligence - AI that creates new content (text, code, images)</td>
+                        </tr>
+                        <tr>
+                            <td><strong><span class="tooltip">API<span class="tooltiptext">Application Programming Interface - allows different software systems to communicate</span></span></strong></td>
+                            <td>Application Programming Interface - allows different software systems to communicate</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><em>[Complete glossary available in Report-Content.txt]</em></p>
+            </details>
+        </div>
+    </main>
+    
+    <script src="assets/js/interactive.js"></script>
+</body>
+</html>
