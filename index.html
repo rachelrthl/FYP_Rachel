@@ -321,7 +321,6 @@
             <p>This project introduces a <span class="tooltip">GenAI<span class="tooltiptext">Generative Artificial Intelligence - AI that creates new content (text, code, images)</span></span>-powered Signal Intelligence Dashboard designed to improve both the coverage and accuracy of account research. It addresses the six identified barriers through a three-layer architecture comprising automated data ingestion, AI-driven signal analysis, and an explainable user interface.</p>
 
             <img src="images/Dashboard-v1.png" alt="Dashboard Interface" class="zoomable">
-            <p><em>Figure 1: Signal Intelligence Dashboard Interface - Click to zoom</em></p>
 
             <video controls width="800" style="margin: 20px 0;" preload="metadata" muted>
                 <source src="./videos/demo-v1-2.mp4" type="video/mp4; codecs='avc1.42E01E, mp4a.40.2'">
@@ -477,8 +476,8 @@
                     <tr>
                         <td>P2</td>
                         <td>DuckDuckGo API + Claude 3.5</td>
-                        <td>73%</td>
-                        <td>Search APIs reliable but lack structure; missing hiring signals reduces complete profile retrieval</td>
+                        <td>100%</td>
+                        <td>Search APIs reliable for data retrieval but unstructured snippets reduce accuracy; missing hiring signals</td>
                     </tr>
                     <tr>
                         <td>P3</td>
@@ -506,7 +505,7 @@
 
             <p>P2 Solution: Use DuckDuckGo Search API to retrieve indexed content about companies (titles, snippets, URLs), then feed to Claude 3.5 for synthesis. This mimics human research (Googling a company) while avoiding bot detection.</p>
 
-            <p>Result: 73% success rate (+41 percentage points), zero maintenance overhead.</p>
+            <p>Result: 100% data retrieval success (no technical failures), but accuracy challenges due to unstructured snippets and duplicate information.</p>
 
             <p><strong>P2 → P3: Solving Timeliness and Data Structure Challenges (August-October)</strong></p>
 
@@ -526,7 +525,7 @@
                 <li><strong>Claude 3.5</strong>: Synthesizes both into explainable scores with natural-language reasoning</li>
             </ul>
 
-            <p>Result: 100% success rate (+27 percentage points), 48-second average processing time, $0.032 cost per account.</p>
+            <p>Result: 100% success rate, 48-second average processing time (overnight batch), $0.032 cost per account.</p>
 
             <h3>4.3 Technical Validation</h3>
 
@@ -611,7 +610,7 @@
             Success rate: 32-68% (scraping) → 100% (API-based). Modern websites deploy bot detection (Cloudflare: 36%, dynamic selectors: 28%); P1-P2 required 5 hours/week maintenance, P3 requires zero. Manual benchmark (n=10 accounts) confirmed 100% profile retrieval accuracy.</p>
 
             <p><strong>Finding 2: Automation Enables Portfolio-Scale Monitoring</strong><br>
-            Processing time: 48 seconds vs. 10 minutes manual (87% reduction). Extrapolated: daily monitoring of 100% portfolio vs. current 7.2% weekly. Section 1.1 estimated ~45 high-intent signals/week go undetected; full coverage captures these opportunities ($1.66M annual unrealized pipeline/rep). Critical: signals decay within 48-72 hours—daily refresh enables Day 1-2 engagement vs. manual Day 7+ discovery.</p>
+            Processing time: 48 seconds per account (overnight batch processing) enables daily refresh of 100% portfolio vs. current 7.2% weekly coverage. Reps access pre-processed insights instantly. Section 1.1 estimated ~45 high-intent signals/week go undetected; full coverage captures these opportunities ($13.0M annual unrealized pipeline/rep). Critical: signals decay within 48-72 hours—daily refresh enables Day 1-2 engagement vs. manual Day 7+ discovery.</p>
 
             <p><strong>Finding 3: Explainable Reasoning Addresses Trust Deficit</strong><br>
             P3 outputs include source citations (e.g., "Posted 3 cloud engineer roles [LinkedIn Jobs, Oct 5]"). Section 1.2 found 6/8 reps manually revalidate AI scores due to 40-50% false positives; transparent reasoning makes AI logic auditable, aligning with Gartner's projection that explainability drives 75% AI adoption by 2025.</p>
@@ -626,9 +625,9 @@
 
             <div class="callout">
                 <h4>💰 Business Case ROI</h4>
-                <p><strong>Revenue Model:</strong> 45 signals/week × 52 weeks × 15% conversion × 20% close × $50K = <span class="metric-large">$3.5M/rep</span><br>
+                <p><strong>Revenue Model:</strong> 45 signals/week × 52 weeks × 15% conversion × 20% close × $37K = <span class="metric-large">$2.6M/rep</span><br>
                 <strong>Cost:</strong> <span class="metric">$384/year per rep</span> ($0.032/account)<br>
-                <strong>ROI:</strong> <span class="metric-large">9,115:1</span> (breaks even with 1 deal/year) (See Appendix B for detailed cost breakdown.)</p>
+                <strong>ROI:</strong> <span class="metric-large">6,764:1</span> (breaks even with 1 deal/year) (See Appendix B for detailed cost breakdown.)</p>
             </div>
 
             <p>Validation requires 6-month pilot (Section 9) to track actual meeting bookings and closed revenue.</p>
@@ -654,7 +653,7 @@
             <p><strong>Validated performance (n=10 test accounts):</strong></p>
             <ul>
                 <li>100% data retrieval success rate</li>
-                <li>48 seconds average processing time (vs 10 minutes manual)</li>
+                <li>48 seconds average processing time (overnight batch refresh; reps get instant access to pre-processed data)</li>
                 <li>$0.032 cost per account (below $0.05 target)</li>
             </ul>
 
@@ -681,7 +680,7 @@
                 <li><strong>Limited Scale Validation (10 accounts)</strong>: System unproven at 1,000-account scale. Resolution: Load testing with 100-account dataset, optimize database queries, validate 2-hour daily refresh window (3 weeks).</li>
                 <li><strong>No User Validation</strong>: Dashboard designed from interviews but untested with actual reps. Resolution: Deploy to 3 pilot reps, collect feedback, measure adoption rate >80% (4 weeks).</li>
                 <li><strong>Singapore-Only Coverage</strong>: System untested across ASEAN markets (Indonesia, Malaysia, Thailand, Vietnam) with different languages/data sources. Resolution: Test 20 accounts per market, add region-specific sources where gaps identified (12 weeks, post-pilot).</li>
-                <li><strong>No Salesforce Integration</strong>: Dashboard standalone; reps manually copy insights to <span class="tooltip">CRM<span class="tooltiptext">Customer Relationship Management system</span></span>. Resolution: Build bidirectional API sync, auto-populate CRM fields (3 weeks).</li>
+                <li><strong>No Salesforce Integration</strong>: Dashboard standalone; reps manually copy insights from <span class="tooltip">CRM<span class="tooltiptext">Customer Relationship Management system</span></span> to dashboard for processing. Resolution: Build bidirectional API sync, auto-populate CRM fields (3 weeks).</li>
             </ol>
 
             <h3>8.2 Prioritization</h3>
