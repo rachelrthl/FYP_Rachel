@@ -475,9 +475,9 @@
                     </tr>
                     <tr>
                         <td>P2</td>
-                        <td>DuckDuckGo API + Claude 3.5</td>
+                        <td>Web Scraping + DuckDuckGo API + Claude 3.5</td>
                         <td>100%</td>
-                        <td>Search APIs reliable for data retrieval but unstructured snippets reduce accuracy; missing hiring signals</td>
+                        <td>Hybrid approach (scraping + API fallback) ensures data retrieval but unstructured snippets reduce accuracy</td>
                     </tr>
                     <tr>
                         <td>P3</td>
@@ -503,9 +503,13 @@
 
             <p>Key Decision: Abandon scraping entirely. Bot detection is an architectural barrier, not a technical challenge—fighting it is unsustainable.</p>
 
-            <p>P2 Solution: Use DuckDuckGo Search API to retrieve indexed content about companies (titles, snippets, URLs), then feed to Claude 3.5 for synthesis. This mimics human research (Googling a company) while avoiding bot detection.</p>
+            <img src="images/Prototype_1.png" alt="Prototype 1 - Web Scraping Interface" class="zoomable">
+
+            <p>P2 Solution: Multi-layer approach combining direct web scraping with API fallback. System first attempts direct scraping of company websites; if blocked by bot detection, it falls back to DuckDuckGo Search API to retrieve indexed content (titles, snippets, URLs), then feeds results to Claude 3.5 for synthesis. This hybrid approach maximizes data quality while maintaining reliability.</p>
 
             <p>Result: 100% data retrieval success (no technical failures), but accuracy challenges due to unstructured snippets and duplicate information.</p>
+
+            <img src="images/Prototype_2.png" alt="Prototype 2 - DuckDuckGo API Interface" class="zoomable">
 
             <p><strong>P2 → P3: Solving Timeliness and Data Structure Challenges (August-October)</strong></p>
 
