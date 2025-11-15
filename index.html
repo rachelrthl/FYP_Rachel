@@ -782,6 +782,55 @@
                 </tbody>
             </table>
 
+            <h3>Phase Priorities & User Testing Focus</h3>
+
+            <p><strong>Phase 1: Pilot Testing (Weeks 1-8) - PRIORITY: User Experience Validation</strong></p>
+            <ul>
+                <li><strong>Week 1-3</strong>: Pre-deployment user research
+                    <ul>
+                        <li>Shadow pilot reps during current manual process to establish baseline</li>
+                        <li>Conduct usability heuristic evaluation of dashboard interface</li>
+                        <li>Test information architecture with think-aloud protocols</li>
+                    </ul>
+                </li>
+                <li><strong>Week 3-6</strong>: Live user testing during 1,000-account load test
+                    <ul>
+                        <li>Daily usage analytics: track engagement, time per account, feature adoption</li>
+                        <li>Weekly 30-min think-aloud sessions with each of the 3 pilot reps</li>
+                        <li>Document pain points, confusion areas, and resistance patterns</li>
+                    </ul>
+                </li>
+                <li><strong>Week 6-8</strong>: User feedback integration
+                    <ul>
+                        <li>A/B test interface variations based on user feedback</li>
+                        <li>Measure trust calibration: confidence in AI recommendations over time</li>
+                        <li>Validate behavior change: reduction in manual research tool usage</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Phase 2: Iteration (Weeks 9-12) - PRIORITY: User-Driven Design Improvements</strong></p>
+            <ul>
+                <li><strong>User co-design sessions</strong>: Reps participate in dashboard redesign decisions</li>
+                <li><strong>Rapid prototyping</strong>: 48-hour turnaround on UI/UX fixes based on pilot feedback</li>
+                <li><strong>Cognitive load optimization</strong>: Reduce information overload, improve decision flow</li>
+            </ul>
+
+            <p><strong>Phase 3: Evaluation (Weeks 11-13) - PRIORITY: User Adoption Metrics</strong></p>
+            <ul>
+                <li><strong>User satisfaction measurement</strong>: >4/5 usability rating target</li>
+                <li><strong>Behavioral analysis</strong>: Compare manual vs dashboard research efficiency per rep</li>
+                <li><strong>Adoption validation</strong>: >80% daily usage rate achievement</li>
+            </ul>
+
+            <p><strong>Phase 4: Integration (Weeks 13-16) - PRIORITY: Seamless User Workflow</strong></p>
+            <ul>
+                <li><strong>Salesforce integration testing</strong>: Ensure smooth CRM workflow integration</li>
+                <li><strong>Change management</strong>: Support 10-rep rollout with user training and feedback loops</li>
+            </ul>
+
+            <p><strong>Key Success Metric</strong>: User adoption rate >80% - technical performance is secondary to actual usage and behavior change.</p>
+
             <p><strong>Expected Outcome (Week 16):</strong> Fully operational system embedded in AWS sales workflow, validated through real rep usage, with recommendation for regional expansion.</p>
         </div>
 
@@ -1441,6 +1490,140 @@ def research_company():
 
                 <p><strong>Screenshot 3: AI-Generated Talking Points</strong></p>
                 <img src="images/talking-points.png" alt="Talking Points" class="zoomable">
+            </details>
+
+            <details>
+                <summary>Appendix G: Risk Assessment & Mitigation</summary>
+                
+                <h3>Technical Risks</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Impact</th>
+                            <th>Probability</th>
+                            <th>Mitigation Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>API Rate Limits</strong></td>
+                            <td>System processes <500 accounts/day vs 1,000 target</td>
+                            <td>Medium</td>
+                            <td>Upgrade to paid tiers (Perplexity Pro: $20/month, Tavily: $50/month); implement intelligent queuing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Quality Degradation</strong></td>
+                            <td>15-20% ASEAN SMBs lack online presence</td>
+                            <td>High</td>
+                            <td>Fallback to manual research for data-sparse accounts; focus on digitally mature markets first</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Claude 3.5 Hallucination</strong></td>
+                            <td>False signals lead to wasted outreach</td>
+                            <td>Medium</td>
+                            <td>Implement confidence scoring; require 2+ source citations for high-impact signals</td>
+                        </tr>
+                        <tr>
+                            <td><strong>API Service Outages</strong></td>
+                            <td>System unavailable during business hours</td>
+                            <td>Low</td>
+                            <td>Multi-vendor redundancy (Perplexity + Tavily backup); cached data for 48-hour continuity</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Business Risks</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Impact</th>
+                            <th>Probability</th>
+                            <th>Mitigation Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Low User Adoption</strong></td>
+                            <td>Reps continue manual research despite system availability</td>
+                            <td>High</td>
+                            <td>4-week pilot with 3 champions; measure >80% daily usage; iterate based on feedback</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Salesforce Integration Delays</strong></td>
+                            <td>Manual data copying reduces efficiency gains</td>
+                            <td>Medium</td>
+                            <td>Phase 1: Standalone dashboard; Phase 2: API integration (3-week timeline)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ASEAN Market Variations</strong></td>
+                            <td>Singapore-trained system fails in Indonesia/Thailand</td>
+                            <td>Medium</td>
+                            <td>Market-by-market validation (20 accounts each); add local data sources as needed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Competitive Response</strong></td>
+                            <td>ZoomInfo/6sense improve ASEAN coverage</td>
+                            <td>Low</td>
+                            <td>Focus on explainability and cost advantage; build switching costs through CRM integration</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Regulatory & Compliance Risks</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Impact</th>
+                            <th>Probability</th>
+                            <th>Mitigation Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Data Privacy (GDPR/PDPA)</strong></td>
+                            <td>Cannot process EU/Singapore company data</td>
+                            <td>Low</td>
+                            <td>Use only publicly available data; implement data retention policies</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI Governance Requirements</strong></td>
+                            <td>AWS requires explainable AI compliance</td>
+                            <td>Medium</td>
+                            <td>Built-in source citations and reasoning transparency already address this</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Financial Risks</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Impact</th>
+                            <th>Probability</th>
+                            <th>Mitigation Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Cost Overruns</strong></td>
+                            <td>API costs exceed $384/rep budget</td>
+                            <td>Medium</td>
+                            <td>Monitor usage daily; implement cost alerts at 80% threshold</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ROI Not Realized</strong></td>
+                            <td>Actual conversion <15% signal-driven rate</td>
+                            <td>Medium</td>
+                            <td>Track pilot metrics weekly; adjust expectations based on real data</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Overall Risk Level: Medium-Low</strong> - Most risks have clear mitigation strategies and the system design already addresses key concerns around explainability and cost control.</p>
             </details>
 
             <details>
