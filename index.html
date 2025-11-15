@@ -328,7 +328,7 @@
                 <source src="./videos/demo-v1-2.mp4" type="video/mp4">
                 <p>Your browser does not support the video tag. <a href="./videos/demo-v1-2.mp4" target="_blank">Click here to download the demo video</a>.</p>
             </video>
-            <p><em>Demo Video: 48-second account research process in action</em></p>
+            <p><em>Demo Video: Signal Intelligence Dashboard in action</em></p>
 
             <details>
                 <summary>Click to view additional dashboard screenshots</summary>
@@ -463,7 +463,7 @@
                     <tr>
                         <th>Prototype</th>
                         <th>Technology Stack</th>
-                        <th>Success Rate</th>
+                        <th>Data Retrieval Success Rate</th>
                         <th>Critical Learning</th>
                     </tr>
                 </thead>
@@ -472,19 +472,19 @@
                         <td>P1</td>
                         <td>Selenium + ScrapingBee</td>
                         <td>32-68%</td>
-                        <td>Official sites accurate but scraping architecturally unsound (36% bot blocks)</td>
+                        <td>Official sites accurate but scraping architecturally unsound (36% bot blocks reduce data access)</td>
                     </tr>
                     <tr>
                         <td>P2</td>
                         <td>DuckDuckGo API + Claude 3.5</td>
                         <td>73%</td>
-                        <td>Search APIs reliable but lack structure; missing hiring signals</td>
+                        <td>Search APIs reliable but lack structure; missing hiring signals reduces complete profile retrieval</td>
                     </tr>
                     <tr>
                         <td>P3</td>
                         <td>Perplexity + Tavily + Claude 3.5</td>
-                        <td>96%</td>
-                        <td>Specialized APIs + <span class="tooltip">LLM<span class="tooltiptext">Large Language Model</span></span> synthesis achieves production-grade performance</td>
+                        <td>100%</td>
+                        <td>Specialized APIs + <span class="tooltip">LLM<span class="tooltiptext">Large Language Model</span></span> synthesis achieves complete profile retrieval (10/10 accounts)</td>
                     </tr>
                 </tbody>
             </table>
@@ -526,7 +526,7 @@
                 <li><strong>Claude 3.5</strong>: Synthesizes both into explainable scores with natural-language reasoning</li>
             </ul>
 
-            <p>Result: 96% success rate (+23 percentage points), 48-second average processing time, $0.032 cost per account.</p>
+            <p>Result: 100% success rate (+27 percentage points), 48-second average processing time, $0.032 cost per account.</p>
 
             <h3>4.3 Technical Validation</h3>
 
@@ -538,7 +538,7 @@
             <div class="callout-success">
                 <h4>✅ Prototype Validation Results</h4>
                 <ul>
-                    <li><span class="metric">96%</span> complete profile retrieval (10/10 accounts)</li>
+                    <li><span class="metric">100%</span> complete profile retrieval (10/10 accounts)</li>
                     <li>Manual benchmark: outputs matched human-researched accuracy across company description, hiring activity, recent news, AWS service fit</li>
                     <li>Processing: <span class="metric">48s average</span> (<span class="metric">87% faster</span> than 10-min manual baseline)</li>
                     <li>Cost: <span class="metric">$0.032/account</span> (36% below $0.05 viability threshold)</li>
@@ -608,7 +608,7 @@
             <h3>6.1 Key Findings</h3>
 
             <p><strong>Finding 1: API-First Architecture Solves Reliability Bottleneck</strong><br>
-            Success rate: 32-68% (scraping) → 96% (API-based). Modern websites deploy bot detection (Cloudflare: 36%, dynamic selectors: 28%); P1-P2 required 5 hours/week maintenance, P3 requires zero. Manual benchmark (n=10 accounts) confirmed 100% profile retrieval accuracy.</p>
+            Success rate: 32-68% (scraping) → 100% (API-based). Modern websites deploy bot detection (Cloudflare: 36%, dynamic selectors: 28%); P1-P2 required 5 hours/week maintenance, P3 requires zero. Manual benchmark (n=10 accounts) confirmed 100% profile retrieval accuracy.</p>
 
             <p><strong>Finding 2: Automation Enables Portfolio-Scale Monitoring</strong><br>
             Processing time: 48 seconds vs. 10 minutes manual (87% reduction). Extrapolated: daily monitoring of 100% portfolio vs. current 7.2% weekly. Section 1.1 estimated ~45 high-intent signals/week go undetected; full coverage captures these opportunities ($1.66M annual unrealized pipeline/rep). Critical: signals decay within 48-72 hours—daily refresh enables Day 1-2 engagement vs. manual Day 7+ discovery.</p>
@@ -618,7 +618,7 @@
 
             <h3>6.2 Validation Status</h3>
 
-            <p><strong>Validated:</strong> Technical feasibility (10/10 accounts, 96% success), processing speed (48s), cost ($0.032/account)</p>
+            <p><strong>Validated:</strong> Technical feasibility (10/10 accounts, 100% success), processing speed (48s), cost ($0.032/account)</p>
 
             <p><strong>Unvalidated:</strong> User adoption (no rep testing), scale (10 accounts tested, 1,000 needed), revenue impact (industry benchmarks, not actual conversions), ASEAN coverage (Singapore only)</p>
 
@@ -653,7 +653,7 @@
 
             <p><strong>Validated performance (n=10 test accounts):</strong></p>
             <ul>
-                <li>96% data retrieval success rate</li>
+                <li>100% data retrieval success rate</li>
                 <li>48 seconds average processing time (vs 10 minutes manual)</li>
                 <li>$0.032 cost per account (below $0.05 target)</li>
             </ul>
