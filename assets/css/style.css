@@ -73,6 +73,21 @@ main {
     background: transparent;
 }
 
+.section {
+    padding: 20px 22px;
+    border-radius: 12px;
+    margin: 24px 0;
+    border: 1px solid rgba(35, 47, 62, 0.08);
+}
+
+.section:nth-of-type(odd) {
+    background: var(--aws-light-blue);
+}
+
+.section:nth-of-type(even) {
+    background: var(--aws-light-orange);
+}
+
 .callout,
 .callout-success,
 .callout-warning,

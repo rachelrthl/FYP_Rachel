@@ -1,4 +1,4 @@
-const headings = [...document.querySelectorAll("main h2, main h3")];
+const headings = [...document.querySelectorAll("main > .section > h2")];
 const toc = document.getElementById("toc");
 
 if (toc && headings.length) {
@@ -12,10 +12,6 @@ if (toc && headings.length) {
         }
 
         const item = document.createElement("li");
-        if (heading.tagName === "H3") {
-            item.style.paddingLeft = "12px";
-        }
-
         const link = document.createElement("a");
         link.href = `#${heading.id}`;
         link.textContent = heading.textContent;
