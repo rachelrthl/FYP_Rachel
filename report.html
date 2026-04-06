@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signal Intelligence Dashboard - FYP Report</title>
+    <title>Signal Intelligence Dashboard - FYP Final Report</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body { 
@@ -69,31 +69,33 @@
     <main>
         <h1>Signal Intelligence Dashboard for AWS Sales</h1>
 
-        <div class="section">
-            <h2>A1. PROBLEM DEFINITION & VALUE PROPOSITION</h2>
+        <!-- ============================================ -->
+        <!-- A1. PROBLEM DEFINITION & VALUE PROPOSITION   -->
+        <!-- ============================================ -->
 
-            <h3>1.1 The Problem & Persona</h3>
+        <div class="section">
+            <h2>A1. Problem Definition &amp; Value Proposition</h2>
+
+            <h3>1.1 The Problem &amp; Persona</h3>
 
             <p><strong>Persona: Sarah Tan – <span class="tooltip">Demand Generation Representative<span class="tooltiptext">Front-line outbound sales role responsible for identifying potential customers and booking qualified meetings for Account Executives</span></span>, AWS (Singapore)</strong></p>
 
-            <p>Sarah is a <span class="tooltip">DGR<span class="tooltiptext">Demand Generation Representative - outbound sales role focused on creating new pipeline</span></span> — a front-line outbound sales role responsible for identifying potential customers and booking qualified meetings for <span class="tooltip">Account Executives<span class="tooltiptext">Senior sales professionals who close deals and manage customer relationships</span></span> (AEs). Her performance is measured by the number of <span class="tooltip">sales-qualified meetings<span class="tooltiptext">Meetings that meet criteria for passing to Account Executives, involving qualified decision-makers with confirmed budget/timeline</span></span> (<span class="tooltip">SQMs<span class="tooltiptext">Sales-Qualified Meetings - meetings that meet specific criteria for passing to Account Executives</span></span>) she creates each week, which directly feeds AWS's new business pipeline.</p>
+            <p>Sarah is a <span class="tooltip">DGR<span class="tooltiptext">Demand Generation Representative — outbound sales role focused on creating new pipeline</span></span> responsible for identifying potential customers and booking qualified meetings for <span class="tooltip">Account Executives<span class="tooltiptext">Senior sales professionals who close deals and manage customer relationships</span></span>. Her performance is measured by <span class="tooltip">sales-qualified meetings<span class="tooltiptext">Meetings that meet criteria for passing to Account Executives, involving qualified decision-makers with confirmed budget/timeline</span></span> (<span class="tooltip">SQMs<span class="tooltiptext">Sales-Qualified Meetings — meetings that meet specific criteria for passing to Account Executives</span></span>) created weekly, directly feeding AWS's new business pipeline. Managing a portfolio of 1,200 <span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business — typically &lt;500 employees, &lt;$50M revenue</span></span> accounts each representing potential cloud deals of US$10K–100K annually, her target is 10 qualified meetings per week.</p>
 
-            <p>Sarah manages a portfolio of 1,200 <span class="tooltip">Small and Medium Business<span class="tooltiptext">Companies typically with <500 employees and <$50M revenue, representing potential cloud deals between $10K-$100K annually</span></span> (<span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business - typically <500 employees, <$50M revenue</span></span>) accounts, each representing potential cloud deals between US$10K–100K annually. Her target is to book 10 qualified meetings per week, converting research and outreach into tangible sales opportunities.</p>
-
-            <p><strong>The Core Problem:</strong> Sarah's challenge is twofold:</p>
+            <p><span class="tooltip">DGRs<span class="tooltiptext">Demand Generation Representatives — outbound sales roles focused on creating new pipeline</span></span> operate under severe time constraints. Interviews with eight AWS sales representatives confirmed that only 12 of 40 weekly working hours are allocated to prospecting; the remainder is consumed by internal meetings, <span class="tooltip">CRM<span class="tooltiptext">Customer Relationship Management — software for managing customer interactions and sales data (e.g. Salesforce)</span></span> updates, and reporting. This leaves Sarah with a structural problem, not a motivational one:</p>
 
             <ol>
-                <li><strong>Time inefficiency</strong>: Manual research across multiple systems takes roughly 10 minutes per account, limiting her to about 72 accounts per week—only 6–7% of her portfolio.</li>
-                <li><strong>Signal blindness</strong>: Within that 7%, her prioritization is based largely on static internal metrics rather than dynamic external <span class="tooltip">buying signals<span class="tooltiptext">Observable indicators that a company may be ready to purchase a product/service (e.g., hiring, funding, leadership changes)</span></span>.</li>
+                <li><strong>Time inefficiency:</strong> Manual research across four disconnected systems takes ~10 minutes per account, limiting her to 72 accounts per week — just 6–7% of her portfolio.</li>
+                <li><strong>Signal blindness:</strong> Prioritisation relies on static internal metrics (revenue tier, past spend, event attendance) rather than dynamic external <span class="tooltip">buying signals<span class="tooltiptext">Observable indicators that a company may be ready to purchase a product/service (e.g., hiring, funding, leadership changes)</span></span> such as hiring activity, funding rounds, or leadership changes.</li>
             </ol>
 
-            <p>This means that each week, roughly 45 high-intent accounts go undetected. Assuming an average AWS <span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business - typically <500 employees, <$50M revenue</span></span> deal size of US$37,000<span class="footnote" data-note="Based on AWS internal data for Scale segment average deal size in ASEAN region, 2024">1</span>, these missed opportunities represent an estimated US$1.66M in unrealized annual pipeline per rep.</p>
+            <p>The consequence is significant: approximately 45 high-intent accounts go undetected each week. At an average AWS SMB deal size of US$37,000<span class="footnote" data-note="Based on AWS internal data for Scale segment average deal size in ASEAN region, 2024">1</span>, this represents an estimated <span class="metric-large">US$1.66M</span> in unrealised annual pipeline per rep — and US$66M across a 40-rep team.</p>
         </div>
 
         <div class="section">
-            <h3>1.2 Current State – The Productivity & Prioritization Problem</h3>
+            <h3>1.2 Current State: Four Disconnected Systems</h3>
 
-            <p>Sarah's current prospecting process depends on four disconnected systems:</p>
+            <p>Sarah's workflow requires navigating four separate tools to identify potential buying signals, each introducing friction and delay:</p>
 
             <table>
                 <thead>
@@ -105,168 +107,826 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Salesforce (≈2 min/account)</td>
-                        <td>Review account history, revenue tier, and past spending trends</td>
-                        <td>Data often outdated; reflects past usage, not current purchase intent</td>
+                        <td>Salesforce (~2 min)</td>
+                        <td>Account history, revenue tier</td>
+                        <td>Reflects past activity rather than current intent</td>
                     </tr>
                     <tr>
-                        <td>LinkedIn (≈3 min/account)</td>
-                        <td>Check leadership changes, hiring activity, and technology discussions</td>
-                        <td>Unscalable across 1,200 accounts; signals are typically 5–7 days old when seen</td>
+                        <td>LinkedIn (~3 min)</td>
+                        <td>Hiring trends, leadership changes</td>
+                        <td>Signals often detected 5–7 days late</td>
                     </tr>
                     <tr>
-                        <td>Google News (≈3 min/account)</td>
-                        <td>Search for funding, expansion, or new partnerships</td>
-                        <td>Requires manual reading and synthesis; many relevant triggers are missed</td>
+                        <td>Google News (~3 min)</td>
+                        <td>Funding announcements, partnerships</td>
+                        <td>Requires manual synthesis</td>
                     </tr>
                     <tr>
-                        <td>Internal <span class="tooltip">Propensity Scores<span class="tooltiptext">AI-generated likelihood rankings that predict which accounts are most likely to buy based on past engagement or usage data</span></span> (≈2 min/account)</td>
-                        <td>Identify "ready-to-buy" accounts using AWS's internal AI models</td>
-                        <td>40–50% false positives lead to distrust; six of eight interviewed reps revalidate scores manually</td>
+                        <td>Internal <span class="tooltip">Propensity Scores<span class="tooltiptext">AI-generated likelihood rankings that predict which accounts are most likely to buy based on past engagement or usage data</span></span> (~2 min)</td>
+                        <td>AI-generated readiness rankings</td>
+                        <td>40–50% false positives require manual validation</td>
                     </tr>
                 </tbody>
             </table>
 
             <p><strong>Total research time:</strong> ~10 minutes per account<br>
-            <strong>Portfolio coverage:</strong> ~7.2% of accounts analyzed weekly</p>
+            <strong>Portfolio coverage:</strong> ~7% of accounts analysed weekly</p>
+
+            <p>Prioritisation relies on lagging indicators such as revenue tier and past engagement, causing dormant accounts to appear high-value while companies demonstrating recent growth signals may not be surfaced in time. The effective engagement window for many buying signals is approximately 24–48 hours; manual weekly research cycles often result in outreach occurring too late to capture emerging opportunities<span class="footnote" data-note="Salesmotion (2024) — case studies on signal decay in B2B outbound sales">2</span>.</p>
+
+            <p>The fragmentation of internal and external intelligence creates a structural barrier to timely and consistent prospecting decisions.</p>
         </div>
 
         <div class="section">
-            <h3>1.6 Solution Overview</h3>
+            <h3>1.3 Ideal State &amp; Design Specifications</h3>
 
-            <p>This project introduces a <span class="tooltip">GenAI<span class="tooltiptext">Generative Artificial Intelligence - AI that creates new content (text, code, images)</span></span>-powered Signal Intelligence Dashboard designed to improve both the coverage and accuracy of account research.</p>
+            <p>Analysis of the current workflow shows that the prospecting challenge is driven by structural limitations in how signals are accessed and interpreted, rather than lack of effort. Key constraints include fragmented data sources, reliance on lagging indicators, limited trust in opaque scoring models, and the short 24–48 hour window in which buying signals remain actionable.</p>
 
-            <img src="images/Dashboard-v1.png" alt="Dashboard Interface" class="zoomable">
-            <p><em>Figure 1: Signal Intelligence Dashboard Interface - Click to zoom</em></p>
+            <p>In the ideal state, Sarah begins each day with a <span class="tooltip">Signal Intelligence Dashboard<span class="tooltiptext">AI-powered interface that consolidates internal CRM data with real-time external signals to support account prioritisation</span></span> that surfaces high-priority accounts, explains why each account is prioritised, and provides relevant context for outreach. Instead of manually consolidating information across multiple platforms, she is presented with a unified view combining internal CRM context with real-time external signals.</p>
 
-            <details>
-                <summary>Click to view additional dashboard screenshots</summary>
-                <img src="images/company-overview.png" alt="Company Overview" class="zoomable">
-                <p><em>Company Profile Overview</em></p>
-                <img src="images/talking-points.png" alt="Talking Points" class="zoomable">
-                <p><em>AI-Generated Talking Points</em></p>
-            </details>
+            <p>Design specifications translate observed workflow constraints into measurable improvements:</p>
 
-            <p><strong>1. Data Ingestion Layer</strong><br>
-            Automates the collection of external data across 1,000+ accounts daily using APIs such as Perplexity and Tavily.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Design Specification</th>
+                        <th>Current Baseline</th>
+                        <th>Target</th>
+                        <th>% Improvement</th>
+                        <th>Justification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Portfolio coverage</td>
+                        <td>7% (~72 accounts/week)</td>
+                        <td>60–80%</td>
+                        <td>+757% to +1043%</td>
+                        <td>Automated monitoring scales research across portfolio</td>
+                    </tr>
+                    <tr>
+                        <td>Research time per account</td>
+                        <td>10 minutes</td>
+                        <td>30–60 seconds</td>
+                        <td>−90% to −95%</td>
+                        <td>Unified signal view reduces manual verification</td>
+                    </tr>
+                    <tr>
+                        <td>Meeting conversion rate</td>
+                        <td>5%</td>
+                        <td>15–20%</td>
+                        <td>+200% to +300%</td>
+                        <td>Higher-intent outreach improves relevance</td>
+                    </tr>
+                    <tr>
+                        <td>Signal detection rate</td>
+                        <td>~25%</td>
+                        <td>75–85%</td>
+                        <td>+200% to +240%</td>
+                        <td>Real-time signals surface earlier indicators</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <p><strong>2. Signal Analysis Layer</strong><br>
-            Powered by <span class="tooltip">Claude 3.5 Sonnet<span class="tooltiptext">Large language model by Anthropic, used for natural-language reasoning and synthesis</span></span>, this layer extracts structured insights and produces transparent natural-language reasoning with cited evidence.</p>
-
-            <p><strong>3. Dashboard Interface</strong><br>
-            Displays ranked accounts (0–100) with signal breakdowns, citations, and AI-generated talking points.</p>
+            <div class="callout-success">
+                <h4>Overall Impact</h4>
+                <p>The design increases effective prospecting capacity by approximately <span class="metric">8–10×</span> while improving confidence in prioritisation decisions.</p>
+            </div>
         </div>
 
         <div class="section">
-            <h2>A4. FABRICATION OF SPECIMENS/PROTOTYPES</h2>
+            <h3>1.4 Solution Overview</h3>
 
-            <h3>4.1 Prototype Evolution Overview</h3>
+            <p>The Signal Intelligence Dashboard integrates multiple data sources into a single decision-support interface that enables representatives to identify and act on buying signals more efficiently.</p>
 
-            <p>From July to October 2024, three prototypes validated the <span class="tooltip">API-First<span class="tooltiptext">System design that prioritizes Application Programming Interface access over web scraping for data retrieval</span></span> + <span class="tooltip">GenAI<span class="tooltiptext">Generative Artificial Intelligence</span></span> architecture:</p>
+            <img src="images/Account List View.png" alt="Signal Intelligence Dashboard — Account List View" class="zoomable">
+            <p><em>Figure 1: Signal Intelligence Dashboard Interface — Click to zoom</em></p>
+
+            <p>The system continuously monitors a defined account portfolio and highlights companies demonstrating observable indicators of potential demand, such as hiring growth, funding activity, expansion signals, or increased digital presence. Each prioritisation recommendation is supported by visible evidence, allowing representatives to understand why an account is surfaced.</p>
+
+            <p>Rather than replacing human judgement, the system augments it by structuring relevant intelligence into a format aligned with existing prospecting workflows.</p>
+
+            <p>Four core capabilities define the solution:</p>
+
+            <p><strong>1. Internal–external signal integration</strong><br>
+            Internal CRM indicators such as account tier, historical engagement, and pipeline activity are combined with external signals reflecting recent organisational developments. This allows prioritisation decisions to reflect both relationship context and current business momentum.</p>
+
+            <p><strong>2. Unified signal visibility</strong><br>
+            External signals from multiple public sources are consolidated into a single account-level view, reducing the need to manually search across platforms such as LinkedIn, company websites, and news sources.</p>
+
+            <p><strong>3. Explainable prioritisation with verifiable sources</strong><br>
+            Observable signals contributing to each recommendation are displayed together with short summaries and cited sources, enabling representatives to quickly verify relevance without additional research.</p>
+
+            <p><strong>4. Workflow-aligned output structure</strong><br>
+            Insights are presented in a format consistent with existing CRM workflows, allowing representatives to incorporate signal-based intelligence without significantly changing established prospecting routines.</p>
+
+            <p>The solution shifts prospecting from a static account review process into a continuously updated prioritisation workflow informed by real-time market signals.</p>
+        </div>
+
+        <div class="section">
+            <h3>1.5 Value Proposition: Improving Allocation of Sales Effort</h3>
+
+            <p>The primary value of the Signal Intelligence Dashboard lies in helping sales representatives allocate limited time towards accounts most likely to convert, by identifying higher-intent opportunities earlier and more consistently across large portfolios.</p>
+
+            <p>By combining internal CRM engagement context with real-time external signals, the system identifies accounts demonstrating observable indicators of potential demand, allowing outreach effort to be directed towards opportunities with higher intent.</p>
+
+            <p>The value created can be understood across three levels:</p>
+
+            <div class="callout">
+                <h4>Operational value</h4>
+                <p>Increases portfolio coverage within the same time constraint, reducing missed opportunities.</p>
+            </div>
+
+            <div class="callout">
+                <h4>Decision value</h4>
+                <p>Provides prioritisation rationale with cited sources, allowing representatives to quickly verify signals without manual cross-checking, supporting faster and more confident prospecting decisions.</p>
+            </div>
+
+            <div class="callout">
+                <h4>Strategic value</h4>
+                <p>Engaging accounts when there are observable signs of interest increases likelihood of conversion and improves probability of achieving sales targets.</p>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- A2. INDUSTRY CONTEXT                         -->
+        <!-- ============================================ -->
+
+        <div class="section">
+            <h2>A2. Industry Context</h2>
+
+            <h3>2.1 Industry Context</h3>
+
+            <p>In today's digitally connected environment, sales data is abundant but fragmented across multiple platforms. Advances in AI and <span class="tooltip">large language models<span class="tooltiptext">AI models trained on vast text data to understand and generate human language (e.g. Claude, GPT)</span></span> now make it technically feasible to synthesise these signals into structured insights, enabling intent-driven selling at scale.</p>
+
+            <p><span class="tooltip">Gartner<span class="tooltiptext">Leading technology research and advisory firm</span></span> (2024) projects that 75% of B2B organisations will adopt AI-guided selling workflows by 2025. However, leading commercial platforms such as <span class="tooltip">ZoomInfo<span class="tooltiptext">Commercial B2B intelligence platform providing company and contact data — primarily optimised for North American markets</span></span> and <span class="tooltip">6sense<span class="tooltiptext">Commercial intent data platform using AI to predict buying behaviour — limited ASEAN coverage</span></span> are primarily optimised for North American markets, offering limited coverage of ASEAN SMBs while operating at price points that are difficult to justify for large-scale prospecting portfolios. Internal scoring models address cost constraints but often lack transparency, resulting in low trust and frequent manual verification.</p>
+
+            <p>Together, these limitations create a gap between the availability of external buying signals and the ability of sales representatives to confidently act on them within time-constrained workflows.</p>
+
+            <div class="callout-warning">
+                <h4>Internal Validation</h4>
+                <p>Interviews with 8 AWS representatives (3 Scale, 3 Enterprise, 2 Nurture) confirmed: (1) 7% portfolio coverage due to 10-min research time, (2) 6/8 reps manually revalidate AI scores (40–50% false positives), (3) desire for explainable reasoning with citations. (See Appendix A for detailed findings.)</p>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- A3. METHODOLOGY / CONCEPT DEVELOPMENT        -->
+        <!-- ============================================ -->
+
+        <div class="section">
+            <h2>A3. Methodology / Concept Development</h2>
+
+            <p>The methodology focused on translating key behavioural constraints identified in earlier sections — limited portfolio visibility, low trust in opaque scoring models, and fragmented external signals — into a coherent design approach.</p>
+
+            <h3>Conceptual Orientation: Human-in-the-Loop Co-Pilot</h3>
+
+            <p>Early concept exploration contrasted two design directions: full automation, where the system independently prioritises accounts, and a <span class="tooltip">human-in-the-loop<span class="tooltiptext">Design approach where automation handles data processing while humans retain control over interpretation and decision-making</span></span> co-pilot model that surfaces intelligence while preserving representative judgement.</p>
+
+            <p>The co-pilot model was selected as it directly addresses the trust gap identified in the research findings. Interview results showed that 6 of 8 representatives manually verify internally generated scores due to concerns about false positives. Increasing automation without improving transparency would therefore be unlikely to improve adoption.</p>
+
+            <p>Positioning the system as a decision-support tool allows signals to be surfaced with visible reasoning, while representatives remain responsible for interpreting relevance and determining outreach actions. This aligns with <span class="tooltip">assisted intelligence<span class="tooltiptext">AI design principle where automation enhances human decision-making without replacing it</span></span> principles, where automation enhances human decision-making without replacing it.</p>
+
+            <h3>Approach Evaluation</h3>
+
+            <p>Three technical approaches were evaluated against key project constraints: explainability requirements, absence of labelled training data, three-month development timeline, and a &lt;$0.05 per-account cost constraint.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Approach</th>
+                        <th>Data Needs</th>
+                        <th>Explainability</th>
+                        <th>Feasibility</th>
+                        <th>Selection</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rule-based filtering</td>
+                        <td>None</td>
+                        <td>Minimal contextual flexibility</td>
+                        <td>Moderate</td>
+                        <td>❌ Insufficient nuance</td>
+                    </tr>
+                    <tr>
+                        <td>Predictive machine learning</td>
+                        <td>High (labelled data)</td>
+                        <td>Low transparency</td>
+                        <td>Low</td>
+                        <td>❌ No dataset available</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tooltip">Generative AI<span class="tooltiptext">AI that creates new content (text, analysis, summaries) rather than classifying existing data</span></span> synthesis</td>
+                        <td>Low (<span class="tooltip">zero-shot<span class="tooltiptext">AI capability to perform tasks without requiring task-specific training data</span></span>)</td>
+                        <td>High (cited reasoning)</td>
+                        <td>High</td>
+                        <td>✅ Selected</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Generative AI enables synthesis of fragmented external signals without requiring historical training datasets, while producing citation-supported reasoning that improves transparency and verifiability of prioritisation logic.</p>
+
+            <p>This supports the co-pilot design orientation by combining scalable signal aggregation with explainable outputs, allowing representatives to maintain contextual judgement while benefiting from increased visibility across large account portfolios.</p>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- A4. PROTOTYPE EVOLUTION & SYSTEM DESIGN       -->
+        <!-- ============================================ -->
+
+        <div class="section">
+            <h2>A4. Prototype Evolution &amp; System Design</h2>
+
+            <h3>4.1 Prototype Evolution</h3>
+
+            <p>Between July and October 2024, three prototype iterations were developed to improve how external company signals could be reliably collected and synthesised into actionable sales intelligence. Each iteration tested a different research method, progressing from direct extraction to structured multi-source synthesis.</p>
 
             <table>
                 <thead>
                     <tr>
                         <th>Prototype</th>
-                        <th>Technology Stack</th>
-                        <th>Success Rate</th>
-                        <th>Critical Learning</th>
+                        <th>Tech Stack</th>
+                        <th>Method</th>
+                        <th>Key Limitation</th>
+                        <th>Improvement</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>P1</td>
                         <td>Selenium + ScrapingBee</td>
-                        <td>32-68%</td>
-                        <td>Official sites accurate but scraping architecturally unsound (36% bot blocks)</td>
+                        <td>Direct website scraping</td>
+                        <td>Blocked by bot protection, unstable page structures</td>
+                        <td>Established feasibility of automated signal collection</td>
                     </tr>
                     <tr>
                         <td>P2</td>
-                        <td>DuckDuckGo API + Claude 3.5</td>
-                        <td>73%</td>
-                        <td>Search APIs reliable but lack structure; missing hiring signals</td>
+                        <td>DuckDuckGo API + <span class="tooltip">Claude 3.5<span class="tooltiptext">Large language model by Anthropic, used for natural-language reasoning and synthesis</span></span></td>
+                        <td>Search-based retrieval</td>
+                        <td>General search results often stale and missing hiring signals</td>
+                        <td>Improved reliability and reduced maintenance effort</td>
                     </tr>
                     <tr>
                         <td>P3</td>
-                        <td>Perplexity + Tavily + Claude 3.5</td>
-                        <td>96%</td>
-                        <td>Specialized APIs + <span class="tooltip">LLM<span class="tooltiptext">Large Language Model - AI trained on vast text data to understand and generate human language</span></span> synthesis achieves production-grade performance</td>
+                        <td><span class="tooltip">Perplexity<span class="tooltiptext">AI-powered search API that retrieves real-time information with cited sources</span></span> + <span class="tooltip">Tavily<span class="tooltiptext">Specialised search API optimised for structured data retrieval including job postings</span></span> + Claude 3.5</td>
+                        <td>Multi-source synthesis</td>
+                        <td>Higher design complexity</td>
+                        <td>Achieved high signal coverage with explainable outputs</td>
                     </tr>
                 </tbody>
             </table>
+
+            <details>
+                <summary>Click to view prototype screenshots</summary>
+                <img src="images/Prototype_1.png" alt="Prototype 1" class="zoomable">
+                <p><em>Prototype 1 — Early scraping-based approach</em></p>
+                <img src="images/Prototype_2.png" alt="Prototype 2" class="zoomable">
+                <p><em>Prototype 2 — Search API-based approach</em></p>
+            </details>
+
+            <h3>P1 → P2: From Direct Extraction to Search-Based Research</h3>
+
+            <p>The first prototype attempted to extract information directly from company websites using Selenium and ScrapingBee. While websites contain rich company information, 36% deployed bot protection and 28% used dynamic page structures requiring constant maintenance (~5 hours per week). This made scraping operationally unstable.</p>
+
+            <p>The second prototype shifted to DuckDuckGo Search API, which retrieves publicly indexed information such as news articles and company mentions. This approach better reflects how human representatives conduct research and improved reliability to 73%, while significantly reducing maintenance requirements.</p>
+
+            <h3>P2 → P3: From Single-Source Search to Specialised Research Agents</h3>
+
+            <p>While search APIs improved stability, results were often cached (7–14 days delay), duplicated across sources, and inconsistent in capturing hiring signals from job platforms.</p>
+
+            <p>The final prototype adopted a multi-source approach using Perplexity API and Tavily API, supported by Claude 3.5. Instead of relying on one general search source, the system distributes research tasks across specialised "agents":</p>
+
+            <ul>
+                <li><strong>Perplexity</strong> retrieves real-time company developments (e.g. funding, partnerships, product launches) with cited sources</li>
+                <li><strong>Tavily</strong> retrieves structured hiring signals from job postings</li>
+                <li><strong>Claude 3.5</strong> synthesises signals into prioritised summaries with supporting citations</li>
+            </ul>
+
+            <div class="stats-box">
+                <h3>Final Prototype Results</h3>
+                <div class="stat-item">
+                    <span class="stat-number">96%</span>
+                    <span class="stat-label">Signal Retrieval Success</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">48s</span>
+                    <span class="stat-label">Avg Processing Time</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$0.032</span>
+                    <span class="stat-label">Cost Per Account</span>
+                </div>
+            </div>
+
+            <p>The prototype evolution demonstrates how methodological improvements in signal retrieval directly enhanced reliability, coverage, and interpretability of outputs, supporting the <span class="tooltip">human-in-the-loop<span class="tooltiptext">Design approach where automation handles data processing while humans retain control over interpretation and decision-making</span></span> co-pilot design described in Section A3.</p>
         </div>
 
         <div class="section">
-            <h2>A9. PROJECT PLAN</h2>
+            <h3>4.2 From Problem to Features: Signal Intelligence System Design</h3>
 
-            <p>Now that the system works, the next goal is to scale it from prototype to production deployment through pilot testing, iteration, and integration into AWS workflows.</p>
+            <p>The Signal Intelligence System translates the behavioural constraints identified in A1 into a structured <span class="tooltip">multi-agent architecture<span class="tooltiptext">System design where specialised AI agents each handle a distinct research task, then feed results into a synthesis layer</span></span>. Instead of relying on a single data source, the system distributes research tasks across specialised agents, each responsible for detecting a specific category of commercial signal. These signals are then synthesised into a unified account view to support faster and more transparent prioritisation decisions.</p>
 
-            <img src="images/gantt-chart.png" alt="Project Timeline" class="zoomable">
-            <p><em>Figure 2: Project Execution Timeline - Click to zoom</em></p>
-
-            <h3>9.2 Execution Plan</h3>
+            <h3>Problem → Agent Mapping</h3>
 
             <table>
                 <thead>
                     <tr>
-                        <th>Phase</th>
-                        <th>Weeks</th>
-                        <th>Key Milestones</th>
-                        <th>Deliverable</th>
+                        <th>Behavioural Constraint (A1)</th>
+                        <th>Design Requirement</th>
+                        <th>Agent</th>
+                        <th>Function</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Pilot Testing</td>
-                        <td>1-8</td>
-                        <td>Week 3: 1,000-account load test<br>Week 6: Deploy to 3 reps<br>Week 8: Usage data collected</td>
-                        <td>Real-world validation</td>
+                        <td>Fragmented internal and external visibility</td>
+                        <td>Unified account context</td>
+                        <td>Account Context Agent</td>
+                        <td>Integrates Salesforce CRM records as internal reference layer</td>
                     </tr>
                     <tr>
-                        <td>Iteration</td>
-                        <td>9-12</td>
-                        <td>Week 10: Signal quality improved<br>Week 12: UI refined</td>
-                        <td>False positives &lt;20%</td>
+                        <td>Limited understanding of company activities</td>
+                        <td>Structured company-level intelligence</td>
+                        <td>Market Research Agent</td>
+                        <td>Builds contextual understanding of company business model, industry focus, hiring activity and technology signals</td>
                     </tr>
                     <tr>
-                        <td>Evaluation</td>
-                        <td>11-13</td>
-                        <td>Week 13: A/B test results</td>
-                        <td>Productivity comparison</td>
+                        <td>Missed external buying signals</td>
+                        <td>Continuous monitoring of company developments</td>
+                        <td>News Signals Agent</td>
+                        <td>Detects events such as funding, expansion, partnerships and product launches</td>
                     </tr>
                     <tr>
-                        <td>Integration</td>
-                        <td>13-16</td>
-                        <td>Week 14: Salesforce sync<br>Week 16: 10-rep rollout</td>
-                        <td>Production system</td>
+                        <td>Low trust in opaque prioritisation logic</td>
+                        <td>Explainable reasoning</td>
+                        <td>Synthesis Agent</td>
+                        <td>Generates propensity score supported by cited signals</td>
+                    </tr>
+                    <tr>
+                        <td>High research time per account</td>
+                        <td>Rapid signal interpretation</td>
+                        <td>Synthesis Agent</td>
+                        <td>Produces structured summaries interpretable within 60 seconds</td>
                     </tr>
                 </tbody>
             </table>
 
-            <p><strong>Expected Outcome (Week 16):</strong> Fully operational system embedded in AWS sales workflow, validated through real rep usage, with recommendation for regional expansion.</p>
+            <h3>Specialised Agent Roles</h3>
+
+            <p><strong>Account Context Agent (internal signal foundation)</strong></p>
+            <p>The Account Context Agent synchronises Salesforce CRM records including accounts, contacts, and opportunities into a structured internal dataset. This provides baseline visibility into existing relationships, engagement history, and account ownership, allowing external signals to be interpreted relative to known business context.</p>
+            <p>Providing a unified internal reference layer addresses the fragmentation issue identified in A1, where representatives previously needed to manually cross-reference CRM records with external research sources.</p>
+
+            <p><strong>Market Research Agent (company context and growth indicators)</strong></p>
+            <p>The Market Research Agent builds a structured understanding of what each company does and how it operates. Using <span class="tooltip">web-grounded research<span class="tooltiptext">AI-powered research that performs real-time web searches during generation, ensuring results reflect current company state</span></span>, the agent identifies key information including business model, industry positioning, product offerings, geographic presence, and indicators of organisational growth such as hiring activity.</p>
+            <p>Hiring signals are included within this agent because recruitment patterns often reflect expansion initiatives, investment in technical capabilities, or preparation for increased operational scale.</p>
+
+            <p><strong>News Signals Agent (company development triggers)</strong></p>
+            <p>The News Signals Agent retrieves recent company-related news, capturing observable developments such as funding announcements, acquisitions, partnerships, product launches, and regional expansion activity.</p>
+            <p>These signals often indicate moments of organisational change where companies are more likely to evaluate new technology solutions. Continuous monitoring improves visibility into time-sensitive opportunities that may not yet be reflected in internal CRM data.</p>
+
+            <p><strong>Synthesis Agent (signal integration and prioritisation logic)</strong></p>
+            <p>The Synthesis Agent consolidates signals from all upstream agents and transforms fragmented information into a structured account summary. Instead of presenting isolated data points, signals are synthesised into a <span class="tooltip">propensity score<span class="tooltiptext">AI-generated score (0–100) indicating likelihood of near-term technology purchasing needs, with transparent factor breakdown</span></span> supported by cited reasoning explaining why an account may represent a higher likelihood opportunity.</p>
+            <p>Embedding citations directly within the output ensures prioritisation logic remains transparent and verifiable, addressing the trust gap identified in A1 where representatives reported manually validating opaque scoring outputs.</p>
+
+            <details>
+                <summary>Click to view example structured output</summary>
+<pre>
+overall_score: 78
+
+company_context:
+  Provides logistics automation solutions across Southeast Asia
+
+key_signals:
+  • hiring for cloud infrastructure engineers
+  • recent regional expansion announcement
+  • partnership integration requiring data infrastructure scaling
+
+reasoning:
+  Observed expansion activity and technical hiring suggest increased
+  likelihood of near-term cloud infrastructure needs.
+
+sources:
+  company website, LinkedIn, TechCrunch
+</pre>
+            </details>
+
+            <p>Separating research responsibilities across specialised agents improves both completeness and interpretability of account intelligence. By structuring intelligence generation around behavioural constraints rather than technical components, the Signal Intelligence System reduces manual research effort while improving confidence in account prioritisation decisions.</p>
+        </div>
+
+        <div class="section">
+            <h3>4.3 Prioritisation Logic and Propensity Scoring</h3>
+
+            <p>The Signal Intelligence System converts fragmented company signals into a structured propensity score indicating likelihood of near-term technology purchasing needs. Scoring logic is grounded in both practitioner decision heuristics identified in A1 interviews and observable market indicators linked to digital infrastructure adoption.</p>
+
+            <p>Interview findings showed that representatives assess account priority based on observable indicators of organisational change. Commonly cited signals included hiring for technical roles, expansion into new markets, product launches, and recent funding events. Six of eight representatives indicated that hiring activity for engineering or data roles often signals preparation for infrastructure scaling, while company announcements relating to partnerships or acquisitions frequently trigger outreach prioritisation.</p>
+
+            <p>These practitioner heuristics are consistent with broader market findings. Gartner (2024) reports that over 70% of digital transformation initiatives involve cloud infrastructure investment, while CB Insights (2024) finds that companies typically increase software spending within 6–12 months following funding events<span class="footnote" data-note="CB Insights (2024) — analysis of post-funding technology spending patterns">3</span>.</p>
+
+            <p>Based on these behavioural and market indicators, signals identified by upstream agents are grouped into four evaluation dimensions:</p>
+
+            <ul>
+                <li><strong>Company fit</strong> — alignment with target customer characteristics such as industry relevance and operational scale</li>
+                <li><strong>Growth activity</strong> — indicators of organisational expansion including hiring activity, market entry, and product development</li>
+                <li><strong>Technology readiness</strong> — observable investment in digital capabilities such as technical hiring and infrastructure-related initiatives</li>
+                <li><strong>Market momentum</strong> — time-sensitive developments including funding announcements, acquisitions, and strategic partnerships</li>
+            </ul>
+
+            <p>Signals across these dimensions are synthesised into a weighted propensity score. Weighting reflects relative predictive relevance of each signal category rather than simple frequency counts. Each score is accompanied by cited reasoning explaining how specific signals contributed to prioritisation.</p>
+
+            <details>
+                <summary>Click to view example scoring structure</summary>
+<pre>
+overall_score: 78
+
+dimension_scores:
+  company_fit: 18
+  growth_activity: 20
+  technology_readiness: 24
+  market_momentum: 16
+
+reasoning:
+  Company expanding technical team and integrating newly acquired
+  systems, indicating potential near-term infrastructure scaling needs.
+
+sources:
+  LinkedIn hiring data, TechCrunch acquisition coverage
+</pre>
+            </details>
+
+            <p>By structuring prioritisation logic around observable commercial indicators supported by both field insight and market research, the system balances automation efficiency with human judgement. Representatives retain decision control while benefiting from systematic visibility across large account portfolios.</p>
+        </div>
+
+        <div class="section">
+            <h3>4.4 Workflow Integration and User Interaction Design</h3>
+
+            <p>The Signal Intelligence System is designed to integrate directly into the existing workflow of AWS representatives by reducing the need to manually gather account intelligence across multiple platforms. Instead of switching between Salesforce, LinkedIn, and news search tools, representatives access pre-synthesised intelligence through a structured dashboard interface.</p>
+
+            <p>The workflow follows a sequential decision flow, allowing representatives to move from portfolio-level prioritisation to account-level strategy development.</p>
+
+            <h3>Step 1: Portfolio Prioritisation (Account List View)</h3>
+
+            <p>Representatives begin by filtering their account portfolio based on territory, country, or account owner. The Account List View ranks accounts using the propensity score (0–100), allowing representatives to quickly identify high-priority opportunities within their assigned region.</p>
+
+            <p>Priority tier filters (High, Medium-High, Medium) enable rapid segmentation of accounts requiring immediate attention. Data quality indicators also signal confidence levels of external intelligence coverage.</p>
+
+            <p>This replaces the manual triage process described in A1, where representatives previously searched across Salesforce, LinkedIn, and Google News individually, requiring approximately 10 minutes per account.</p>
+
+            <img src="images/Account List View.png" alt="Account List View — Portfolio Prioritisation" class="zoomable">
+            <p><em>Figure 2: Account List View — Portfolio Prioritisation — Click to zoom</em></p>
+
+            <h3>Step 2: Company Understanding (Account Detail View)</h3>
+
+            <p>Selecting an account opens the Account Detail View, which provides a unified company profile combining internal CRM data with AI-generated external intelligence.</p>
+
+            <p>The view includes:</p>
+            <ul>
+                <li>Company business description</li>
+                <li>Operating markets and regions</li>
+                <li>Financial and organisational signals</li>
+                <li>Recent developments identified through external research</li>
+                <li>Cited sources supporting each insight</li>
+            </ul>
+
+            <p>This provides the "single pane of glass" identified as the primary unmet need in A1, allowing representatives to understand company context without conducting separate research.</p>
+
+            <img src="images/Account Detail View 1.png" alt="Account Detail View — Company Profile" class="zoomable">
+            <p><em>Figure 3: Account Detail View — Company Profile — Click to zoom</em></p>
+
+            <details>
+                <summary>Click to view additional Account Detail screenshot</summary>
+                <img src="images/Account Detail View 2.png" alt="Account Detail View — Extended Intelligence" class="zoomable">
+                <p><em>Account Detail View — Extended Intelligence</em></p>
+            </details>
+
+            <h3>Step 3: Stakeholder Identification (Organisation Structure View)</h3>
+
+            <p>The Organisation Structure &amp; Stakeholders View maps key decision makers, influencers, and potential champions within each account. Role classifications (Critical / High / Medium) help representatives identify relevant stakeholders prior to outreach.</p>
+
+            <p>Stakeholder visibility was highlighted in A1 interviews as an important factor influencing outreach confidence, particularly when entering unfamiliar accounts.</p>
+
+            <img src="images/Organisation Structure View.png" alt="Organisation Structure & Stakeholders View" class="zoomable">
+            <p><em>Figure 4: Organisation Structure &amp; Stakeholders View — Click to zoom</em></p>
+
+            <h3>Step 4: Opportunity Framing (Propensity Score &amp; Pain Points View)</h3>
+
+            <p>The Propensity Score &amp; Pain Points View presents a breakdown of weighted scoring factors:</p>
+            <ul>
+                <li>AWS usage signals</li>
+                <li>Engagement signals</li>
+                <li>Technology readiness</li>
+                <li>Market momentum</li>
+            </ul>
+
+            <p>An impact-urgency matrix highlights identified business challenges inferred from external signals, allowing representatives to understand why an account is prioritised and what potential needs may exist.</p>
+
+            <p>Providing transparent reasoning addresses the trust deficit identified in A1, where representatives reported manually validating opaque scoring outputs before taking action.</p>
+
+            <img src="images/Propensity Score View.png" alt="Propensity Score & Pain Points View" class="zoomable">
+            <p><em>Figure 5: Propensity Score &amp; Pain Points View — Click to zoom</em></p>
+
+            <h3>Step 5: Outreach Preparation (Pursue Strategy View)</h3>
+
+            <p>The Pursue Strategy View generates contextualised talking points and outreach angles anchored to detected company signals. Suggested messaging references observable developments such as hiring expansion, acquisitions, or regional growth initiatives.</p>
+
+            <p>Representatives can adapt suggested messaging to align with their communication style while maintaining relevance to account context.</p>
+
+            <p>Pilot feedback indicated this feature reduced preparation time for territory planning and increased confidence in outreach relevance.</p>
+
+            <img src="images/Pursue Strategy 1.png" alt="Pursue Strategy View — Talking Points" class="zoomable">
+            <p><em>Figure 6: Pursue Strategy View — Talking Points — Click to zoom</em></p>
+
+            <details>
+                <summary>Click to view additional Pursue Strategy screenshot</summary>
+                <img src="images/Pursue Strategy 2.png" alt="Pursue Strategy View — Outreach Angles" class="zoomable">
+                <p><em>Pursue Strategy View — Outreach Angles</em></p>
+            </details>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- A5. TESTING                                   -->
+        <!-- ============================================ -->
+
+        <div class="section">
+            <h2>A5. Testing</h2>
+
+            <h3>5.1 Purpose of Testing</h3>
+
+            <p>Testing addressed two sequential questions corresponding to the project's two phases:</p>
+
+            <ul>
+                <li><strong>Problem validation (July–August 2024):</strong> How do sales representatives currently prospect, and what barriers prevent scale and accuracy?</li>
+                <li><strong>Solution validation (October 2024–present):</strong> Does RubyChan v2 improve research efficiency, and do users trust and adopt explainable AI-driven prioritisation?</li>
+            </ul>
+
+            <h3>5.2 Problem Validation Methods</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test</th>
+                        <th>Purpose</th>
+                        <th>Methodology</th>
+                        <th>Key Findings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>User Interviews (n=8)</td>
+                        <td>Understand workflow pain points</td>
+                        <td>Semi-structured interviews across Scale, Enterprise, Nurture segments</td>
+                        <td>Confirmed 7% portfolio coverage; 6/8 reps manually revalidate AI scores due to 40–50% false positives</td>
+                    </tr>
+                    <tr>
+                        <td>Contextual Observation</td>
+                        <td>Observe prospecting in real settings</td>
+                        <td>Shadowed 3 Scale reps for one hour each across CRM, LinkedIn, Google News</td>
+                        <td>Identified repetitive system-switching; confirmed 8–10 min average per account</td>
+                    </tr>
+                    <tr>
+                        <td>Manual Benchmark</td>
+                        <td>Evaluate automated research feasibility</td>
+                        <td>Compared AI-generated summaries with manual research for 10 accounts</td>
+                        <td>AI synthesis reduced research time by ~90% with comparable accuracy</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>These methods consistently surfaced three themes: time inefficiency, signal blindness, and lack of explainability — which directly shaped the design requirements in A4.</p>
+
+            <h3>5.3 Usability Evaluation (<span class="tooltip">System Usability Scale<span class="tooltiptext">SUS — a standardised 10-item questionnaire measuring perceived usability on a 0–100 scale. Scores above 68 are considered above average.</span></span>)</h3>
+
+            <p>Usability of the dashboard was evaluated using the <span class="tooltip">SUS<span class="tooltiptext">System Usability Scale — standardised usability questionnaire yielding a score from 0–100</span></span>. One participating sales representative completed the questionnaire after interacting with the five main views (Account List, Account Detail, Organisation Structure, Propensity Score, Pursue Strategy).</p>
+
+            <div class="stats-box">
+                <h3>SUS Score</h3>
+                <div class="stat-item">
+                    <span class="stat-number">80</span>
+                    <span class="stat-label">Strong Perceived Usability</span>
+                </div>
+            </div>
+
+            <p>The main friction point related to initial setup complexity due to local deployment requirements rather than interface design. Once operational, users found navigation intuitive, particularly the ranked account list and priority filters. Some uncertainty was observed in interpreting the weighting logic behind the propensity score, suggesting explanation clarity can be further improved in future iterations.</p>
+
+            <h3>5.4 Solution Validation: Pilot Field Survey</h3>
+
+            <p>Following onboarding of 20 DGRs and <span class="tooltip">CSRs<span class="tooltiptext">Customer Sales Representatives — sales roles managing customer relationships and handling inbound leads</span></span>, a 38-question survey was administered to evaluate perceived usefulness and workflow fit (n=2; directional findings).</p>
+
+            <p>Both respondents rated the 3-tab workflow (Propensity Score, Know the Customer, Pursue Strategy) <span class="metric">5/5</span> for intuitiveness, with information retrieval speed also rated <span class="metric">5/5</span>, supporting the 48-second benchmark observed in pilot testing.</p>
+
+            <p>Understanding of propensity score logic showed mixed clarity: one respondent rated usefulness 5/5, while the other rated usefulness 3/5 and factor understanding 2/5, highlighting that weighting logic is not immediately intuitive. One respondent noted that greenfield accounts may be penalised due to lack of engagement history, suggesting potential scoring bias.</p>
+
+            <p>The Pursue Strategy view was identified as the most valuable feature, particularly the WHAT, HOW, and WHO components. Likelihood of using AI-generated talking points averaged <span class="metric">4.5/5</span>.</p>
+
+            <p>Perceived accuracy averaged 4.5/5, freshness 4/5, and integration of internal and external signals 5/5. Both respondents rated likelihood to close more deals and recommend the tool <span class="metric">5/5</span>, with overall satisfaction 4/5.</p>
+
+            <p><em>Full survey instrument provided in Appendix G.</em></p>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- A6. ANALYSIS                                  -->
+        <!-- ============================================ -->
+
+        <div class="section">
+            <h2>A6. Analysis</h2>
+
+            <h3>6.1 System Design Insight</h3>
+
+            <p>The prototype progression demonstrates that effective AI-based sales research depends on structuring how information is retrieved before applying <span class="tooltip">LLM<span class="tooltiptext">Large Language Model — AI trained on vast text data to understand and generate human language</span></span> synthesis.</p>
+
+            <p>Initial approaches showed that simply increasing access to data sources does not guarantee useful insights. Direct scraping produced unreliable outputs due to bot protection and unstable page structures, while early search-based approaches often returned generic or incomplete information when queries were not sufficiently targeted. These iterations revealed that LLM output quality is highly dependent on the relevance and structure of input data.</p>
+
+            <p>The final design addressed this by structuring the research workflow into specialised agents aligned to specific signal categories. The News Agent retrieves recent company developments, the Research Agent performs grounded search to identify company context, technology signals, and hiring activity, while the Account Agent retrieves internal CRM data. These signals are synthesised by the Consolidation Agent into a structured company profile and propensity score.</p>
+
+            <div class="callout">
+                <h4>Key Learning</h4>
+                <p>LLMs produce more useful insights when applied to structured and relevant inputs rather than broad unfiltered data. The multi-agent architecture functions as a data quality control layer, ensuring that signals provided to the synthesis model are aligned with decision-making needs. Performance improvements observed in the final prototype reflect improved data structuring rather than model capability alone.</p>
+            </div>
+
+            <h3>6.2 User Workflow Insight</h3>
+
+            <p>User feedback suggests that the primary value of the system lies in reducing the effort required for representatives to evaluate account context and prioritise outreach decisions.</p>
+
+            <p>Sales representatives often operate under time constraints when reviewing large account portfolios, requiring them to piece together signals from multiple fragmented sources such as LinkedIn, company websites, news articles, and CRM data. By consolidating internal and external signals into a single structured profile, the system provides a clearer starting point for determining which accounts warrant further investigation.</p>
+
+            <p>In one pilot example, a representative filtered for high-propensity accounts within their territory and reviewed a company demonstrating hiring expansion and recent business developments surfaced by the Research Agent. Using the consolidated company profile and suggested talking points from the Pursue Strategy view, the representative initiated outreach via phone referencing the surfaced insights. The interaction progressed into a <span class="tooltip">Sales Qualified Meeting<span class="tooltiptext">A meeting that meets specific criteria for passing to an Account Executive, involving qualified decision-makers</span></span> (SQM).</p>
+
+            <div class="callout-success">
+                <h4>Emergent Use Case: Territory Planning</h4>
+                <p>One CSR noted that the system <em>"helps me in my territory planning in a way no existing tool does."</em> Representatives indicated that reviewing accounts through a ranked portfolio view improved their ability to identify which accounts require deeper evaluation and how effort should be allocated across their territory.</p>
+            </div>
+
+            <p>Overall, findings indicate that AI provides the greatest value when it structures relevant signals into interpretable context that supports prioritisation decisions and outreach preparation.</p>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- A7. FULFILMENT OF DELIVERABLES                -->
+        <!-- ============================================ -->
+
+        <div class="section">
+            <h2>A7. Fulfilment of Deliverables</h2>
+
+            <h3>7.1 Delivery of Intended System Capability</h3>
+
+            <p>The primary project objective was to develop an AI-assisted research system capable of consolidating fragmented internal and external company signals into structured insights supporting account prioritisation decisions.</p>
+
+            <p>This objective was achieved through the development of a functional dashboard application implementing a multi-agent research architecture. The system retrieves company context, hiring signals, technology indicators, and recent developments, and synthesises these signals into structured company profiles and propensity scores. These outputs support representatives in evaluating account relevance and preparing outreach strategies.</p>
+
+            <h3>7.2 Integration into Sales Research Workflow</h3>
+
+            <p>The delivered application was deployed within a real sales environment involving DGR and CSR roles, enabling evaluation under practical workflow conditions using actual account data.</p>
+
+            <p>User interactions indicate that consolidating internal CRM information with external company intelligence reduces the need to manually search across multiple fragmented sources such as LinkedIn, company websites, and news articles. Structured company profiles provide a clearer starting point for understanding account context, while propensity scoring supports prioritisation across large account portfolios.</p>
+
+            <p>An emergent observation is that the system also supports territory planning activities by improving visibility into account-level signals across a representative's portfolio.</p>
+
+            <h3>7.3 Extent of Deliverable Realisation</h3>
+
+            <p>The project progressed beyond conceptual prototyping into deployment within an operational sales environment, enabling evaluation under real workflow conditions. This allowed assessment not only of technical feasibility, but also of practical usability in supporting account research and prioritisation activities.</p>
+
+            <p>Findings presented in Section A5 indicate that users are able to interpret and apply the generated insights within their existing research process. While longer-term commercial impact such as influence on conversion outcomes requires extended observation, the implementation of a working internal tool demonstrates that the intended deliverable of improving access to structured account intelligence has been realised in practice.</p>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- A8. AWARENESS OF SHORTCOMINGS                 -->
+        <!-- ============================================ -->
+
+        <div class="section">
+            <h2>A8. Awareness of Shortcomings</h2>
+
+            <h3>8.1 Major Shortcomings</h3>
+
+            <div class="callout-warning">
+                <h4>1. Cloud Deployment Blocked by Data Governance Policy</h4>
+                <p>The most significant production barrier is an internal AWS policy preventing deployment of applications handling customer account data on non-approved infrastructure. This forces users to run RubyChan v2 locally via command line — a setup process that creates a prohibitive barrier for non-technical business personas. Of the 20 onboarded users, several required assisted setup, and broader rollout beyond the initial cohort is effectively blocked until this is resolved.</p>
+                <p><strong>Resolution:</strong> Engage AWS IT and legal teams to obtain approval for an internally hosted deployment on approved AWS infrastructure. Given that the system already runs entirely on AWS services (<span class="tooltip">Bedrock<span class="tooltiptext">Amazon Web Services' managed service for running large language models</span></span>, <span class="tooltip">DynamoDB<span class="tooltiptext">AWS fully managed NoSQL database service providing fast, predictable performance at any scale</span></span>, EC2), the technical lift is minimal — the bottleneck is approval, not engineering. Estimated timeline: 4–6 weeks pending internal review.</p>
+            </div>
+
+            <div class="callout-warning">
+                <h4>2. No Bidirectional Salesforce Integration</h4>
+                <p>RubyChan v2 currently ingests Salesforce data via static export rather than live API sync. This means account data requires manual refresh, and AI-generated insights cannot be written back to CRM records — forcing reps to manually copy talking points and scores into Salesforce. Export functionality was the most frequently requested feature enhancement in pilot feedback.</p>
+                <p><strong>Resolution:</strong> Submit formal request for Salesforce <span class="tooltip">MCP<span class="tooltiptext">Model Context Protocol — a standard for connecting AI systems to external data sources and tools</span></span> server access in parallel with cloud deployment approval. Technical implementation (bidirectional sync and CRM field population) is estimated at 3 weeks once both approvals are obtained.</p>
+            </div>
+
+            <h3>8.2 Prioritisation</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shortcoming</th>
+                        <th>Timeline</th>
+                        <th>Priority</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cloud deployment approval</td>
+                        <td>4–6 weeks</td>
+                        <td><span class="metric">Critical</span></td>
+                        <td>Blocks all further onboarding and production use</td>
+                    </tr>
+                    <tr>
+                        <td>Salesforce bidirectional sync</td>
+                        <td>3 weeks post-deployment</td>
+                        <td><span class="metric">Critical</span></td>
+                        <td>User-validated as primary workflow friction point</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- A9. IMPACT & VISIBILITY                       -->
+        <!-- ============================================ -->
+
+        <div class="section">
+            <h2>A9. Impact &amp; Visibility</h2>
+
+            <h3>9.1 Immediate Impact: AWS Singapore Sales Team</h3>
+
+            <p>The system is currently used within the AWS Singapore Scale sales team to support account research using real customer data. It helps representatives quickly understand company context by combining internal CRM information with external signals such as hiring activity, company developments, and technology indicators in one place.</p>
+
+            <p>This reduces the need to manually search across multiple sources such as LinkedIn, company websites, and news articles within the short 24–48 hour engagement window identified in A1.</p>
+
+            <p>An additional outcome observed during usage is support for territory planning. Representatives reported that having a structured overview of account signals makes it easier to review their portfolio and decide which accounts require deeper focus.</p>
+
+            <h3>9.2 Organisational Potential</h3>
+
+            <p>The system is designed so that data sources can be adjusted for different markets, making it possible to apply the same workflow structure across other sales teams.</p>
+
+            <div class="stats-box">
+                <h3>Operating Cost</h3>
+                <div class="stat-item">
+                    <span class="stat-number">$384</span>
+                    <span class="stat-label">Per Representative / Year</span>
+                </div>
+            </div>
+
+            <p>There has already been interest from teams in other regions including APJ, France, and Canada, indicating that the challenge of fragmented account research is not unique to a single geography.</p>
+
+            <h3>9.3 Industry Relevance</h3>
+
+            <p>The problem of fragmented account intelligence is common across B2B sales environments where useful information is spread across multiple tools.</p>
+
+            <p>This project demonstrates how AI can be used to structure internal and external signals into a single view that helps users understand account context more efficiently. Rather than replacing decision-making, the system supports users by organising relevant information in a clearer format.</p>
+
+            <p>The observed use in territory planning suggests that structured signal consolidation may also support broader account strategy workflows beyond the initial scope of lead research.</p>
         </div>
 
         <hr>
 
+        <!-- ============================================ -->
+        <!-- REFERENCES                                    -->
+        <!-- ============================================ -->
+
         <div class="section">
-            <h2>APPENDICES</h2>
+            <h2>References</h2>
+
+            <p>Arrieta, A. B., Díaz-Rodríguez, N., Del Ser, J., Bennetot, A., Tabik, S., Barbado, A., García, S., Gil-López, S., Molina, D., Benjamins, R., Chatila, R., &amp; Herrera, F. (2020). Explainable artificial intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, 58, 82–115.</p>
+
+            <p>Bangor, A., Kortum, P., &amp; Miller, J. (2009). Determining what individual SUS scores mean: Adding an adjective rating scale. <em>Journal of Usability Studies</em>, 4(3), 114–123.</p>
+
+            <p>Brooke, J. (1996). SUS: A quick and dirty usability scale. In P. Jordan, B. Thomas, B. Weerdmeester, &amp; I. McClelland (Eds.), <em>Usability Evaluation in Industry</em>. London: Taylor &amp; Francis.</p>
+
+            <p>Davis, F. D. (1989). Perceived usefulness, perceived ease of use, and user acceptance of information technology. <em>MIS Quarterly</em>, 13(3), 319–340.</p>
+
+            <p>Forrester Research. (2023). <em>B2B buyer journey benchmark report 2023</em>.</p>
+
+            <p>Gartner. (2024a). <em>Forecast analysis: Public cloud services, worldwide, 2024</em>.</p>
+
+            <p>Gartner. (2024b). <em>Predicts 2025: AI-guided selling becomes the new standard for B2B sales</em>.</p>
+
+            <p>Salesforce Research. (2023). <em>State of Sales</em> (5th ed.).</p>
+
+            <p>Salesmotion. (2024). <em>Case studies: Incredible Health and Analytic Partners</em>.</p>
+
+            <p>ZoomInfo Technologies Inc. (2024). <em>Customer Impact Report</em>.</p>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- APPENDICES                                    -->
+        <!-- ============================================ -->
+
+        <div class="section">
+            <h2>Appendices</h2>
 
             <details>
                 <summary>Appendix A: Semi-Structured Interview Findings</summary>
                 <h3>Purpose</h3>
-                <p>To understand how <span class="tooltip">Demand Generation Representatives<span class="tooltiptext">Front-line outbound sales roles responsible for identifying potential customers and booking qualified meetings</span></span> (<span class="tooltip">DGRs<span class="tooltiptext">Demand Generation Representatives - outbound sales role focused on creating new pipeline</span></span>) and Customer Sales Representatives (<span class="tooltip">CSRs<span class="tooltiptext">Sales representatives who manage customer relationships and handle inbound leads</span></span>) currently prioritise accounts, identify buying signals, and the challenges they face with manual prospecting.</p>
+                <p>To understand how <span class="tooltip">Demand Generation Representatives<span class="tooltiptext">Front-line outbound sales roles responsible for identifying potential customers and booking qualified meetings</span></span> (DGRs) and Customer Sales Representatives (CSRs) currently prioritise accounts, identify buying signals, and the challenges they face with manual prospecting.</p>
 
                 <h3>Methodology</h3>
                 <ul>
                     <li>Sample: 8 AWS sales representatives (3 Scale, 3 Enterprise, 2 Nurture segments)</li>
-                    <li>Format: Semi-structured interviews (45-60 minutes each)</li>
-                    <li>Period: July-August 2024</li>
+                    <li>Format: Semi-structured interviews (45–60 minutes each)</li>
+                    <li>Period: July–August 2024</li>
                 </ul>
 
                 <h3>Key Findings Summary</h3>
                 <ul>
                     <li><strong>7% portfolio coverage</strong> due to 10-minute research time per account</li>
-                    <li><strong>6 out of 8 reps</strong> manually revalidate AI scores due to 40-50% false positives</li>
+                    <li><strong>6 out of 8 reps</strong> manually revalidate AI scores due to 40–50% false positives</li>
                     <li><strong>Desire for explainable reasoning</strong> with citations and transparent logic</li>
                     <li><strong>Time inefficiency</strong> as the primary barrier to scale</li>
                 </ul>
@@ -275,30 +935,8 @@
             </details>
 
             <details>
-                <summary>Appendix B: Technical Architecture</summary>
-                <h3>System Architecture Overview</h3>
-                <p>The system uses a three-layer architecture:</p>
-                <ol>
-                    <li><strong>Data Ingestion</strong>: Perplexity + Tavily + NewsAPI</li>
-                    <li><strong>AI Analysis</strong>: Claude 3.5 Sonnet via <span class="tooltip">AWS Bedrock<span class="tooltiptext">Amazon Web Services' managed service for running large language models</span></span></li>
-                    <li><strong>Storage & UI</strong>: PostgreSQL + DynamoDB + Web Dashboard</li>
-                </ol>
-
-                <h3>Cost Breakdown (per 1,000 accounts/month)</h3>
-                <ul>
-                    <li>Perplexity API: $15.00</li>
-                    <li>Tavily API: $12.00</li>
-                    <li>AWS Bedrock: $5.00</li>
-                    <li>Infrastructure: $15.00</li>
-                    <li><strong>Total: $0.047 per account</strong></li>
-                </ul>
-
-                <p><em>[Full technical specifications available in Report-Content.txt]</em></p>
-            </details>
-
-            <details>
-                <summary>Appendix C: Prototype Evolution Details</summary>
-                <h3>P1 → P2 → P3 Evolution:</h3>
+                <summary>Appendix B: Prototype Evolution Details</summary>
+                <h3>P1 → P2 → P3 Evolution</h3>
                 <table>
                     <thead>
                         <tr>
@@ -310,7 +948,7 @@
                     <tbody>
                         <tr>
                             <td>P1 (Scraping)</td>
-                            <td>32-68%</td>
+                            <td>32–68%</td>
                             <td>Bot detection is architectural barrier</td>
                         </tr>
                         <tr>
@@ -319,7 +957,7 @@
                             <td>Reliable but lacks structure</td>
                         </tr>
                         <tr>
-                            <td>P3 (Specialized APIs)</td>
+                            <td>P3 (Specialised APIs)</td>
                             <td>96%</td>
                             <td>Production-grade performance achieved</td>
                         </tr>
@@ -329,7 +967,7 @@
             </details>
 
             <details>
-                <summary>Appendix D: Glossary of Terms</summary>
+                <summary>Appendix C: Glossary of Terms</summary>
                 <table>
                     <thead>
                         <tr>
@@ -339,28 +977,63 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong><span class="tooltip">DGR<span class="tooltiptext">Demand Generation Representative - outbound sales role focused on creating new pipeline</span></span></strong></td>
-                            <td>Demand Generation Representative - outbound sales role focused on creating new pipeline</td>
+                            <td><strong>DGR</strong></td>
+                            <td>Demand Generation Representative — outbound sales role focused on creating new pipeline</td>
                         </tr>
                         <tr>
-                            <td><strong><span class="tooltip">SQM<span class="tooltiptext">Sales-Qualified Meeting - meeting that meets criteria for passing to Account Executive</span></span></strong></td>
-                            <td>Sales-Qualified Meeting - meeting that meets criteria for passing to Account Executive</td>
+                            <td><strong>SQM</strong></td>
+                            <td>Sales-Qualified Meeting — meeting that meets criteria for passing to Account Executive</td>
                         </tr>
                         <tr>
-                            <td><strong><span class="tooltip">SMB<span class="tooltiptext">Small and Medium Business - typically <500 employees, <$50M revenue</span></span></strong></td>
-                            <td>Small and Medium Business - typically &lt;500 employees, &lt;$50M revenue</td>
+                            <td><strong>SMB</strong></td>
+                            <td>Small and Medium Business — typically &lt;500 employees, &lt;$50M revenue</td>
                         </tr>
                         <tr>
-                            <td><strong><span class="tooltip">GenAI<span class="tooltiptext">Generative Artificial Intelligence - AI that creates new content</span></span></strong></td>
-                            <td>Generative Artificial Intelligence - AI that creates new content (text, code, images)</td>
+                            <td><strong>CSR</strong></td>
+                            <td>Customer Sales Representative — manages customer relationships and handles inbound leads</td>
                         </tr>
                         <tr>
-                            <td><strong><span class="tooltip">API<span class="tooltiptext">Application Programming Interface - allows different software systems to communicate</span></span></strong></td>
-                            <td>Application Programming Interface - allows different software systems to communicate</td>
+                            <td><strong>GenAI</strong></td>
+                            <td>Generative Artificial Intelligence — AI that creates new content (text, analysis, summaries)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LLM</strong></td>
+                            <td>Large Language Model — AI trained on vast text data to understand and generate human language</td>
+                        </tr>
+                        <tr>
+                            <td><strong>API</strong></td>
+                            <td>Application Programming Interface — allows different software systems to communicate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CRM</strong></td>
+                            <td>Customer Relationship Management — software for managing customer interactions and sales data</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SUS</strong></td>
+                            <td>System Usability Scale — standardised usability questionnaire yielding a score from 0–100</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Propensity Score</strong></td>
+                            <td>AI-generated score (0–100) indicating likelihood of near-term technology purchasing needs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Human-in-the-loop</strong></td>
+                            <td>Design approach where automation handles data processing while humans retain control over decisions</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zero-shot</strong></td>
+                            <td>AI capability to perform tasks without requiring task-specific training data</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DynamoDB</strong></td>
+                            <td>AWS fully managed NoSQL database service providing fast, predictable performance at any scale</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bedrock</strong></td>
+                            <td>Amazon Web Services' managed service for running large language models</td>
                         </tr>
                     </tbody>
                 </table>
-                <p><em>[Complete glossary available in Report-Content.txt]</em></p>
             </details>
         </div>
     </main>

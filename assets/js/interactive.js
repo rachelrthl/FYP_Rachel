@@ -1,88 +1,76 @@
-// Interactive FYP Report JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Generate Table of Contents
-    function generateTOC() {
-        const toc = document.getElementById('toc');
-        if (!toc) return;
-        
-        // Only get headings that are NOT inside details elements (appendices)
-        const allHeadings = document.querySelectorAll('h1, h2, h3');
-        const mainHeadings = Array.from(allHeadings).filter(heading => {
-            // Check if heading is inside a details element
-            return !heading.closest('details');
-        });
-        
-        if (mainHeadings.length === 0) return;
-        
-        let tocHTML = '<h4>Contents</h4><ul>';
-        
-        mainHeadings.forEach((heading, index) => {
-            const id = heading.id || `heading-${index}`;
-            heading.id = id;
-            
-            const level = heading.tagName.toLowerCase();
-            const text = heading.textContent;
-            const indent = level === 'h3' ? 'style="margin-left: 20px;"' : '';
-            
-            tocHTML += `<li ${indent}><a href="#${id}" class="toc-link">${text}</a></li>`;
-        });
-        
-        tocHTML += '</ul>';
-        toc.innerHTML = tocHTML;
-        
-        // Smooth scrolling for TOC links
-        document.querySelectorAll('.toc-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+const headings = [...document.querySelectorAll("main h2, main h3")];
+const toc = document.getElementById("toc");
+
+if (toc && headings.length) {
+    const title = document.createElement("h2");
+    title.textContent = "Contents";
+    const list = document.createElement("ul");
+
+    headings.forEach((heading, index) => {
+        if (!heading.id) {
+            heading.id = `section-${index + 1}`;
+        }
+
+        const item = document.createElement("li");
+        if (heading.tagName === "H3") {
+            item.style.paddingLeft = "12px";
+        }
+
+        const link = document.createElement("a");
+        link.href = `#${heading.id}`;
+        link.textContent = heading.textContent;
+        item.appendChild(link);
+        list.appendChild(item);
+    });
+
+    toc.append(title, list);
+
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                const link = toc.querySelector(`a[href="#${entry.target.id}"]`);
+                if (link) {
+                    link.classList.toggle("active", entry.isIntersecting);
                 }
             });
-        });
+        },
+        { rootMargin: "-20% 0px -65% 0px", threshold: 0.1 }
+    );
+
+    headings.forEach(heading => observer.observe(heading));
+}
+
+const lightbox = document.createElement("div");
+lightbox.className = "lightbox";
+lightbox.innerHTML = '<button type="button" aria-label="Close image">Close</button><img alt="">';
+document.body.appendChild(lightbox);
+
+const lightboxImage = lightbox.querySelector("img");
+const closeLightbox = () => lightbox.classList.remove("open");
+
+document.querySelectorAll("img.zoomable").forEach(image => {
+    image.addEventListener("click", () => {
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightbox.classList.add("open");
+    });
+});
+
+lightbox.addEventListener("click", event => {
+    if (event.target === lightbox || event.target.tagName === "BUTTON") {
+        closeLightbox();
     }
-    
-    // Highlight active section in TOC
-    function highlightActiveTOC() {
-        const allHeadings = document.querySelectorAll('h1, h2, h3');
-        const mainHeadings = Array.from(allHeadings).filter(heading => {
-            return !heading.closest('details');
-        });
-        const tocLinks = document.querySelectorAll('.toc-link');
-        
-        window.addEventListener('scroll', function() {
-            let current = '';
-            
-            mainHeadings.forEach(heading => {
-                const rect = heading.getBoundingClientRect();
-                if (rect.top <= 100) {
-                    current = heading.id;
-                }
-            });
-            
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        closeLightbox();
     }
-    
-    // Image zoom functionality
-    function setupImageZoom() {
-        const images = document.querySelectorAll('.zoomable');
-        
-        images.forEach(img => {
-            img.addEventListener('click', function() {
-                this.classList.toggle('zoomed');
-            });
-        });
+});
+
+document.querySelectorAll(".footnote").forEach(footnote => {
+    const note = footnote.dataset.note;
+    if (note) {
+        footnote.title = note;
     }
-    
-    // Initialize all features
-    generateTOC();
-    highlightActiveTOC();
-    setupImageZoom();
 });
