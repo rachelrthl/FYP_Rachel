@@ -20,9 +20,7 @@ html {
 }
 
 body {
-    background:
-        radial-gradient(circle at top right, rgba(255, 153, 0, 0.12), transparent 28%),
-        linear-gradient(180deg, #fbfcfe 0%, var(--aws-background) 100%);
+    background: #ffffff;
     color: var(--aws-text);
 }
 
