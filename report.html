@@ -532,7 +532,7 @@ sources:
                 <li><strong>Market momentum</strong> — time-sensitive developments including funding announcements, acquisitions, and strategic partnerships</li>
             </ul>
 
-            <p>Signals across these dimensions are synthesised into a weighted propensity score. Weighting reflects relative predictive relevance of each signal category rather than simple frequency counts. Each score is accompanied by cited reasoning explaining how specific signals contributed to prioritisation.</p>
+            <p>Signals across these dimensions are synthesised into a weighted propensity score. Weighting reflects relative predictive relevance of each signal category rather than simple frequency counts. Each score is accompanied by cited reasoning explaining how specific signals contributed to prioritisation. <em>See Appendix H for the prompt structure and implementation examples supporting this stage.</em></p>
 
             <details>
                 <summary>Click to view example scoring structure</summary>
@@ -720,7 +720,7 @@ sources:
 
             <p>Perceived accuracy averaged 4.5/5, freshness 4/5, and integration of internal and external signals 5/5. Both respondents rated likelihood to close more deals and recommend the tool <span class="metric">5/5</span>, with overall satisfaction 4/5.</p>
 
-            <p><em>Full survey instrument provided in Appendix G.</em></p>
+            <p><em>Full survey instrument and response summary provided in Appendix G.</em></p>
         </div>
 
         <!-- ============================================ -->
@@ -736,7 +736,7 @@ sources:
 
             <p>Initial approaches showed that simply increasing access to data sources does not guarantee useful insights. Direct scraping produced unreliable outputs due to bot protection and unstable page structures, while early search-based approaches often returned generic or incomplete information when queries were not sufficiently targeted. These iterations revealed that LLM output quality is highly dependent on the relevance and structure of input data.</p>
 
-            <p>The final design addressed this by structuring the research workflow into specialised agents aligned to specific signal categories. The News Agent retrieves recent company developments, the Research Agent performs grounded search to identify company context, technology signals, and hiring activity, while the Account Agent retrieves internal CRM data. These signals are synthesised by the Consolidation Agent into a structured company profile and propensity score.</p>
+            <p>The final design addressed this by structuring the research workflow into specialised agents aligned to specific signal categories. The News Agent retrieves recent company developments, the Research Agent performs grounded search to identify company context, technology signals, and hiring activity, while the Account Agent retrieves internal CRM data. These signals are synthesised by the Consolidation Agent into a structured company profile and propensity score. <em>Appendix H provides representative prompt and code samples from this pipeline.</em></p>
 
             <div class="callout">
                 <h4>Key Learning</h4>
@@ -1260,24 +1260,114 @@ Internal CRM / Account Data      External Company Signals      Recent News Signa
             </details>
 
             <details>
-                <summary>Appendix G: Pilot Survey Instrument and Risk Considerations</summary>
-                <h3>Pilot Survey Instrument</h3>
-                <p>The post-pilot evaluation combined a standard <span class="tooltip">SUS<span class="tooltiptext">System Usability Scale — standardised usability questionnaire yielding a score from 0–100</span></span> questionnaire with workflow-fit questions tailored to the dashboard.</p>
+                <summary>Appendix G: Pilot Survey Instrument and Response Summary</summary>
+                <h3>Survey Overview</h3>
+                <p>The pilot evaluation used a 38-question survey completed by two sales representatives after interacting with RubyChan. The survey captured navigation ease, workflow fit, perceived usefulness of the propensity score, quality of account intelligence, and overall value to the sales process. The raw source file retained for this appendix is <code>RubyChan_Pilot_Test_Surve_Survey_37BlTqk0r955uj6uEwZ3UyH0YtE_2026.csv</code>.</p>
 
-                <p><strong>Survey sections included:</strong></p>
+                <h3>Survey Structure</h3>
                 <ul>
-                    <li>Perceived ease of use of the five main dashboard views</li>
-                    <li>Perceived usefulness for account prioritisation and research reduction</li>
-                    <li>Trust in surfaced signals, reasoning, and citations</li>
-                    <li>Likelihood of repeated use within the representative workflow</li>
+                    <li>Role and territory context</li>
+                    <li>Navigation and workflow intuitiveness</li>
+                    <li>Perceived usefulness and interpretability of propensity scoring</li>
+                    <li>Evaluation of Know the Customer and Pursue Strategy content</li>
+                    <li>Perceived data accuracy, recency, and source integration</li>
+                    <li>Overall satisfaction, recommendation intent, and open-ended feedback</li>
                 </ul>
 
-                <p><strong>Example evaluation prompts:</strong></p>
+                <h3>Representative Question Categories</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Representative Questions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Usability</td>
+                            <td>Ease of navigation, intuitiveness of the 3-tab workflow, and speed of finding relevant information</td>
+                        </tr>
+                        <tr>
+                            <td>Propensity score evaluation</td>
+                            <td>Usefulness of the score, understanding of contributing factors, and feedback on factor weights</td>
+                        </tr>
+                        <tr>
+                            <td>Know the Customer content</td>
+                            <td>Comprehensiveness of company intelligence and most valuable content elements</td>
+                        </tr>
+                        <tr>
+                            <td>Pursue Strategy content</td>
+                            <td>Usefulness of WHAT/HOW/WHO guidance, talking points, and next-step recommendations</td>
+                        </tr>
+                        <tr>
+                            <td>Overall business value</td>
+                            <td>Likelihood to close more deals, recommend the tool, and overall satisfaction</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Response Summary (n=2)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Measure</th>
+                            <th>Representative 1</th>
+                            <th>Representative 2</th>
+                            <th>Observation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Navigation ease</td>
+                            <td>4/5</td>
+                            <td>5/5</td>
+                            <td>Both users found the dashboard easy to navigate.</td>
+                        </tr>
+                        <tr>
+                            <td>3-tab workflow intuitiveness</td>
+                            <td>5/5</td>
+                            <td>5/5</td>
+                            <td>The overall workflow structure was consistently well received.</td>
+                        </tr>
+                        <tr>
+                            <td>Propensity score usefulness</td>
+                            <td>3/5</td>
+                            <td>5/5</td>
+                            <td>Usefulness was promising but not uniformly convincing.</td>
+                        </tr>
+                        <tr>
+                            <td>Understanding of score factors</td>
+                            <td>2/5</td>
+                            <td>5/5</td>
+                            <td>Interpretability of weighting logic remains an improvement area.</td>
+                        </tr>
+                        <tr>
+                            <td>Likelihood of using AI talking points</td>
+                            <td>5/5</td>
+                            <td>4/5</td>
+                            <td>Pursue Strategy content showed strong practical value.</td>
+                        </tr>
+                        <tr>
+                            <td>Perceived data accuracy</td>
+                            <td>4/5</td>
+                            <td>5/5</td>
+                            <td>Users generally viewed the outputs as credible.</td>
+                        </tr>
+                        <tr>
+                            <td>Overall satisfaction</td>
+                            <td>3/5</td>
+                            <td>5/5</td>
+                            <td>Overall sentiment was positive but still directional due to the small sample.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Selected Qualitative Feedback</h3>
                 <ul>
-                    <li>The dashboard helped me identify which accounts deserved attention faster than my usual process.</li>
-                    <li>The rationale and cited signals made the prioritisation easier to trust.</li>
-                    <li>The output structure fit naturally into my existing prospecting workflow.</li>
-                    <li>I would use this system regularly if it were available in my day-to-day environment.</li>
+                    <li><strong>Most valuable:</strong> Pursue Strategy was highlighted as useful because it consolidates who to engage and how to engage them on one page.</li>
+                    <li><strong>Improvement request:</strong> Both responses suggested making use cases and follow-up guidance more relevant to first customer conversations.</li>
+                    <li><strong>Scoring insight:</strong> One respondent noted that greenfield accounts may be unfairly penalised if historical engagement is weighted similarly to engaged accounts.</li>
+                    <li><strong>Data need:</strong> Existing AWS usage visibility was requested as an important missing input for stronger sales decision support.</li>
                 </ul>
 
                 <h3>Risk Considerations and Mitigation</h3>
@@ -1312,6 +1402,62 @@ Internal CRM / Account Data      External Company Signals      Recent News Signa
                         </tr>
                     </tbody>
                 </table>
+            </details>
+
+            <details>
+                <summary>Appendix H: Prompt and Code Samples</summary>
+                <h3>Purpose</h3>
+                <p>This appendix provides representative implementation samples showing how raw account data is transformed into structured intelligence. The source files retained in the repository are <code>consolidated_info_prompt.txt</code>, <code>propensity_score_prompt.txt</code>, and <code>newsapi_service.py</code>.</p>
+
+                <h3>Sample 1: Consolidated Intelligence Prompt</h3>
+                <p>The consolidated prompt instructs the model to transform raw account, contact, revenue, opportunity, research, and news data into a structured executive briefing while enforcing strict data integrity rules.</p>
+<pre><code>RESPOND WITH ONLY VALID JSON. NO MARKDOWN. NO CODE BLOCKS.
+
+You are an expert business intelligence analyst tasked with transforming
+raw account data into a structured executive briefing.
+
+RULE 1: EXACT EXTRACTION ONLY
+- Use only data explicitly present in the input JSON
+- If a specific metric is not in the input, set it to null
+- Never infer unsupported numbers or dates
+</code></pre>
+                <p>This prompt supports the synthesis stage described in Sections A4 and A6 by forcing structure, limiting hallucination, and preserving traceability back to source fields.</p>
+
+                <h3>Sample 2: Propensity Score Prompt</h3>
+                <p>The propensity prompt converts consolidated account information into a weighted 0–100 score using four factors aligned with the project’s prioritisation logic.</p>
+<pre><code>### 1. AWS Usage Patterns (30%)
+### 2. Engagement Signals (30%)
+### 3. Technology Readiness (20%)
+### 4. Market Momentum (20%)
+
+Overall Score =
+(AWS Usage × 0.30) + (Engagement × 0.30) +
+(Technology × 0.20) + (Momentum × 0.20)
+</code></pre>
+                <p>This implementation-level weighting complements the conceptual scoring explanation in Section 4.3 and provides one concrete example of how scoring was operationalised.</p>
+
+                <h3>Sample 3: News API Service Code</h3>
+                <p>The News API service supports the News Signals Agent by fetching external articles, handling request failures, parsing structured article objects, and returning a clean intermediate layer for downstream synthesis.</p>
+<pre><code>class NewsAPIService:
+    def fetch_articles_with_query(self, query_body: Dict) -> Tuple[List[Article], Dict]:
+        response = requests.post(
+            url=self.base_url,
+            json=query_body,
+            timeout=self.timeout,
+            headers={'Content-Type': 'application/json'}
+        )
+        ...
+        articles = self._parse_articles_response(data, language)
+        return articles, processing_info
+</code></pre>
+                <p>The code illustrates that the News Signals Agent is not a single prompt, but a retrieval-and-cleaning pipeline that prepares external evidence before synthesis. This aligns with the report’s argument that output quality depends on upstream information structure, not model capability alone.</p>
+
+                <h3>Implementation Relevance</h3>
+                <ul>
+                    <li><strong>Appendix B connection:</strong> These samples show how the agent roles are operationalised under the hood.</li>
+                    <li><strong>Appendix D connection:</strong> The prompts and service logic support the assumptions behind research speed, evidence traceability, and explainable scoring.</li>
+                    <li><strong>Main report connection:</strong> They demonstrate that the system’s explainability is designed into both retrieval and synthesis stages rather than added only at the interface layer.</li>
+                </ul>
             </details>
         </div>
     </main>
