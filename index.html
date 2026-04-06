@@ -971,21 +971,150 @@ sources:
                     <li>Sample: 8 AWS sales representatives (3 Scale, 3 Enterprise, 2 Nurture segments)</li>
                     <li>Format: Semi-structured interviews (45–60 minutes each)</li>
                     <li>Period: July–August 2024</li>
+                    <li>Questions covered: current prioritisation methods, buying signals used, tools consulted, and major workflow bottlenecks</li>
                 </ul>
 
-                <h3>Key Findings Summary</h3>
+                <h3>Observed Prioritisation Patterns</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Representative Type</th>
+                            <th>Current Prioritisation Method</th>
+                            <th>Primary Limitation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DGR – Nurture</td>
+                            <td>Selects recognisable companies and manually researches them online alongside internal account data</td>
+                            <td>Highly subjective and difficult to scale across large portfolios</td>
+                        </tr>
+                        <tr>
+                            <td>DGR – Enterprise / Priority</td>
+                            <td>Prioritises by company size, internal contacts, and manual signal checking before outreach</td>
+                            <td>Requires one-by-one account review</td>
+                        </tr>
+                        <tr>
+                            <td>CSR / DGR Hybrid</td>
+                            <td>Relies on campaign history, events, and internal scores</td>
+                            <td>Scores are not sufficiently explainable for direct action</td>
+                        </tr>
+                        <tr>
+                            <td>CSR – CLM Accounts</td>
+                            <td>Works from campaign or event-driven lists with internal data as the main signal source</td>
+                            <td>Limited external market context</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Buying Signals Commonly Used</h3>
                 <ul>
-                    <li><strong>7% portfolio coverage</strong> due to 10-minute research time per account</li>
-                    <li><strong>6 out of 8 reps</strong> manually revalidate AI scores due to 40–50% false positives</li>
-                    <li><strong>Desire for explainable reasoning</strong> with citations and transparent logic</li>
-                    <li><strong>Time inefficiency</strong> as the primary barrier to scale</li>
+                    <li>Hiring growth, especially for technical and cloud-related roles</li>
+                    <li>Leadership changes and executive announcements</li>
+                    <li>Funding activity, partnerships, and product launches</li>
+                    <li>Event attendance, campaign engagement, and recent account activity</li>
                 </ul>
 
-                <p><em>[Full interview findings available in Report-Content.txt]</em></p>
+                <h3>Cross-Interview Themes</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Theme</th>
+                            <th>Finding</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Manual research overload</td>
+                            <td>Representatives reported spending 5–10 minutes per account, limiting weekly coverage to roughly 5–10% of assigned portfolios.</td>
+                        </tr>
+                        <tr>
+                            <td>Data fragmentation</td>
+                            <td>Relevant information is split across Salesforce, LinkedIn, company websites, and news sources, with no unified view.</td>
+                        </tr>
+                        <tr>
+                            <td>Low explainability</td>
+                            <td>6 of 8 interviewees said they manually revalidate internal scores due to low trust in opaque recommendations.</td>
+                        </tr>
+                        <tr>
+                            <td>Need for predictive support</td>
+                            <td>Multiple interviewees explicitly requested signal-based alerting or prioritised account suggestions with rationale.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>These findings directly informed the problem framing in Section A1 and the explainable, human-in-the-loop design approach developed in Sections A3 and A4.</p>
             </details>
 
             <details>
-                <summary>Appendix B: Prototype Evolution Details</summary>
+                <summary>Appendix B: System Architecture and Agent Workflow</summary>
+                <h3>Architecture Purpose</h3>
+                <p>The system architecture was designed to solve the behavioural constraints identified in Section A1: fragmented data, limited time for account research, short windows of signal relevance, and low trust in opaque prioritisation tools. Rather than treating the system primarily as a collection of APIs, the report frames it as a set of specialised agents that each perform a distinct decision-support role.</p>
+
+                <h3>Simplified Agent Architecture</h3>
+<pre>
+Internal CRM / Account Data      External Company Signals      Recent News Signals
+            |                               |                           |
+            v                               v                           v
+                    Account Context Agent   Market Research Agent   News Signals Agent
+                                      \         |         /
+                                       \        |        /
+                                        v       v       v
+                                           Synthesis Agent
+                                                  |
+                                                  v
+                               Dashboard outputs: company summary, key signals,
+                               propensity score, reasoning, citations, outreach direction
+</pre>
+
+                <h3>Agent Roles</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agent</th>
+                            <th>Primary Role</th>
+                            <th>Why It Matters</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Account Context Agent</td>
+                            <td>Retrieves internal CRM context such as account ownership, opportunity history, contacts, and relationship signals</td>
+                            <td>Ensures external findings are interpreted in light of existing AWS account knowledge</td>
+                        </tr>
+                        <tr>
+                            <td>Market Research Agent</td>
+                            <td>Builds company understanding using web-grounded research on business profile, hiring activity, and technology signals</td>
+                            <td>Provides the business and technical context needed to judge whether an account is expanding or becoming more cloud-relevant</td>
+                        </tr>
+                        <tr>
+                            <td>News Signals Agent</td>
+                            <td>Surfaces recent events such as funding rounds, product launches, partnerships, and expansion activity</td>
+                            <td>Captures time-sensitive triggers that are often missed in weekly manual research cycles</td>
+                        </tr>
+                        <tr>
+                            <td>Synthesis Agent</td>
+                            <td>Integrates upstream signals into a structured summary, prioritisation logic, score, and cited reasoning</td>
+                            <td>Transforms fragmented evidence into an explainable output aligned with representative workflows</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>System Flow</h3>
+                <ol>
+                    <li>Internal account data is retrieved to establish baseline account context.</li>
+                    <li>External company research and recent news signals are gathered in parallel.</li>
+                    <li>Retrieved information is cached to reduce repeated processing and support faster re-access.</li>
+                    <li>AI synthesis combines the evidence into structured business intelligence and a propensity score with supporting rationale.</li>
+                    <li>The front-end dashboard presents the results through account list, account detail, organisation structure, propensity score, and pursue strategy views.</li>
+                </ol>
+
+                <h3>Implementation Note</h3>
+                <p>In implementation, these agent roles are supported by separate backend services for account retrieval, news retrieval, company research, orchestration, caching, and AI analysis. This separation improves reliability and makes it possible to refresh or reuse upstream research without rerunning the entire pipeline, while keeping the user-facing design focused on explainable decision support rather than technical complexity.</p>
+            </details>
+
+            <details>
+                <summary>Appendix C: Prototype Evolution Details</summary>
                 <h3>P1 → P2 → P3 Evolution</h3>
                 <table>
                     <thead>
@@ -999,25 +1128,103 @@ sources:
                         <tr>
                             <td>P1 (Scraping)</td>
                             <td>32–68%</td>
-                            <td>Bot detection is architectural barrier</td>
+                            <td>Bot detection is an architectural barrier rather than a short-term tooling issue</td>
                         </tr>
                         <tr>
                             <td>P2 (Search API)</td>
                             <td>73%</td>
-                            <td>Reliable but lacks structure</td>
+                            <td>Search improves reliability but still lacks enough structure for consistent signal capture</td>
                         </tr>
                         <tr>
                             <td>P3 (Specialised APIs)</td>
                             <td>96%</td>
-                            <td>Production-grade performance achieved</td>
+                            <td>Combining specialised retrieval with AI synthesis produces production-grade performance</td>
                         </tr>
                     </tbody>
                 </table>
-                <p><em>[Complete prototype details available in Report-Content.txt]</em></p>
+                <p><em>Complete prototype notes and intermediate observations are available in Report-Content.txt.</em></p>
             </details>
 
             <details>
-                <summary>Appendix C: Glossary of Terms</summary>
+                <summary>Appendix D: Design Specifications and Target Assumptions</summary>
+                <p>This appendix provides the assumptions used to justify the target specifications presented in Section 1.3.</p>
+
+                <h3>Portfolio Coverage: 60–80%</h3>
+                <p><strong>Assumption:</strong> Automated monitoring processes a large account set in the background, while representatives spend their time reviewing prioritised outputs rather than gathering raw information.</p>
+                <ul>
+                    <li>Lower bound assumes incomplete public data and some cases requiring manual verification.</li>
+                    <li>Upper bound assumes stable pipelines, improved signal coverage, and faster user review over time.</li>
+                    <li>The target is intentionally lower than theoretical full coverage to reflect practical deployment conditions.</li>
+                </ul>
+
+                <h3>Research Time: 30–60 seconds per account</h3>
+                <p><strong>Assumption:</strong> Research effort shifts from information gathering to validation and action.</p>
+                <ul>
+                    <li>15–20 seconds to read the summary and score explanation</li>
+                    <li>10–20 seconds to verify one or two cited signals</li>
+                    <li>5–10 seconds to decide whether to pursue, defer, or ignore</li>
+                    <li>5–10 seconds to queue or record the action</li>
+                </ul>
+
+                <h3>Meeting Conversion Rate: 15–20%</h3>
+                <p>This target assumes that signal-based outreach performs materially better than cold outreach because the representative can reference recent company developments and time outreach within the 24–48 hour signal relevance window discussed in Section A1.</p>
+
+                <h3>Signal Detection Rate: 75–85%</h3>
+                <p>This range assumes the system captures most publicly detectable signals, while acknowledging that private conversations, confidential deals, and unannounced organisational changes remain outside system visibility.</p>
+
+                <h3>Summary Table</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Specification</th>
+                            <th>Target</th>
+                            <th>Confidence</th>
+                            <th>Basis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Portfolio coverage</td>
+                            <td>60–80%</td>
+                            <td>High</td>
+                            <td>Architectural scalability plus conservative real-world adjustment</td>
+                        </tr>
+                        <tr>
+                            <td>Research time</td>
+                            <td>30–60 seconds</td>
+                            <td>High</td>
+                            <td>Manual work is reduced to validation and action selection</td>
+                        </tr>
+                        <tr>
+                            <td>Meeting conversion</td>
+                            <td>15–20%</td>
+                            <td>Medium</td>
+                            <td>Requires continued pilot validation in live usage</td>
+                        </tr>
+                        <tr>
+                            <td>Signal detection</td>
+                            <td>75–85%</td>
+                            <td>Medium</td>
+                            <td>Bounded by public data availability and regional source coverage</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+
+            <details>
+                <summary>Appendix E: Dashboard Screenshots</summary>
+                <p><strong>Account List View</strong></p>
+                <img src="images/Dashboard-v1.png" alt="Dashboard account list view" class="zoomable">
+
+                <p><strong>Account Detail View</strong></p>
+                <img src="images/company-overview.png" alt="Dashboard company overview" class="zoomable">
+
+                <p><strong>Pursue Strategy / Talking Points View</strong></p>
+                <img src="images/talking-points.png" alt="Dashboard talking points" class="zoomable">
+            </details>
+
+            <details>
+                <summary>Appendix F: Glossary of Terms</summary>
                 <table>
                     <thead>
                         <tr>
@@ -1081,6 +1288,77 @@ sources:
                         <tr>
                             <td><strong>Bedrock</strong></td>
                             <td>Amazon Web Services' managed service for running large language models</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ASEAN</strong></td>
+                            <td>Association of Southeast Asian Nations; the regional market context for the project</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Propensity Score</strong></td>
+                            <td>AI-generated score indicating the relative likelihood that an account is showing near-term purchase intent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Human-in-the-loop</strong></td>
+                            <td>Design approach where AI supports interpretation and prioritisation while the representative retains decision control</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zero-shot</strong></td>
+                            <td>Use of a model to perform a task without task-specific supervised training data</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+
+            <details>
+                <summary>Appendix G: Pilot Survey Instrument and Risk Considerations</summary>
+                <h3>Pilot Survey Instrument</h3>
+                <p>The post-pilot evaluation combined a standard <span class="tooltip">SUS<span class="tooltiptext">System Usability Scale — standardised usability questionnaire yielding a score from 0–100</span></span> questionnaire with workflow-fit questions tailored to the dashboard.</p>
+
+                <p><strong>Survey sections included:</strong></p>
+                <ul>
+                    <li>Perceived ease of use of the five main dashboard views</li>
+                    <li>Perceived usefulness for account prioritisation and research reduction</li>
+                    <li>Trust in surfaced signals, reasoning, and citations</li>
+                    <li>Likelihood of repeated use within the representative workflow</li>
+                </ul>
+
+                <p><strong>Example evaluation prompts:</strong></p>
+                <ul>
+                    <li>The dashboard helped me identify which accounts deserved attention faster than my usual process.</li>
+                    <li>The rationale and cited signals made the prioritisation easier to trust.</li>
+                    <li>The output structure fit naturally into my existing prospecting workflow.</li>
+                    <li>I would use this system regularly if it were available in my day-to-day environment.</li>
+                </ul>
+
+                <h3>Risk Considerations and Mitigation</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Impact</th>
+                            <th>Mitigation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>API rate limits or service interruption</td>
+                            <td>Reduced refresh volume and slower signal updates</td>
+                            <td>Use caching, stagger refresh schedules, and prioritise high-value accounts first</td>
+                        </tr>
+                        <tr>
+                            <td>Variable public data quality</td>
+                            <td>Some accounts may have weak or incomplete external visibility</td>
+                            <td>Expose source transparency, display confidence through evidence richness, and retain human review</td>
+                        </tr>
+                        <tr>
+                            <td>Low trust in AI-generated prioritisation</td>
+                            <td>Representatives may ignore surfaced accounts</td>
+                            <td>Provide citations, rationale, and interpretable factor-based scoring rather than opaque outputs</td>
+                        </tr>
+                        <tr>
+                            <td>Deployment and governance constraints</td>
+                            <td>Limits rollout beyond local or approved environments</td>
+                            <td>Align hosting and data handling with internal AWS infrastructure and governance requirements</td>
                         </tr>
                     </tbody>
                 </table>
