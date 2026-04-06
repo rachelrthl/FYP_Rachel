@@ -105,6 +105,10 @@ main {
     margin-bottom: 10px;
 }
 
+.stats-box h3 {
+    color: #f6f8fb;
+}
+
 .tooltip {
     position: relative;
     border-bottom: 1px dashed var(--aws-orange);
@@ -168,7 +172,7 @@ main {
 .stats-box {
     display: grid;
     gap: 14px;
-    background: linear-gradient(135deg, rgba(35, 47, 62, 0.98), rgba(52, 73, 94, 0.98));
+    background: linear-gradient(135deg, var(--aws-orange), #ff7700);
     color: #fff;
 }
 
@@ -186,7 +190,7 @@ main {
 }
 
 .stat-label {
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.92);
     font-size: 0.95rem;
 }
 
