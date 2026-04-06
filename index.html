@@ -99,7 +99,7 @@
                 <div>
                     <h4 style="margin: 0 0 10px 0; color: var(--aws-dark-blue);">👋 About This Project</h4>
                     <p style="margin: 0 0 10px 0;">I am <strong>Rachel</strong>, a Y4 Mechanical Engineering student from <strong>NUS</strong>, working on this Final Year Project in collaboration with <strong>Amazon Web Services</strong>. This report presents a GenAI-powered solution to automate sales account research and improve productivity for AWS sales representatives.</p>
-                    <p style="margin: 0;"><strong>My Role:</strong> I served as project manager ensuring on-time delivery, led problem identification, and took hands-on responsibility for the data ingestion layer development, component testing, and system integration. With support from solution architect colleagues for technical guidance, our combined efforts drove the prototype development to where it stands today.</p>
+                    <p style="margin: 0;"><strong>My Role:</strong> I served as project manager ensuring on-time delivery, led problem identification, and took hands-on responsibility for the data ingestion layer development, component testing, and system integration. With support from solution architect colleagues for technical guidance, our combined efforts culminated in a final working application that was successfully onboarded to 20 internal employees.</p>
                 </div>
             </div>
         </div>
@@ -182,7 +182,7 @@
             <p><strong>Total research time:</strong> ~10 minutes per account<br>
             <strong>Portfolio coverage:</strong> ~7% of accounts analysed weekly</p>
 
-            <p>Prioritisation relies on lagging indicators such as revenue tier and past engagement, causing dormant accounts to appear high-value while companies demonstrating recent growth signals may not be surfaced in time. The effective engagement window for many buying signals is approximately 24–48 hours; manual weekly research cycles often result in outreach occurring too late to capture emerging opportunities<span class="footnote" data-note="Salesmotion (2024) — case studies on signal decay in B2B outbound sales">2</span>.</p>
+            <p>Prioritisation relies on lagging indicators such as revenue tier and past engagement, causing dormant accounts to appear high-value while companies demonstrating recent growth signals may not be surfaced in time. The effective engagement window for many buying signals is approximately 24–48 hours; manual weekly research cycles often result in outreach occurring too late to capture emerging opportunities<span class="footnote" data-note="Salesmotion. (2024). Case studies: Incredible Health and Analytic Partners.">2</span>.</p>
 
             <p>The fragmentation of internal and external intelligence creates a structural barrier to timely and consistent prospecting decisions.</p>
         </div>
@@ -468,6 +468,8 @@
                 </div>
             </div>
 
+            <p>The final architecture achieved a 96% signal retrieval success rate, average processing time of 48 seconds per account, and cost efficiency of approximately $0.032 per account. <em>See Appendix D for the cost justification and operating assumptions.</em> These results validate an API-first, multi-source synthesis approach capable of generating scalable and explainable account intelligence.</p>
+
             <p>The prototype evolution demonstrates how methodological improvements in signal retrieval directly enhanced reliability, coverage, and interpretability of outputs, supporting the <span class="tooltip">human-in-the-loop<span class="tooltiptext">Design approach where automation handles data processing while humans retain control over interpretation and decision-making</span></span> co-pilot design described in Section A3.</p>
         </div>
 
@@ -475,6 +477,8 @@
             <h3>4.2 From Problem to Features: Signal Intelligence System Design</h3>
 
             <p>The Signal Intelligence System translates the behavioural constraints identified in A1 into a structured <span class="tooltip">multi-agent architecture<span class="tooltiptext">System design where specialised AI agents each handle a distinct research task, then feed results into a synthesis layer</span></span>. Instead of relying on a single data source, the system distributes research tasks across specialised agents, each responsible for detecting a specific category of commercial signal. These signals are then synthesised into a unified account view to support faster and more transparent prioritisation decisions.</p>
+
+            <p>Each agent is designed to directly address an observed workflow constraint, ensuring the system solves actual visibility and trust gaps rather than assumed technical problems.</p>
 
             <h3>Problem → Agent Mapping</h3>
 
@@ -571,18 +575,18 @@ sources:
 
             <p>Interview findings showed that representatives assess account priority based on observable indicators of organisational change. Commonly cited signals included hiring for technical roles, expansion into new markets, product launches, and recent funding events. Six of eight representatives indicated that hiring activity for engineering or data roles often signals preparation for infrastructure scaling, while company announcements relating to partnerships or acquisitions frequently trigger outreach prioritisation.</p>
 
-            <p>These practitioner heuristics are consistent with broader market findings. Gartner (2024) reports that over 70% of digital transformation initiatives involve cloud infrastructure investment, while CB Insights (2024) finds that companies typically increase software spending within 6–12 months following funding events<span class="footnote" data-note="CB Insights (2024) — analysis of post-funding technology spending patterns">3</span>.</p>
+            <p>These practitioner heuristics are consistent with broader market findings. Gartner (2024) reports that over 70% of digital transformation initiatives involve cloud infrastructure investment.</p>
 
             <p>Based on these behavioural and market indicators, signals identified by upstream agents are grouped into four evaluation dimensions:</p>
 
             <ul>
-                <li><strong>Company fit</strong> — alignment with target customer characteristics such as industry relevance and operational scale</li>
-                <li><strong>Growth activity</strong> — indicators of organisational expansion including hiring activity, market entry, and product development</li>
+                <li><strong>AWS usage signals</strong> — current AWS footprint, product usage indicators, and cloud adoption context relevant to account maturity</li>
+                <li><strong>Engagement signals</strong> — relationship context such as prior interactions, existing opportunities, and accessibility of relevant stakeholders</li>
                 <li><strong>Technology readiness</strong> — observable investment in digital capabilities such as technical hiring and infrastructure-related initiatives</li>
                 <li><strong>Market momentum</strong> — time-sensitive developments including funding announcements, acquisitions, and strategic partnerships</li>
             </ul>
 
-            <p>Signals across these dimensions are synthesised into a weighted propensity score. Weighting reflects relative predictive relevance of each signal category rather than simple frequency counts. Each score is accompanied by cited reasoning explaining how specific signals contributed to prioritisation. <em>See Appendix H for the prompt structure and implementation examples supporting this stage.</em></p>
+            <p>Signals across these dimensions are synthesised into a weighted propensity score. Weighting reflects relative predictive relevance of each signal category rather than simple frequency counts. For example, hiring activity for cloud engineering roles contributes more strongly to technology readiness than general company news mentions. Each score is accompanied by cited reasoning explaining how specific signals contributed to prioritisation. <em>See Appendix H for the prompt structure and implementation examples supporting this stage.</em></p>
 
             <details>
                 <summary>Click to view example scoring structure</summary>
@@ -617,8 +621,6 @@ sources:
             <h3>Step 1: Portfolio Prioritisation (Account List View)</h3>
 
             <p>Representatives begin by filtering their account portfolio based on territory, country, or account owner. The Account List View ranks accounts using the propensity score (0–100), allowing representatives to quickly identify high-priority opportunities within their assigned region.</p>
-
-            <p>Priority tier filters (High, Medium-High, Medium) enable rapid segmentation of accounts requiring immediate attention. Data quality indicators also signal confidence levels of external intelligence coverage.</p>
 
             <p>This replaces the manual triage process described in A1, where representatives previously searched across Salesforce, LinkedIn, and Google News individually, requiring approximately 10 minutes per account.</p>
 
@@ -706,8 +708,57 @@ sources:
 
             <ul>
                 <li><strong>Problem validation (July–August 2024):</strong> How do sales representatives currently prospect, and what barriers prevent scale and accuracy?</li>
-                <li><strong>Solution validation (October 2024–present):</strong> Does RubyChan v2 improve research efficiency, and do users trust and adopt explainable AI-driven prioritisation?</li>
+                <li><strong>Solution validation (October 2024–present):</strong> Does the Signal Intelligence System improve research efficiency, and do users trust and adopt explainable AI-driven prioritisation?</li>
             </ul>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Validation Layer</th>
+                        <th>Test</th>
+                        <th>Purpose</th>
+                        <th>Sample</th>
+                        <th>Key Evidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Problem validation</td>
+                        <td>User interviews</td>
+                        <td>Identify workflow pain points and prioritisation criteria</td>
+                        <td>n=8</td>
+                        <td>Confirmed fragmented workflow, low portfolio coverage, and low trust in opaque scoring</td>
+                    </tr>
+                    <tr>
+                        <td>Problem validation</td>
+                        <td>Contextual observation</td>
+                        <td>Observe real prospecting behaviour in context</td>
+                        <td>3 reps</td>
+                        <td>Confirmed repeated system-switching and 8-10 minute research cycles per account</td>
+                    </tr>
+                    <tr>
+                        <td>Prototype validation</td>
+                        <td>Manual benchmark</td>
+                        <td>Compare system-generated research against manual research</td>
+                        <td>10 accounts</td>
+                        <td>Reduced research time by approximately 90% while maintaining comparable output quality</td>
+                    </tr>
+                    <tr>
+                        <td>Usability validation</td>
+                        <td>SUS</td>
+                        <td>Assess perceived usability of the dashboard interface</td>
+                        <td>n=1</td>
+                        <td>Recorded a System Usability Scale score of 77.5</td>
+                    </tr>
+                    <tr>
+                        <td>Workflow-fit validation</td>
+                        <td>Pilot field survey</td>
+                        <td>Evaluate usefulness, trust, and fit within live sales workflow</td>
+                        <td>n=2</td>
+                        <td>Strong ratings for workflow intuitiveness, perceived signal quality, and usefulness of generated talking points</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <h3>5.2 Problem Validation Methods</h3>
 
@@ -770,6 +821,8 @@ sources:
 
             <p>Perceived accuracy averaged 4.5/5, freshness 4/5, and integration of internal and external signals 5/5. Both respondents rated likelihood to close more deals and recommend the tool <span class="metric">5/5</span>, with overall satisfaction 4/5.</p>
 
+            <p>Pilot survey responses also provided directional evidence on perceived signal and research accuracy. Respondents were explicitly asked to assess the system's outputs against accounts they already knew well from their own sales coverage. Overall data accuracy against their own account understanding was rated <span class="metric">4/5</span> and <span class="metric">5/5</span>, giving an average of <span class="metric">4.5/5</span>. The comprehensiveness of the "Know the Customer" research output was rated <span class="metric">4/5</span> and <span class="metric">5/5</span>, while information freshness was rated <span class="metric">3/5</span> and <span class="metric">5/5</span>, averaging <span class="metric">4/5</span>. This alignment was also reflected in pilot-use observations shared during feedback discussions: in one case, the system surfaced an ongoing partnership with Google Cloud that closely matched the representative's own understanding of the account. Taken together, these findings suggest that users generally viewed the surfaced company research and external signals as credible and sufficiently current for account preparation, while indicating that signal freshness remains more variable than overall accuracy.</p>
+
             <p><em>Full survey instrument and response summary provided in Appendix G.</em></p>
         </div>
 
@@ -788,6 +841,8 @@ sources:
 
             <p>The final design addressed this by structuring the research workflow into specialised agents aligned to specific signal categories. The News Agent retrieves recent company developments, the Research Agent performs grounded search to identify company context, technology signals, and hiring activity, while the Account Agent retrieves internal CRM data. These signals are synthesised by the Consolidation Agent into a structured company profile and propensity score. <em>Appendix H provides representative prompt and code samples from this pipeline.</em></p>
 
+            <p>Assigning each agent a clearly defined task improves data relevance by ensuring that retrieved information aligns with predefined analytical objectives. Instead of relying on a single model to determine what information may be important, the system guides retrieval according to specific signal types required for sales evaluation.</p>
+
             <div class="callout">
                 <h4>Key Learning</h4>
                 <p>LLMs produce more useful insights when applied to structured and relevant inputs rather than broad unfiltered data. The multi-agent architecture functions as a data quality control layer, ensuring that signals provided to the synthesis model are aligned with decision-making needs. Performance improvements observed in the final prototype reflect improved data structuring rather than model capability alone.</p>
@@ -799,12 +854,14 @@ sources:
 
             <p>Sales representatives often operate under time constraints when reviewing large account portfolios, requiring them to piece together signals from multiple fragmented sources such as LinkedIn, company websites, news articles, and CRM data. By consolidating internal and external signals into a single structured profile, the system provides a clearer starting point for determining which accounts warrant further investigation.</p>
 
-            <p>In one pilot example, a representative filtered for high-propensity accounts within their territory and reviewed a company demonstrating hiring expansion and recent business developments surfaced by the Research Agent. Using the consolidated company profile and suggested talking points from the Pursue Strategy view, the representative initiated outreach via phone referencing the surfaced insights. The interaction progressed into a <span class="tooltip">Sales Qualified Meeting<span class="tooltiptext">A meeting that meets specific criteria for passing to an Account Executive, involving qualified decision-makers</span></span> (SQM).</p>
+            <p>In one pilot example, a representative filtered for high-propensity accounts within their territory and reviewed a company demonstrating hiring expansion and recent business developments surfaced by the Research Agent. Using the consolidated company profile and suggested talking points from the Pursue Strategy view, the representative initiated outreach via phone referencing the surfaced insights. The interaction progressed into a <span class="tooltip">Sales Qualified Meeting<span class="tooltiptext">A meeting that meets specific criteria for passing to an Account Executive, involving qualified decision-makers</span></span> (SQM). While this example does not establish causal proof of improved conversion performance, it illustrates how structured signal visibility can support faster transition from research to engagement preparation.</p>
 
             <div class="callout-success">
                 <h4>Emergent Use Case: Territory Planning</h4>
                 <p>One CSR noted that the system <em>"helps me in my territory planning in a way no existing tool does."</em> Representatives indicated that reviewing accounts through a ranked portfolio view improved their ability to identify which accounts require deeper evaluation and how effort should be allocated across their territory.</p>
             </div>
+
+            <p>Rather than replacing user judgement, the system supports decision-making by reducing cognitive effort required to interpret fragmented signals.</p>
 
             <p>Overall, findings indicate that AI provides the greatest value when it structures relevant signals into interpretable context that supports prioritisation decisions and outreach preparation.</p>
         </div>
@@ -848,13 +905,15 @@ sources:
 
             <div class="callout-warning">
                 <h4>1. Cloud Deployment Blocked by Data Governance Policy</h4>
-                <p>The most significant production barrier is an internal AWS policy preventing deployment of applications handling customer account data on non-approved infrastructure. This forces users to run RubyChan v2 locally via command line — a setup process that creates a prohibitive barrier for non-technical business personas. Of the 20 onboarded users, several required assisted setup, and broader rollout beyond the initial cohort is effectively blocked until this is resolved.</p>
+                <p>The most significant production barrier is an internal AWS policy preventing deployment of applications handling customer account data on non-approved infrastructure. This forces users to run the Signal Intelligence System locally via command line — a setup process that creates a prohibitive barrier for non-technical business personas. Of the 20 onboarded users, several required assisted setup, and broader rollout beyond the initial cohort is effectively blocked until this is resolved.</p>
+                <p>This shortcoming was not anticipated at interim stage; it emerged as a direct consequence of attempting real deployment with real customer data, and represents the highest-priority item for production readiness.</p>
                 <p><strong>Resolution:</strong> Engage AWS IT and legal teams to obtain approval for an internally hosted deployment on approved AWS infrastructure. Given that the system already runs entirely on AWS services (<span class="tooltip">Bedrock<span class="tooltiptext">Amazon Web Services' managed service for running large language models</span></span>, <span class="tooltip">DynamoDB<span class="tooltiptext">AWS fully managed NoSQL database service providing fast, predictable performance at any scale</span></span>, EC2), the technical lift is minimal — the bottleneck is approval, not engineering. Estimated timeline: 4–6 weeks pending internal review.</p>
             </div>
 
             <div class="callout-warning">
                 <h4>2. No Bidirectional Salesforce Integration</h4>
-                <p>RubyChan v2 currently ingests Salesforce data via static export rather than live API sync. This means account data requires manual refresh, and AI-generated insights cannot be written back to CRM records — forcing reps to manually copy talking points and scores into Salesforce. Export functionality was the most frequently requested feature enhancement in pilot feedback.</p>
+                <p>The Signal Intelligence System currently ingests Salesforce data via static export rather than live API sync. This means account data requires manual refresh, and AI-generated insights cannot be written back to CRM records — forcing reps to manually copy talking points and scores into Salesforce. Export functionality was the most frequently requested feature enhancement in pilot feedback.</p>
+                <p>The resolution path has two dependencies that are outside the project's direct control. First, cloud deployment approval must be secured before a stable API endpoint exists. Second, Salesforce MCP server access requires internal IT and security permissions within AWS — an approval process governed by enterprise data governance policy rather than engineering capacity. Both dependencies mean this shortcoming cannot be resolved on a fixed timeline regardless of technical readiness.</p>
                 <p><strong>Resolution:</strong> Submit formal request for Salesforce <span class="tooltip">MCP<span class="tooltiptext">Model Context Protocol — a standard for connecting AI systems to external data sources and tools</span></span> server access in parallel with cloud deployment approval. Technical implementation (bidirectional sync and CRM field population) is estimated at 3 weeks once both approvals are obtained.</p>
             </div>
 
@@ -895,11 +954,43 @@ sources:
 
             <h3>9.1 Immediate Impact: AWS Singapore Sales Team</h3>
 
-            <p>The system is currently used within the AWS Singapore Scale sales team to support account research using real customer data. It helps representatives quickly understand company context by combining internal CRM information with external signals such as hiring activity, company developments, and technology indicators in one place.</p>
+            <p>The Signal Intelligence System is now a working internal application used within the AWS Singapore Scale sales context with real customer data. Within a single semester, the project progressed from a 10-account technical validation to onboarding 20 internal employees, including DGRs and CSRs, demonstrating adoption beyond the project module itself.</p>
 
-            <p>This reduces the need to manually search across multiple sources such as LinkedIn, company websites, and news articles within the short 24–48 hour engagement window identified in A1.</p>
+            <p>The system helps representatives review company context, external signals, and outreach direction in one place, reducing the need to manually consolidate information across multiple tools. An additional outcome observed during pilot use was support for territory planning, where representatives used the system to compare accounts across their portfolio and identify where deeper focus was needed. This suggests that the value of unified internal-external account intelligence extends beyond the original prospecting use case.</p>
 
-            <p>An additional outcome observed during usage is support for territory planning. Representatives reported that having a structured overview of account signals makes it easier to review their portfolio and decide which accounts require deeper focus.</p>
+            <p>One pilot-use example also illustrated practical value: a representative used surfaced company developments and suggested outreach angles to guide a phone conversation that progressed into a <span class="tooltip">Sales Qualified Meeting<span class="tooltiptext">A meeting that meets specific criteria for passing to an Account Executive, involving qualified decision-makers</span></span> (SQM).</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Impact Area</th>
+                        <th>Evidence</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Internal adoption</td>
+                        <td>20 DGRs and CSRs onboarded</td>
+                        <td>Demonstrated</td>
+                    </tr>
+                    <tr>
+                        <td>Research workflow support</td>
+                        <td>Used for account review and outreach preparation</td>
+                        <td>Demonstrated</td>
+                    </tr>
+                    <tr>
+                        <td>Territory planning support</td>
+                        <td>Used to scan portfolio-level signals</td>
+                        <td>Observed in pilot use</td>
+                    </tr>
+                    <tr>
+                        <td>Outreach progression</td>
+                        <td>One pilot case progressed to SQM</td>
+                        <td>Early directional evidence</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <h3>9.2 Organisational Potential</h3>
 
@@ -913,15 +1004,23 @@ sources:
                 </div>
             </div>
 
-            <p>There has already been interest from teams in other regions including APJ, France, and Canada, indicating that the challenge of fragmented account research is not unique to a single geography.</p>
+            <p>Estimated operating cost is approximately $384 per representative per year, indicating relatively low cost compared to the potential value of improved account prioritisation and research efficiency. The combination of demonstrated onboarding, positive pilot feedback, and low operating cost suggests credible potential for wider internal deployment once integration and governance constraints are resolved.</p>
+
+            <p>The system has also attracted attention beyond the immediate pilot context, with teams in France and Canada expressing interest in implementing a similar solution for their own sales organisations. This suggests that the workflow problem addressed by the project is not isolated to the AWS Singapore context, but is relevant across different regional sales environments.</p>
+
+            <p>Further testing across additional teams would help determine how consistently the workflow benefits can be observed.</p>
 
             <h3>9.3 Industry Relevance</h3>
 
             <p>The problem of fragmented account intelligence is common across B2B sales environments where useful information is spread across multiple tools.</p>
 
-            <p>This project demonstrates how AI can be used to structure internal and external signals into a single view that helps users understand account context more efficiently. Rather than replacing decision-making, the system supports users by organising relevant information in a clearer format.</p>
+            <p>The broader significance of this project lies in how it responds to an emerging shift in B2B sales from static account selection toward AI-guided selling. Gartner (2024b) predicts that AI-guided selling will become the new standard for B2B sales, reflecting a wider move away from manual research and opaque scoring toward systems that help representatives identify intent earlier and act with greater confidence. This project demonstrates a practical model for that transition by embedding an intelligence layer directly into the sales workflow.</p>
 
-            <p>The observed use in territory planning suggests that structured signal consolidation may also support broader account strategy workflows beyond the initial scope of lead research.</p>
+            <p>That contribution is important because many sales intelligence tools focus on signal availability, but not necessarily on usability, transparency, or fit with how representatives actually work. In contrast, the system developed here organises internal CRM context and external company signals into explainable prioritisation support, company understanding, and outreach guidance. Rather than asking representatives to interpret disconnected data points for themselves, it structures signals into a form that supports how sales teams already prioritise accounts, research companies, and prepare conversations.</p>
+
+            <p>The industry relevance of the project therefore lies not only in the multi-agent architecture, but in the workflow-aligned intelligence layer it creates. This addresses a broader B2B need: helping organisations move from fragmented research and opaque scoring toward explainable, signal-driven account prioritisation. The same design logic can extend beyond prospecting into adjacent workflows such as territory planning, account planning, and opportunity preparation, making the impact of the project broader than its initial use case.</p>
+
+            <p>Taken together, the project offers more than a technical prototype. It provides a transferable design pattern for how AI can be implemented in B2B sales as a decision-support layer that improves visibility, speed, and confidence while preserving human judgement. In that sense, its relevance extends beyond AWS and beyond this module, reflecting a direction in which many B2B organisations are likely to move as AI-guided selling becomes more established.</p>
         </div>
 
         <hr>
@@ -934,24 +1033,34 @@ sources:
             <h2>References</h2>
 
             <p>Arrieta, A. B., Díaz-Rodríguez, N., Del Ser, J., Bennetot, A., Tabik, S., Barbado, A., García, S., Gil-López, S., Molina, D., Benjamins, R., Chatila, R., &amp; Herrera, F. (2020). Explainable artificial intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, 58, 82–115.</p>
+            <p><a href="https://www.sciencedirect.com/science/article/abs/pii/S1566253519308103" target="_blank" rel="noopener noreferrer">https://www.sciencedirect.com/science/article/abs/pii/S1566253519308103</a></p>
 
             <p>Bangor, A., Kortum, P., &amp; Miller, J. (2009). Determining what individual SUS scores mean: Adding an adjective rating scale. <em>Journal of Usability Studies</em>, 4(3), 114–123.</p>
+            <p><a href="https://uxpajournal.org/wp-content/uploads/sites/7/pdf/JUS_Bangor_May2009.pdf" target="_blank" rel="noopener noreferrer">https://uxpajournal.org/wp-content/uploads/sites/7/pdf/JUS_Bangor_May2009.pdf</a></p>
 
             <p>Brooke, J. (1996). SUS: A quick and dirty usability scale. In P. Jordan, B. Thomas, B. Weerdmeester, &amp; I. McClelland (Eds.), <em>Usability Evaluation in Industry</em>. London: Taylor &amp; Francis.</p>
+            <p><a href="https://hci-studies.org/methods-and-measures/downloads/SUS_Brooke1996.pdf" target="_blank" rel="noopener noreferrer">https://hci-studies.org/methods-and-measures/downloads/SUS_Brooke1996.pdf</a></p>
 
             <p>Davis, F. D. (1989). Perceived usefulness, perceived ease of use, and user acceptance of information technology. <em>MIS Quarterly</em>, 13(3), 319–340.</p>
+            <p><a href="https://www.researchgate.net/publication/200085965" target="_blank" rel="noopener noreferrer">https://www.researchgate.net/publication/200085965</a></p>
 
             <p>Forrester Research. (2023). <em>B2B buyer journey benchmark report 2023</em>.</p>
+            <p><a href="https://www.forrester.com/press-newsroom/2023-forrester-b2b-buyers-journey/" target="_blank" rel="noopener noreferrer">https://www.forrester.com/press-newsroom/2023-forrester-b2b-buyers-journey/</a></p>
 
             <p>Gartner. (2024a). <em>Forecast analysis: Public cloud services, worldwide, 2024</em>.</p>
+            <p><a href="https://www.gartner.com/en/newsroom/press-releases/2024-05-20-gartner-forecasts-worldwide-public-cloud-end-user-spending-to-surpass-675-billion-in-2024" target="_blank" rel="noopener noreferrer">https://www.gartner.com/en/newsroom/press-releases/2024-05-20-gartner-forecasts-worldwide-public-cloud-end-user-spending-to-surpass-675-billion-in-2024</a></p>
 
             <p>Gartner. (2024b). <em>Predicts 2025: AI-guided selling becomes the new standard for B2B sales</em>.</p>
+            <p><a href="https://www.gartner.com/en/newsroom/press-releases/gartner-predicts-75--of-b2b-sales-organizations-will-augment-tra" target="_blank" rel="noopener noreferrer">https://www.gartner.com/en/newsroom/press-releases/gartner-predicts-75--of-b2b-sales-organizations-will-augment-tra</a></p>
 
             <p>Salesforce Research. (2023). <em>State of Sales</em> (5th ed.).</p>
+            <p><a href="https://media.bitpipe.com/io_32x/io_322542/item_2864478/SALES_TrendsinSales_PDF_V3_Sales%20Cloud.pdf" target="_blank" rel="noopener noreferrer">https://media.bitpipe.com/io_32x/io_322542/item_2864478/SALES_TrendsinSales_PDF_V3_Sales%20Cloud.pdf</a></p>
 
             <p>Salesmotion. (2024). <em>Case studies: Incredible Health and Analytic Partners</em>.</p>
+            <p><a href="https://salesmotion.io/customer-story-incredible-health" target="_blank" rel="noopener noreferrer">https://salesmotion.io/customer-story-incredible-health</a></p>
 
             <p>ZoomInfo Technologies Inc. (2024). <em>Customer Impact Report</em>.</p>
+            <p><a href="https://downloads.ctfassets.net/kyld7105l6mt/6RwJmVrDvEqjUUgz8fZmud/2c2fd86f4172552f42a1ee4d2f5fc36e/ZoomInfo-Customer-Impact-Report-2024.pdf" target="_blank" rel="noopener noreferrer">https://downloads.ctfassets.net/kyld7105l6mt/6RwJmVrDvEqjUUgz8fZmud/2c2fd86f4172552f42a1ee4d2f5fc36e/ZoomInfo-Customer-Impact-Report-2024.pdf</a></p>
         </div>
 
         <!-- ============================================ -->
@@ -1172,6 +1281,78 @@ Internal CRM / Account Data      External Company Signals      Recent News Signa
                 <h3>Signal Detection Rate: 75–85%</h3>
                 <p>This range assumes the system captures most publicly detectable signals, while acknowledging that private conversations, confidential deals, and unannounced organisational changes remain outside system visibility.</p>
 
+                <h3>Cost Per Account: $0.032</h3>
+                <p>This estimate was carried forward from the interim report cost appendix and is based on projected monthly usage across external research APIs, LLM inference, and storage services. The figure represents data-processing cost per account before broader infrastructure amortisation.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Usage</th>
+                            <th>Unit Cost</th>
+                            <th>Monthly Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Perplexity API</td>
+                            <td>1,000 queries</td>
+                            <td>$0.015/query</td>
+                            <td>$15.00</td>
+                        </tr>
+                        <tr>
+                            <td>Tavily API</td>
+                            <td>1,000 queries</td>
+                            <td>$0.012/query</td>
+                            <td>$12.00</td>
+                        </tr>
+                        <tr>
+                            <td>NewsAPI</td>
+                            <td>1,000 queries</td>
+                            <td>$0.000/query (free tier)</td>
+                            <td>$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tooltip">AWS Bedrock<span class="tooltiptext">Amazon Web Services' managed service for running large language models</span></span> (Claude 3.5)</td>
+                            <td>~500K tokens</td>
+                            <td>$0.003/1K input tokens<br>$0.015/1K output tokens</td>
+                            <td>$5.00</td>
+                        </tr>
+                        <tr>
+                            <td>AWS DynamoDB</td>
+                            <td>1,000 writes, 10K reads</td>
+                            <td>On-demand pricing</td>
+                            <td>~$2.00</td>
+                        </tr>
+                        <tr>
+                            <td>AWS RDS (PostgreSQL)</td>
+                            <td>db.t3.micro instance</td>
+                            <td>730 hours/month</td>
+                            <td>$13.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Infrastructure</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>$47.00</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Per Account (data only)</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>$0.032</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Per Account (with infrastructure)</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>$0.047</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Note:</strong> Infrastructure costs amortize across larger account volumes. At 10,000 accounts per month, per-account cost drops to approximately $0.033.</p>
+
                 <h3>Summary Table</h3>
                 <table>
                     <thead>
@@ -1294,16 +1475,24 @@ Internal CRM / Account Data      External Company Signals      Recent News Signa
                             <td>Association of Southeast Asian Nations; the regional market context for the project</td>
                         </tr>
                         <tr>
+                            <td><strong>Scale</strong></td>
+                            <td>AWS sales segment focused on acquiring and growing a large volume of smaller-spend accounts until they are mature enough to be handed to another segment for deeper account management.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Enterprise</strong></td>
+                            <td>AWS sales segment covering larger logo accounts with higher total addressable cloud spend potential than Scale accounts.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nurture</strong></td>
+                            <td>AWS sales segment managing a very large base of smaller business accounts at lighter-touch coverage.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Greenfield account</strong></td>
+                            <td>Customer account that is not yet using AWS services, or is only spending at a very small level.</td>
+                        </tr>
+                        <tr>
                             <td><strong>Propensity Score</strong></td>
                             <td>AI-generated score indicating the relative likelihood that an account is showing near-term purchase intent</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Human-in-the-loop</strong></td>
-                            <td>Design approach where AI supports interpretation and prioritisation while the representative retains decision control</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Zero-shot</strong></td>
-                            <td>Use of a model to perform a task without task-specific supervised training data</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1312,19 +1501,60 @@ Internal CRM / Account Data      External Company Signals      Recent News Signa
             <details>
                 <summary>Appendix G: Pilot Survey Instrument and Response Summary</summary>
                 <h3>Survey Overview</h3>
-                <p>The pilot evaluation used a 38-question survey completed by two sales representatives after interacting with RubyChan. The survey captured navigation ease, workflow fit, perceived usefulness of the propensity score, quality of account intelligence, and overall value to the sales process. The raw source file retained for this appendix is <code>RubyChan_Pilot_Test_Surve_Survey_37BlTqk0r955uj6uEwZ3UyH0YtE_2026.csv</code>.</p>
+                <p>The pilot evaluation used a 38-question survey completed by two sales representatives after interacting with the Signal Intelligence System. The survey captured navigation ease, workflow fit, perceived usefulness of the propensity score, quality of account intelligence, and overall value to the sales process. The raw source file retained for this appendix is <code>RubyChan_Pilot_Test_Surve_Survey_37BlTqk0r955uj6uEwZ3UyH0YtE_2026.csv</code>, reflecting the working project name used during the pilot.</p>
 
                 <h3>Survey Structure</h3>
-                <ul>
-                    <li>Role and territory context</li>
-                    <li>Navigation and workflow intuitiveness</li>
-                    <li>Perceived usefulness and interpretability of propensity scoring</li>
-                    <li>Evaluation of Know the Customer and Pursue Strategy content</li>
-                    <li>Perceived data accuracy, recency, and source integration</li>
-                    <li>Overall satisfaction, recommendation intent, and open-ended feedback</li>
-                </ul>
+	                <ul>
+	                    <li>Role and territory context</li>
+	                    <li>Navigation and workflow intuitiveness</li>
+	                    <li>Perceived usefulness and interpretability of propensity scoring</li>
+	                    <li>Evaluation of Know the Customer and Pursue Strategy content</li>
+	                    <li>Perceived data accuracy, recency, and source integration</li>
+	                    <li>Overall satisfaction, recommendation intent, and open-ended feedback</li>
+	                </ul>
 
-                <h3>Representative Question Categories</h3>
+	                <h3>Full Pilot Survey Question Inventory</h3>
+	                <p>The pilot survey was designed to evaluate not only interface usability, but also decision support quality, scoring transparency, workflow fit, and overall business usefulness. The full set of prompts is listed below to demonstrate the scope of evaluation.</p>
+
+	                <ol>
+	                    <li>What is your current role?</li>
+	                    <li>How long have you been in your current role?</li>
+	                    <li>Which country/countries do you support?</li>
+	                    <li>On a scale of 1-5, how easy was it to navigate through the RubyChan dashboard?</li>
+	                    <li>How intuitive was the 3-tab workflow structure (Propensity Score, Know the Customer, Pursue Strategy)?</li>
+	                    <li>How quickly were you able to find the information you needed?</li>
+	                    <li>How valuable was the AI-calculated propensity score in helping you prioritize accounts?</li>
+	                    <li>How well did you understand the factors contributing to the propensity score?</li>
+	                    <li>How important are digital transformation signals in the propensity score?</li>
+	                    <li>How important is decision maker accessibility in the propensity score?</li>
+	                    <li>How important are urgency indicators in the propensity score?</li>
+	                    <li>How important is organizational readiness in the propensity score?</li>
+	                    <li>How important is relationship potential in the propensity score?</li>
+	                    <li>Do you agree with the current weight distribution for the propensity score factors?</li>
+	                    <li>If you would adjust the weights, how would you redistribute them?</li>
+	                    <li>Are there any additional factors that should be included in the propensity score calculation?</li>
+	                    <li>How comprehensive was the company intelligence provided in the Know the Customer tab?</li>
+	                    <li>Which elements of the Know the Customer tab did you find most valuable?</li>
+	                    <li>Are there any additional features you would like to see in this tab?</li>
+	                    <li>Which elements of the Pursue Strategy tab did you find most valuable?</li>
+	                    <li>How likely are you to use the AI-generated talking points in actual customer conversations?</li>
+	                    <li>How well did the Immediate Next Steps section provide clear direction for your account strategy?</li>
+	                    <li>What additional strategic guidance would you like to see in this tab?</li>
+	                    <li>How accurate is the data compared to your own understanding of the accounts?</li>
+	                    <li>How up-to-date did the information seem?</li>
+	                    <li>How well did the dashboard integrate different data sources into a coherent view?</li>
+	                    <li>Rank the following features in order of their value to your sales process.</li>
+	                    <li>How likely is this dashboard to help you close more deals?</li>
+	                    <li>How likely are you to recommend this dashboard to colleagues?</li>
+	                    <li>Overall, how satisfied are you with the RubyChan dashboard?</li>
+	                    <li>What features did you find most valuable and why?</li>
+	                    <li>What features were least valuable or most confusing?</li>
+	                    <li>What features would you like to see added to the dashboard?</li>
+	                    <li>How could the dashboard be improved to better support your sales process?</li>
+	                    <li>Any additional comments or suggestions?</li>
+	                </ol>
+
+	                <h3>Representative Question Categories</h3>
                 <table>
                     <thead>
                         <tr>
@@ -1524,57 +1754,189 @@ Internal CRM / Account Data      External Company Signals      Recent News Signa
             <details>
                 <summary>Appendix H: Prompt and Code Samples</summary>
                 <h3>Purpose</h3>
-                <p>This appendix provides representative implementation samples showing how raw account data is transformed into structured intelligence. The source files retained in the repository are <code>consolidated_info_prompt.txt</code>, <code>propensity_score_prompt.txt</code>, and <code>newsapi_service.py</code>.</p>
+                <p>This appendix provides representative implementation samples showing how raw account data is transformed into structured intelligence. The source files retained in the repository are <code>consolidated_info_prompt.txt</code>, <code>propensity_score_prompt.txt</code>, and <code>newsapi_service.py</code>. Together, these files demonstrate that the system is built around explicit retrieval, validation, and synthesis logic rather than a single unconstrained LLM call.</p>
 
-                <h3>Sample 1: Consolidated Intelligence Prompt</h3>
-                <p>The consolidated prompt instructs the model to transform raw account, contact, revenue, opportunity, research, and news data into a structured executive briefing while enforcing strict data integrity rules.</p>
+                <h3>1. Consolidated Intelligence Prompt</h3>
+                <p>The consolidated prompt is the core instruction set used to transform raw account, contact, revenue, opportunity, research, and news data into a structured executive briefing. Its most important design choice is that it constrains the model heavily: the model is told to return valid JSON only, avoid unsupported numerical inference, and tie numerical claims back to source paths.</p>
+
+                <p><strong>Opening instruction and response constraint:</strong></p>
 <pre><code>RESPOND WITH ONLY VALID JSON. NO MARKDOWN. NO CODE BLOCKS.
+NO EXPLANATIONS. START WITH { AND END WITH }.
 
-You are an expert business intelligence analyst tasked with transforming
-raw account data into a structured executive briefing.
+You are an expert business intelligence analyst tasked with
+transforming raw account data into a structured executive briefing.</code></pre>
 
-RULE 1: EXACT EXTRACTION ONLY
-- Use only data explicitly present in the input JSON
-- If a specific metric is not in the input, set it to null
-- Never infer unsupported numbers or dates
-</code></pre>
-                <p>This prompt supports the synthesis stage described in Sections A4 and A6 by forcing structure, limiting hallucination, and preserving traceability back to source fields.</p>
+                <p><strong>Key hallucination-control rules from the prompt:</strong></p>
+<pre><code>RULE 1: EXACT EXTRACTION ONLY
+- Use ONLY data explicitly present in the input JSON
+- If a specific number, percentage, or metric is not in the input -> SET TO null
+- NEVER infer numerical values, percentages, growth rates, or financial figures
 
-                <h3>Sample 2: Propensity Score Prompt</h3>
-                <p>The propensity prompt converts consolidated account information into a weighted 0–100 score using four factors aligned with the project’s prioritisation logic.</p>
-<pre><code>### 1. AWS Usage Patterns (30%)
-### 2. Engagement Signals (30%)
-### 3. Technology Readiness (20%)
-### 4. Market Momentum (20%)
+RULE 3: SOURCE ATTRIBUTION
+- Every numerical claim MUST have a traceable source in dataSources array
+- If you cannot cite the exact source -> omit the claim
 
-Overall Score =
-(AWS Usage × 0.30) + (Engagement × 0.30) +
-(Technology × 0.20) + (Momentum × 0.20)
-</code></pre>
-                <p>This implementation-level weighting complements the conceptual scoring explanation in Section 4.3 and provides one concrete example of how scoring was operationalised.</p>
+RULE 4: PROHIBITED INFERENCES
+- NEVER fabricate specific dollar amounts not in opportunities/revenues
+- NEVER fabricate dates or timelines not referenced in input
+- NEVER fabricate stakeholder relationships not indicated by title/engagement data</code></pre>
 
-                <h3>Sample 3: News API Service Code</h3>
-                <p>The News API service supports the News Signals Agent by fetching external articles, handling request failures, parsing structured article objects, and returning a clean intermediate layer for downstream synthesis.</p>
-<pre><code>class NewsAPIService:
-    def fetch_articles_with_query(self, query_body: Dict) -> Tuple[List[Article], Dict]:
-        response = requests.post(
-            url=self.base_url,
-            json=query_body,
-            timeout=self.timeout,
-            headers={'Content-Type': 'application/json'}
-        )
-        ...
-        articles = self._parse_articles_response(data, language)
-        return articles, processing_info
-</code></pre>
-                <p>The code illustrates that the News Signals Agent is not a single prompt, but a retrieval-and-cleaning pipeline that prepares external evidence before synthesis. This aligns with the report’s argument that output quality depends on upstream information structure, not model capability alone.</p>
+                <p><strong>Examples of task-specific field instructions:</strong></p>
+<pre><code>companyProfile.execSummary
+- Source: research.business_profile.summary + news.news_summary
+- Length: 2-3 sentences
+
+keyStakeholders
+- Sort by: C-level -> VP/Directors -> Managers -> Individual contributors
+- Limit: Top 5 most senior with complete contact info
+
+businessInitiatives
+- Source priority:
+  1) news article titles/content previews
+  2) business profile summary
+  3) technology adoption summary
+  4) hiring intelligence summary</code></pre>
+
+                <p><strong>Output shape enforced by the prompt:</strong></p>
+<pre><code>{
+  "accountId": "string",
+  "accountName": "string",
+  "lastUpdated": "string",
+  "knowTheCustomer": { ... },
+  "pursueStrategy": { ... }
+}</code></pre>
+
+                <p>This prompt is important because it shows that explainability in the Signal Intelligence System is not added only in the dashboard layer. The prompt itself encodes source attribution, numerical discipline, stakeholder ranking rules, and constraints against unsupported claims.</p>
+
+                <h3>2. Propensity Score Prompt</h3>
+                <p>The propensity score prompt converts consolidated account information into a weighted 0–100 score. Compared with the broader consolidated prompt, this one is narrower and more evaluative: it tells the model exactly which input signals matter, how much they should matter, and how missing data should be handled.</p>
+
+                <p><strong>Core scoring dimensions:</strong></p>
+<pre><code>1. AWS Usage Patterns (30%)
+2. Engagement Signals (30%)
+3. Technology Readiness (20%)
+4. Market Momentum (20%)</code></pre>
+
+                <p><strong>Scoring logic excerpt:</strong></p>
+<pre><code>AWS Usage (30%)
+- 90-100: TopGainer + high growth (>20%) + consistent usage
+- 70-89: TopGainer OR strong growth (15-20%)
+- 50-69: Moderate growth (10-15%) or stable usage
+- 0-29: Declining AWS usage (major penalty)
+
+Engagement (30%)
+- 90-100: 4+ senior contacts with phones + multiple AWS opportunities
+- 70-89: 2-3 contacts with phones + AWS history</code></pre>
+
+                <p><strong>Missing-data handling:</strong></p>
+<pre><code>- No topGainer: Focus on 12-month AWS usage trends
+- No AWS usage data: Weight engagement and technology factors higher
+- No phone numbers: Score contacts by title/seniority only
+- Always explain data limitations in the scoring explanation</code></pre>
+
+                <p><strong>Expected output schema:</strong></p>
+<pre><code>{
+  "accountId": "string",
+  "propensityScoreDetails": {
+    "overallScore": 75,
+    "propensityScoreExplanation": "string",
+    "lastCalculated": "timestamp",
+    "factors": [
+      {"category": "AWS Usage Patterns", "weight": "30%", "score": "85"},
+      {"category": "Engagement Signals", "weight": "30%", "score": "70"},
+      {"category": "Technology Readiness", "weight": "20%", "score": "75"},
+      {"category": "Market Momentum", "weight": "20%", "score": "75"}
+    ]
+  }
+}</code></pre>
+
+                <p>This prompt operationalises the scoring logic described conceptually in Section 4.3. It also shows that the system distinguishes between absence of evidence and negative evidence, rather than simply penalising incomplete accounts without explanation.</p>
+
+                <h3>3. News API Service Code</h3>
+                <p>The News API service supports the News Signals Agent by handling retrieval, validation, parsing, and error control before any synthesis prompt is applied. This is important because the report argues that LLM performance depends heavily on upstream information quality.</p>
+
+                <p><strong>External retrieval layer:</strong></p>
+<pre><code>response = requests.post(
+    url=self.base_url,
+    json=query_body,
+    timeout=self.timeout,
+    headers={'Content-Type': 'application/json'}
+)</code></pre>
+
+                <p><strong>Fallback and error-handling behaviour:</strong></p>
+<pre><code>if response.status_code >= 400:
+    http_error = requests.exceptions.HTTPError(response=response)
+    raise ErrorHandler.handle_external_api_error(http_error, "NewsAPI")
+
+except requests.exceptions.Timeout as e:
+    raise IntelligenceAPIError.timeout_error("NewsAPI", self.timeout, "search_articles")</code></pre>
+
+                <p><strong>Structured parsing into article objects:</strong></p>
+<pre><code>articles_data = data.get('articles', {}).get('results', [])
+for article_data in articles_data:
+    article = self._parse_single_article(article_data, language)
+    if article:
+        articles.append(article)</code></pre>
+
+                <p><strong>Parsed fields include:</strong></p>
+                <ul>
+                    <li>article URI</li>
+                    <li>title</li>
+                    <li>content preview</li>
+                    <li>source</li>
+                    <li>publication date</li>
+                    <li>URL</li>
+                    <li>sentiment</li>
+                    <li>relevance</li>
+                </ul>
+
+                <p>This code demonstrates that the News Signals Agent is a retrieval-and-cleaning service, not just a generative layer. The model receives pre-structured article inputs rather than raw, noisy web text.</p>
+
+                <h3>4. What These Samples Show About the Built System</h3>
+                <ul>
+                    <li><strong>Prompting is schema-driven:</strong> both prompts force structured outputs instead of free-form summarisation.</li>
+                    <li><strong>Explainability is built in upstream:</strong> source attribution, evidence boundaries, and numerical validation rules are encoded in the prompts themselves.</li>
+                    <li><strong>The system is multi-stage:</strong> data retrieval, parsing, validation, synthesis, and scoring are separated rather than collapsed into one model call.</li>
+                    <li><strong>The implementation matches the report argument:</strong> the final system improves output quality by structuring inputs before synthesis.</li>
+                </ul>
 
                 <h3>Implementation Relevance</h3>
                 <ul>
-                    <li><strong>Appendix B connection:</strong> These samples show how the agent roles are operationalised under the hood.</li>
-                    <li><strong>Appendix D connection:</strong> The prompts and service logic support the assumptions behind research speed, evidence traceability, and explainable scoring.</li>
-                    <li><strong>Main report connection:</strong> They demonstrate that the system’s explainability is designed into both retrieval and synthesis stages rather than added only at the interface layer.</li>
+                    <li><strong>Appendix B connection:</strong> these files show how the agent roles are operationalised under the hood.</li>
+                    <li><strong>Appendix D connection:</strong> the prompts and service logic support the assumptions behind research speed, evidence traceability, and explainable scoring.</li>
+                    <li><strong>Main report connection:</strong> they demonstrate that explainability is designed into both retrieval and synthesis stages rather than added only at the interface layer.</li>
                 </ul>
+            </details>
+
+            <details>
+                <summary>Appendix I: Pilot Onboarding and Rollout Evidence</summary>
+                <h3>Purpose</h3>
+                <p>This appendix documents the scope and status of the internal pilot onboarding referenced in Section A9.</p>
+
+                <h3>Pilot Cohort</h3>
+                <p>A total of 20 internal users were onboarded during the pilot phase:</p>
+                <ul>
+                    <li>15 Demand Generation Representatives (DGRs)</li>
+                    <li>5 Customer Sales Representatives (CSRs)</li>
+                </ul>
+
+                <h3>Onboarding Method</h3>
+                <p>Onboarding was conducted through guided office-hour sessions, during which participants were supported in setting up the application locally on their laptops. This approach was necessary because current deployment constraints require the system to run locally rather than through a centrally hosted internal web environment.</p>
+
+                <h3>Rollout Status</h3>
+                <p>The pilot successfully achieved initial onboarding across the target user group and enabled early workflow usage with real account data. However, usage tracking remains limited at this stage because the system runs locally and stores data locally, preventing centralised capture of behavioural analytics such as login frequency, session duration, or feature-level usage rates.</p>
+
+                <h3>Current Evidence Base</h3>
+                <p>As a result, current evidence of adoption is primarily based on:</p>
+                <ul>
+                    <li>successful onboarding counts</li>
+                    <li>qualitative feedback gathered during office-hour sessions and follow-up discussions</li>
+                    <li>survey-based pilot responses</li>
+                    <li>observed examples of workflow use during pilot testing</li>
+                </ul>
+
+                <h3>Interpretation</h3>
+                <p>Although centralised usage metrics are not yet available, the onboarding outcome still provides evidence of early internal adoption and demonstrates that the system progressed beyond technical validation into real-user pilot use.</p>
             </details>
         </div>
     </main>

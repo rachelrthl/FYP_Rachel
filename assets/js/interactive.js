@@ -68,5 +68,7 @@ document.querySelectorAll(".footnote").forEach(footnote => {
     const note = footnote.dataset.note;
     if (note) {
         footnote.title = note;
+        footnote.setAttribute("tabindex", "0");
+        footnote.setAttribute("aria-label", note);
     }
 });
